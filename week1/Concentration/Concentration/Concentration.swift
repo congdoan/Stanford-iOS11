@@ -6,21 +6,21 @@
 //  Copyright © 2018 Cong Doan. All rights reserved.
 //
 
-import Foundation
-
 class Concentration {
     
-    var cards = [Card]()
+    private(set) var cards = [Card]()
     
-    let matchScore = 2
-    let mismatchScore = -1
-    var currentlyFacedUpCardIndices = Set<Int>()
-    var score = 0
-    var alreadySeenCardIndices = Set<Int>()
+    private let matchScore = 2
+    private let mismatchScore = -1
+    private var currentlyFacedUpCardIndices = Set<Int>()
+    private(set) var score = 0
+    private var alreadySeenCardIndices = Set<Int>()
     
-    var flipCount = 0
+    private(set) var flipCount = 0
     
     init(numberOfPairsOfCards: Int) {
+        assert(numberOfPairsOfCards > 0, "Concentration.init(numberOfPairsOfCards: \(numberOfPairsOfCards)); Number of pairs must be atleast 1")
+        
         for _ in 1...numberOfPairsOfCards {
             let card = Card()
             cards += [card, card]
@@ -29,6 +29,8 @@ class Concentration {
     }
     
     func chooseCard(at index: Int) -> Set<Int> {
+        assert(cards.indices.contains(index), "Concentration.chooseCard(at: \(index); Index must be in \(cards.indices)")
+        
         var changedCardIndices = Set<Int>()
         if cards[index].isFaceUp || cards[index].isMatched { return changedCardIndices }
         if currentlyFacedUpCardIndices.count == 1 {

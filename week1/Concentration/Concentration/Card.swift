@@ -10,9 +10,9 @@ import Foundation
 
 struct Card {
     
-    static var identifierFactory = 0
+    private static var identifierFactory = 0
     
-    static func getIdentifier() -> Int {
+    private static func getIdentifier() -> Int {
         identifierFactory += 1
         return identifierFactory
     }

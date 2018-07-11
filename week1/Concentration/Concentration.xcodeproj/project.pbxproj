@@ -15,6 +15,7 @@
 		F4BFAB5920EDAE3C00D35258 /* Concentration.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4BFAB5820EDAE3C00D35258 /* Concentration.swift */; };
 		F4BFAB5B20EDAF2600D35258 /* Card.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4BFAB5A20EDAF2600D35258 /* Card.swift */; };
 		F4BFAB5D20EE425A00D35258 /* HelperExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4BFAB5C20EE425A00D35258 /* HelperExtensions.swift */; };
+		F4DBC74520F5DCED006C9BF3 /* ConcentrationByMichel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4DBC74420F5DCED006C9BF3 /* ConcentrationByMichel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -28,6 +29,7 @@
 		F4BFAB5820EDAE3C00D35258 /* Concentration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Concentration.swift; sourceTree = "<group>"; };
 		F4BFAB5A20EDAF2600D35258 /* Card.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Card.swift; sourceTree = "<group>"; };
 		F4BFAB5C20EE425A00D35258 /* HelperExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HelperExtensions.swift; sourceTree = "<group>"; };
+		F4DBC74420F5DCED006C9BF3 /* ConcentrationByMichel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConcentrationByMichel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -62,6 +64,7 @@
 			children = (
 				F4727D8B20ECE819002BBDDA /* ViewController.swift */,
 				F4BFAB5820EDAE3C00D35258 /* Concentration.swift */,
+				F4DBC74420F5DCED006C9BF3 /* ConcentrationByMichel.swift */,
 				F4BFAB5A20EDAF2600D35258 /* Card.swift */,
 				F4BFAB5C20EE425A00D35258 /* HelperExtensions.swift */,
 				F4727D8D20ECE819002BBDDA /* Main.storyboard */,
@@ -154,6 +157,7 @@
 			files = (
 				F4727D8C20ECE819002BBDDA /* ViewController.swift in Sources */,
 				F4727D8A20ECE819002BBDDA /* AppDelegate.swift in Sources */,
+				F4DBC74520F5DCED006C9BF3 /* ConcentrationByMichel.swift in Sources */,
 				F4BFAB5D20EE425A00D35258 /* HelperExtensions.swift in Sources */,
 				F4BFAB5920EDAE3C00D35258 /* Concentration.swift in Sources */,
 				F4BFAB5B20EDAF2600D35258 /* Card.swift in Sources */,
