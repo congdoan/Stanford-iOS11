@@ -13,8 +13,8 @@ class ViewController: UIViewController {
     var numberOfPairs: Int {
         return (cardButtons.count + 1) / 2
     }
-    private lazy var game = ConcentrationByMichel(numberOfPairsOfCards: numberOfPairs)
-    //private lazy var game = Concentration(numberOfPairsOfCards: numberOfPairs)
+    //private lazy var game = ConcentrationByMichel(numberOfPairsOfCards: numberOfPairs)
+    private lazy var game = Concentration(numberOfPairsOfCards: numberOfPairs)
 
     private static let emojiThemes = ["🐝🐶🐸🦅🐠🦓🐒🐘🦔🕷",
                                       "🎾⚽️🏀🚴‍♀️🏊‍♂️🏓🏋️‍♂️🤺🏹🏑",
@@ -33,8 +33,14 @@ class ViewController: UIViewController {
     
     @IBOutlet private var cardButtons: [UIButton]!
     
-    @IBOutlet private weak var scoreLabel: UILabel!
-    
+    @IBOutlet private weak var scoreLabel: UILabel! {
+        didSet {
+            refreshScoreLabel()
+        }
+    }
+    private let scoreWordAttrString = NSAttributedString(string: "Score: ", attributes: [.strokeWidth: 4])
+    private let scoreNumberAttr: [NSAttributedStringKey: Any] = [.foregroundColor: #colorLiteral(red: 1, green: 0.5763723254, blue: 0, alpha: 1)]
+
     @IBOutlet private weak var flipCountLabel: UILabel!
     
     @IBAction private func tapCard(_ button: UIButton) {
@@ -62,8 +68,15 @@ class ViewController: UIViewController {
     }
     
     private func refreshScoreAndFlipCountLabels() {
-        scoreLabel.text = "Score: \(game.score)"
+        refreshScoreLabel()
         flipCountLabel.text = "Flips: \(game.flipCount)"
+    }
+    
+    private func refreshScoreLabel() {
+        let scoreNumberAttrString = NSAttributedString(string: "\(game.score)", attributes: scoreNumberAttr)
+        let scoreAttrString = NSMutableAttributedString(attributedString: scoreWordAttrString)
+        scoreAttrString.append(scoreNumberAttrString)
+        scoreLabel.attributedText = scoreAttrString
     }
     
     @IBAction private func tapNewGame(_ sender: Any) {
@@ -71,8 +84,8 @@ class ViewController: UIViewController {
             cardButton.setTitle(nil, for: .normal)
             cardButton.backgroundColor = #colorLiteral(red: 1, green: 0.5763723254, blue: 0, alpha: 1)
         }
-        game = ConcentrationByMichel(numberOfPairsOfCards: numberOfPairs)
-        //game = Concentration(numberOfPairsOfCards: numberOfPairs)
+        //game = ConcentrationByMichel(numberOfPairsOfCards: numberOfPairs)
+        game = Concentration(numberOfPairsOfCards: numberOfPairs)
         refreshScoreAndFlipCountLabels()
         emojiChoices = ViewController.getRandomEmojiTheme()
         card2Emoji.removeAll(keepingCapacity: true)
