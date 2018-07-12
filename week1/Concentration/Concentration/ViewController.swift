@@ -13,8 +13,8 @@ class ViewController: UIViewController {
     var numberOfPairs: Int {
         return (cardButtons.count + 1) / 2
     }
-    //private lazy var game = ConcentrationByMichel(numberOfPairsOfCards: numberOfPairs)
-    private lazy var game = Concentration(numberOfPairsOfCards: numberOfPairs)
+    private lazy var game = ConcentrationByMichel(numberOfPairsOfCards: numberOfPairs)
+    //private lazy var game = Concentration(numberOfPairsOfCards: numberOfPairs)
 
     private static let emojiThemes = ["🐝🐶🐸🦅🐠🦓🐒🐘🦔🕷",
                                       "🎾⚽️🏀🚴‍♀️🏊‍♂️🏓🏋️‍♂️🤺🏹🏑",
@@ -71,8 +71,8 @@ class ViewController: UIViewController {
             cardButton.setTitle(nil, for: .normal)
             cardButton.backgroundColor = #colorLiteral(red: 1, green: 0.5763723254, blue: 0, alpha: 1)
         }
-        //game = ConcentrationByMichel(numberOfPairsOfCards: numberOfPairs)
-        game = Concentration(numberOfPairsOfCards: numberOfPairs)
+        game = ConcentrationByMichel(numberOfPairsOfCards: numberOfPairs)
+        //game = Concentration(numberOfPairsOfCards: numberOfPairs)
         refreshScoreAndFlipCountLabels()
         emojiChoices = ViewController.getRandomEmojiTheme()
         card2Emoji.removeAll(keepingCapacity: true)

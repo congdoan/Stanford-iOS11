@@ -19,17 +19,8 @@ class ConcentrationByMichel {
     
     private var indexOfOnlyAndOneFacedUpCard: Int? {
         get {
-            var foundIndex: Int?
-            for index in cards.indices {
-                if cards[index].isFaceUp && !cards[index].isMatched {
-                    if foundIndex == nil {
-                        foundIndex = index
-                    } else {
-                        return nil
-                    }
-                }
-            }
-            return foundIndex
+            let facedUpUnmatchedIndices = cards.indices.filter { cards[$0].isFaceUp && !cards[$0].isMatched }
+            return facedUpUnmatchedIndices.onlyAndOne
         }
         set {
             for index in cards.indices {
@@ -86,3 +77,10 @@ class ConcentrationByMichel {
     }
 
 }
+
+extension Collection {
+    var onlyAndOne: Element? {
+        return count == 1 ? first : nil
+    }
+}
+
