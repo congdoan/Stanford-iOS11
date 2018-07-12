@@ -16,14 +16,14 @@ class ViewController: UIViewController {
     //private lazy var game = ConcentrationByMichel(numberOfPairsOfCards: numberOfPairs)
     private lazy var game = Concentration(numberOfPairsOfCards: numberOfPairs)
 
-    private static let emojiThemes = [["🐝", "🐶", "🐸", "🦅", "🐠", "🦓", "🐒", "🐘", "🦔", "🕷"],
-                                      ["🎾", "⚽️", "🏀", "🚴‍♀️", "🏊‍♂️", "🏓", "🏋️‍♂️", "🤺", "🏹", "🏑"],
-                                      ["🍏", "🍎", "🍐", "🍊", "🍋", "🍌", "🍉", "🍇", "🍓", "🍈"],
-                                      ["🚗", "🚕", "🚙", "🚌", "🚎", "🏎", "🚓", "🚑", "🚒", "🚐"],
-                                      ["⌚️", "📱", "💻", "⌨️", "🖥", "🖨", "🖲", "🕹", "🗜", "📷"],
-                                      ["🏁", "🚩", "🏳️‍🌈", "🇦🇫", "🇦🇽", "🇦🇱", "🇩🇿", "🇦🇸", "🇦🇩", "🇦🇴"]]
+    private static let emojiThemes = ["🐝🐶🐸🦅🐠🦓🐒🐘🦔🕷",
+                                      "🎾⚽️🏀🚴‍♀️🏊‍♂️🏓🏋️‍♂️🤺🏹🏑",
+                                      "🍏🍎🍐🍊🍋🍌🍉🍇🍓🍈",
+                                      "🚗🚕🚙🚌🚎🏎🚓🚑🚒🚐",
+                                      "⌚️📱💻⌨️🖥🖨🖲🕹🗜📷",
+                                      "🏁🚩🏳️‍🌈🇦🇫🇦🇽🇦🇱🇩🇿🇦🇸🇦🇩🇦🇴"]
     private static func getRandomEmojiTheme() -> [String] {
-        var emojiTheme = emojiThemes[emojiThemes.count.arc4random]
+        var emojiTheme = emojiThemes[emojiThemes.count.arc4random].map { "\($0)" }
         emojiTheme.shuffle()
         return emojiTheme
     }
