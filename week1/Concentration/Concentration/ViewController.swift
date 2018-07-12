@@ -29,7 +29,7 @@ class ViewController: UIViewController {
     }
     
     private var emojiChoices = getRandomEmojiTheme()
-    private var cardId2Emoji = [Int: String]()
+    private var card2Emoji = [Card: String]()
     
     @IBOutlet private var cardButtons: [UIButton]!
     
@@ -55,10 +55,10 @@ class ViewController: UIViewController {
     }
     
     private func emoji(for card: Card) -> String {
-        if cardId2Emoji[card.identifier] == nil && emojiChoices.count > 0 {
-            cardId2Emoji[card.identifier] = emojiChoices.removeLast()
+        if card2Emoji[card] == nil && emojiChoices.count > 0 {
+            card2Emoji[card] = emojiChoices.removeLast()
         }
-        return cardId2Emoji[card.identifier] ?? "?"
+        return card2Emoji[card] ?? "?"
     }
     
     private func refreshScoreAndFlipCountLabels() {
@@ -75,7 +75,7 @@ class ViewController: UIViewController {
         game = Concentration(numberOfPairsOfCards: numberOfPairs)
         refreshScoreAndFlipCountLabels()
         emojiChoices = ViewController.getRandomEmojiTheme()
-        cardId2Emoji.removeAll(keepingCapacity: true)
+        card2Emoji.removeAll(keepingCapacity: true)
     }
     
 }

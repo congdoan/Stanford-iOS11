@@ -55,7 +55,7 @@ class ConcentrationByMichel {
         if cards[pickIndex].isFaceUp || cards[pickIndex].isMatched { return changedCardIndices }
         
         if let matchIndex = indexOfOnlyAndOneFacedUpCard {
-            if cards[matchIndex].identifier == cards[pickIndex].identifier {
+            if cards[matchIndex] == cards[pickIndex] {
                 cards[matchIndex].isMatched = true
                 cards[pickIndex].isMatched = true
                 score += matchScore

@@ -35,7 +35,7 @@ class Concentration {
         if cards[index].isFaceUp || cards[index].isMatched { return changedCardIndices }
         if currentlyFacedUpCardIndices.count == 1 {
             let matchIndex = Array(currentlyFacedUpCardIndices)[0]
-            if cards[matchIndex].identifier == cards[index].identifier {
+            if cards[matchIndex] == cards[index] {
                 cards[matchIndex].isMatched = true
                 cards[index].isMatched = true
                 score += matchScore
