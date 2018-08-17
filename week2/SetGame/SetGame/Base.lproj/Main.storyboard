@@ -258,6 +258,9 @@
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
                                 <state key="normal" title="Deal 3 More Cards"/>
+                                <connections>
+                                    <action selector="onDealButtonTap:" destination="BYZ-38-t0r" eventType="touchUpInside" id="GOC-M0-F4w"/>
+                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -274,6 +277,7 @@
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                     <connections>
+                        <outlet property="dealButton" destination="SEI-Ra-7hA" id="MNl-Fq-qAh"/>
                         <outlet property="scoreLabel" destination="FZZ-US-hGc" id="3ph-1h-J3s"/>
                         <outletCollection property="cardButtons" destination="UBT-v9-YbQ" collectionClass="NSMutableArray" id="cCX-Wq-zfn"/>
                         <outletCollection property="cardButtons" destination="2D9-uY-8Wx" collectionClass="NSMutableArray" id="HK5-tc-5mY"/>

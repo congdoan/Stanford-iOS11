@@ -99,12 +99,20 @@ class ViewController: UIViewController {
         }
     }
     
+    @IBOutlet weak var dealButton: UIButton!
+    @IBAction func onDealButtonTap(_ sender: Any) {
+        if selectedCardIndices.count == Deck.SET_SIZE && areSelectedCardsASet {
+            replaceWith(deck.deal())
+            selectedCardIndices = []
+        } else {
+            addWith(deck.deal())
+        }
+    }
+    
     private func onTapWhen3CardsSelected(_ tappedButtonIndex: Int) {
         if areSelectedCardsASet {
             if deck.isEmpty {
-                for selectedIdx in selectedCardIndices {
-                    cardButtons[selectedIdx].isHidden = true
-                }
+                hideSelectedCards()
             } else {
                 replaceWith(deck.deal())
             }
@@ -121,6 +129,12 @@ class ViewController: UIViewController {
         }
     }
     
+    private func hideSelectedCards() {
+        for selectedIdx in selectedCardIndices {
+            cardButtons[selectedIdx].isHidden = true
+        }
+    }
+    
     private func replaceWith(_ newlyDealtCards: [Card]) {
         for arrayIndex in newlyDealtCards.indices {
             let selectedCardIndex = selectedCardIndices[arrayIndex]
@@ -130,6 +144,16 @@ class ViewController: UIViewController {
             ViewController.deselect(button)
             ViewController.setAttributedTitle(of: button, basedOn: newCard)
         }
+    }
+    
+    private func addWith(_ newlyDealtCards: [Card]) {
+        let start = cards.count
+        cards.append(contentsOf: newlyDealtCards)
+        for index in newlyDealtCards.indices {
+            cardButtons[start + index].isHidden = false
+            ViewController.setAttributedTitle(of: cardButtons[start + index], basedOn: newlyDealtCards[index])
+        }
+        
     }
     
     private static func toggleSelectionStatus(_ button: UIButton) -> Bool {
