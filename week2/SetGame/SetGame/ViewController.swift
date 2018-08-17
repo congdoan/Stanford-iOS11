@@ -29,7 +29,7 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         
         for idx in 0..<cards.count {
-            ViewController.display(cardButtons[idx], cards[idx])
+            ViewController.setAttributedTitle(of: cardButtons[idx], basedOn: cards[idx])
         }
         
         for idx in numberOfCardsToStart..<cardButtons.count {
@@ -37,7 +37,7 @@ class ViewController: UIViewController {
         }
     }
     
-    private static func display(_ button: UIButton, _ card: Card) {
+    private static func setAttributedTitle(of button: UIButton, basedOn card: Card) {
         let symbol = card.shape.unicodeString
         let color = card.color.uiColor
         
