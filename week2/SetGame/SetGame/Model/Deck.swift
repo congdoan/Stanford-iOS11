@@ -8,9 +8,11 @@
 
 class Deck {
     
+    static let SET_SIZE = 3
+    
     static func isSet(_ cards: [Card]) -> Bool {
-        guard cards.count == 3 else {
-            fatalError("Number of cards is Not 3: \(cards.count)")
+        guard cards.count == SET_SIZE else {
+            fatalError("Number of cards is Not \(SET_SIZE): \(cards.count)")
         }
         return satisfyRule(for: cards.map { $0.number })
             && satisfyRule(for: cards.map { $0.shape })
@@ -38,6 +40,10 @@ class Deck {
         if shuffle {
             cards.shuffle()
         }
+    }
+    
+    var isEmpty: Bool {
+        return cards.isEmpty
     }
     
     func deal(numberOfCards: Int = 3) -> [Card] {

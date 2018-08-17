@@ -13,8 +13,8 @@ class ViewController: UIViewController {
     private static let selectedCardBorderWidth: CGFloat = 2
     
     private let numberOfCardsToStart = 12
-    
-    private lazy var cards = Deck(shuffle: true).deal(numberOfCards: numberOfCardsToStart)
+    private let deck = Deck()
+    private lazy var cards = deck.deal(numberOfCards: numberOfCardsToStart)
 
     @IBOutlet var cardButtons: [UIButton]! {
         didSet {
@@ -63,18 +63,63 @@ class ViewController: UIViewController {
         button.setAttributedTitle(attrTitle, for: .normal)
     }
     
+    private var selectedCardIndices = [Int]()
+    
     @IBAction func onCardButtonTap(_ sender: UIButton) {
-        let idx = sender.tag
-        let button = cardButtons[idx]
-        ViewController.toggleSelectionStatus(button)
+        let btnIdx = sender.tag
+        let button = cardButtons[btnIdx]
+        if selectedCardIndices.count == Deck.SET_SIZE {
+            let selectedCards = selectedCardIndices.map{cards[$0]}
+            if Deck.isSet(selectedCards) {
+                if deck.isEmpty {
+                    for selectedIdx in selectedCardIndices {
+                        cardButtons[selectedIdx].isHidden = true
+                    }
+                } else {
+                    replaceWith(deck.deal())
+                }
+                selectedCardIndices = selectedCardIndices.contains(btnIdx) ? [] : [btnIdx]
+                for selectedIdx in selectedCardIndices {
+                    ViewController.select(cardButtons[selectedIdx])
+                }
+            } else {
+                for selectedIdx in selectedCardIndices {
+                    ViewController.deselect(cardButtons[selectedIdx])
+                }
+                ViewController.select(button)
+                selectedCardIndices = [btnIdx]
+            }
+            return
+        }
+        if ViewController.toggleSelectionStatus(button) {
+            selectedCardIndices.append(btnIdx)
+            if selectedCardIndices.count == Deck.SET_SIZE {
+                let selectedCards = selectedCardIndices.map{cards[$0]}
+                print("Selected Cards form a Set?:", Deck.isSet(selectedCards))
+            }
+        } else {
+            selectedCardIndices.remove(at: selectedCardIndices.index(of: btnIdx)!)
+        }
     }
     
-    private static func toggleSelectionStatus(_ button: UIButton) {
+    private func replaceWith(_ newlyDealtCards: [Card]) {
+        for arrayIndex in newlyDealtCards.indices {
+            let selectedCardIndex = selectedCardIndices[arrayIndex]
+            let button = cardButtons[selectedCardIndex]
+            let newCard = newlyDealtCards[arrayIndex]
+            ViewController.deselect(button)
+            ViewController.setAttributedTitle(of: button, basedOn: newCard)
+        }
+    }
+    
+    private static func toggleSelectionStatus(_ button: UIButton) -> Bool {
         let selected = button.layer.borderWidth == selectedCardBorderWidth
         if selected {
             deselect(button)
+            return false
         } else {
             select(button)
+            return true
         }
     }
     
