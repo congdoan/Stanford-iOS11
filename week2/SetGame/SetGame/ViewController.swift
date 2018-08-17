@@ -150,10 +150,10 @@ class ViewController: UIViewController {
         let start = cards.count
         cards.append(contentsOf: newlyDealtCards)
         for index in newlyDealtCards.indices {
-            cardButtons[start + index].isHidden = false
             ViewController.setAttributedTitle(of: cardButtons[start + index], basedOn: newlyDealtCards[index])
+            cardButtons[start + index].isHidden = false
         }
-        
+
     }
     
     private static func toggleSelectionStatus(_ button: UIButton) -> Bool {
