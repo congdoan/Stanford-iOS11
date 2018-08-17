@@ -64,41 +64,48 @@ class ViewController: UIViewController {
     }
     
     private var selectedCardIndices = [Int]()
+    private var areSelectedCardsASet = false
     
     @IBAction func onCardButtonTap(_ sender: UIButton) {
         let btnIdx = sender.tag
-        let button = cardButtons[btnIdx]
+
         if selectedCardIndices.count == Deck.SET_SIZE {
-            let selectedCards = selectedCardIndices.map{cards[$0]}
-            if Deck.isSet(selectedCards) {
-                if deck.isEmpty {
-                    for selectedIdx in selectedCardIndices {
-                        cardButtons[selectedIdx].isHidden = true
-                    }
-                } else {
-                    replaceWith(deck.deal())
-                }
-                selectedCardIndices = selectedCardIndices.contains(btnIdx) ? [] : [btnIdx]
-                for selectedIdx in selectedCardIndices {
-                    ViewController.select(cardButtons[selectedIdx])
-                }
-            } else {
-                for selectedIdx in selectedCardIndices {
-                    ViewController.deselect(cardButtons[selectedIdx])
-                }
-                ViewController.select(button)
-                selectedCardIndices = [btnIdx]
-            }
+            onTapWhen3CardsSelected(btnIdx)
             return
         }
+
+        let button = cardButtons[btnIdx]
         if ViewController.toggleSelectionStatus(button) {
             selectedCardIndices.append(btnIdx)
             if selectedCardIndices.count == Deck.SET_SIZE {
                 let selectedCards = selectedCardIndices.map{cards[$0]}
-                print("Selected Cards form a Set?:", Deck.isSet(selectedCards))
+                areSelectedCardsASet = Deck.isSet(selectedCards)
+                print("Selected Cards form a Set?:", areSelectedCardsASet)
             }
         } else {
             selectedCardIndices.remove(at: selectedCardIndices.index(of: btnIdx)!)
+        }
+    }
+    
+    private func onTapWhen3CardsSelected(_ tappedButtonIndex: Int) {
+        if areSelectedCardsASet {
+            if deck.isEmpty {
+                for selectedIdx in selectedCardIndices {
+                    cardButtons[selectedIdx].isHidden = true
+                }
+            } else {
+                replaceWith(deck.deal())
+            }
+            selectedCardIndices = selectedCardIndices.contains(tappedButtonIndex) ? [] : [tappedButtonIndex]
+            for selectedIdx in selectedCardIndices {
+                ViewController.select(cardButtons[selectedIdx])
+            }
+        } else {
+            for selectedIdx in selectedCardIndices {
+                ViewController.deselect(cardButtons[selectedIdx])
+            }
+            ViewController.select(cardButtons[tappedButtonIndex])
+            selectedCardIndices = [tappedButtonIndex]
         }
     }
     
