@@ -1,7 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13122.16" systemVersion="17A277" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13104.12"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -9,13 +13,220 @@
         <!--View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="ViewController" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="SetGame" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Score: " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FZZ-US-hGc" userLabel="ScoreLabel">
+                                <rect key="frame" x="147" y="40" width="81" height="30"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="25"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="NrL-hI-7bP" userLabel="VerticalStackView">
+                                <rect key="frame" x="8" y="90" width="359" height="504"/>
+                                <subviews>
+                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="Gfc-l3-YIs" userLabel="HorizontalStackView1">
+                                        <rect key="frame" x="0.0" y="0.0" width="359" height="77.5"/>
+                                        <subviews>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UBT-v9-YbQ" userLabel="card1">
+                                                <rect key="frame" x="0.0" y="0.0" width="84" height="77.5"/>
+                                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="32"/>
+                                                <state key="normal" title="c1"/>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2D9-uY-8Wx" userLabel="card2">
+                                                <rect key="frame" x="92" y="0.0" width="83.5" height="77.5"/>
+                                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="32"/>
+                                                <state key="normal" title="c2"/>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YHG-QF-sZI" userLabel="card3">
+                                                <rect key="frame" x="183.5" y="0.0" width="84" height="77.5"/>
+                                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="32"/>
+                                                <state key="normal" title="c3"/>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ukb-FP-xhN" userLabel="card4">
+                                                <rect key="frame" x="275.5" y="0.0" width="83.5" height="77.5"/>
+                                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="32"/>
+                                                <state key="normal" title="c4"/>
+                                            </button>
+                                        </subviews>
+                                    </stackView>
+                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="n7R-Zl-UeL" userLabel="HorizontalStackView2">
+                                        <rect key="frame" x="0.0" y="85.5" width="359" height="77"/>
+                                        <subviews>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZKd-Vg-Eec" userLabel="card5">
+                                                <rect key="frame" x="0.0" y="0.0" width="84" height="77"/>
+                                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="32"/>
+                                                <state key="normal" title="c5"/>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UPg-Ag-YZB" userLabel="card6">
+                                                <rect key="frame" x="92" y="0.0" width="83.5" height="77"/>
+                                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="32"/>
+                                                <state key="normal" title="c6"/>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uLS-Xb-I6Y" userLabel="card7">
+                                                <rect key="frame" x="183.5" y="0.0" width="84" height="77"/>
+                                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="32"/>
+                                                <state key="normal" title="c7"/>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dCQ-fq-ZFd" userLabel="card8">
+                                                <rect key="frame" x="275.5" y="0.0" width="83.5" height="77"/>
+                                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="32"/>
+                                                <state key="normal" title="c8"/>
+                                            </button>
+                                        </subviews>
+                                    </stackView>
+                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="RIS-vk-uka" userLabel="HorizontalStackView3">
+                                        <rect key="frame" x="0.0" y="170.5" width="359" height="77.5"/>
+                                        <subviews>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Nue-xz-xmB" userLabel="card9">
+                                                <rect key="frame" x="0.0" y="0.0" width="84" height="77.5"/>
+                                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="32"/>
+                                                <state key="normal" title="c9"/>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="d6k-1O-FDb" userLabel="card10">
+                                                <rect key="frame" x="92" y="0.0" width="83.5" height="77.5"/>
+                                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="32"/>
+                                                <state key="normal" title="c10"/>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wYR-E0-BxB" userLabel="card11">
+                                                <rect key="frame" x="183.5" y="0.0" width="84" height="77.5"/>
+                                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="32"/>
+                                                <state key="normal" title="c11"/>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5Ud-Kl-eoY" userLabel="card12">
+                                                <rect key="frame" x="275.5" y="0.0" width="83.5" height="77.5"/>
+                                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="32"/>
+                                                <state key="normal" title="c12"/>
+                                            </button>
+                                        </subviews>
+                                    </stackView>
+                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="VlO-ej-jbm" userLabel="HorizontalStackView4">
+                                        <rect key="frame" x="0.0" y="256" width="359" height="77.5"/>
+                                        <subviews>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="v69-s4-IdQ" userLabel="card13">
+                                                <rect key="frame" x="0.0" y="0.0" width="84" height="77.5"/>
+                                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="32"/>
+                                                <state key="normal" title="c13"/>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="U4d-lz-Cu1" userLabel="card14">
+                                                <rect key="frame" x="92" y="0.0" width="83.5" height="77.5"/>
+                                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="32"/>
+                                                <state key="normal" title="c14"/>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kdI-Eh-AIC" userLabel="card15">
+                                                <rect key="frame" x="183.5" y="0.0" width="84" height="77.5"/>
+                                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="32"/>
+                                                <state key="normal" title="c15"/>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZH8-Qn-p0g" userLabel="card16">
+                                                <rect key="frame" x="275.5" y="0.0" width="83.5" height="77.5"/>
+                                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="32"/>
+                                                <state key="normal" title="c16"/>
+                                            </button>
+                                        </subviews>
+                                    </stackView>
+                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="OTv-Jk-aEd" userLabel="HorizontalStackView5">
+                                        <rect key="frame" x="0.0" y="341.5" width="359" height="77"/>
+                                        <subviews>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Z20-oU-v3L" userLabel="card17">
+                                                <rect key="frame" x="0.0" y="0.0" width="84" height="77"/>
+                                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="32"/>
+                                                <state key="normal" title="c17"/>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="L4C-cN-itl" userLabel="card18">
+                                                <rect key="frame" x="92" y="0.0" width="83.5" height="77"/>
+                                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="32"/>
+                                                <state key="normal" title="c18"/>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Cb7-dg-cnu" userLabel="card19">
+                                                <rect key="frame" x="183.5" y="0.0" width="84" height="77"/>
+                                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="32"/>
+                                                <state key="normal" title="c19"/>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0H5-8R-BUn" userLabel="card20">
+                                                <rect key="frame" x="275.5" y="0.0" width="83.5" height="77"/>
+                                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="32"/>
+                                                <state key="normal" title="c20"/>
+                                            </button>
+                                        </subviews>
+                                    </stackView>
+                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="Aax-Ba-GGT" userLabel="HorizontalStackView6">
+                                        <rect key="frame" x="0.0" y="426.5" width="359" height="77.5"/>
+                                        <subviews>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9gN-ml-n3z" userLabel="card21">
+                                                <rect key="frame" x="0.0" y="0.0" width="84" height="77.5"/>
+                                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="32"/>
+                                                <state key="normal" title="c21"/>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QpY-VH-HQb" userLabel="card22">
+                                                <rect key="frame" x="92" y="0.0" width="83.5" height="77.5"/>
+                                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="32"/>
+                                                <state key="normal" title="c22"/>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nKT-ej-2Pc" userLabel="card23">
+                                                <rect key="frame" x="183.5" y="0.0" width="84" height="77.5"/>
+                                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="32"/>
+                                                <state key="normal" title="c23"/>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BNV-EJ-Uv1" userLabel="card24">
+                                                <rect key="frame" x="275.5" y="0.0" width="83.5" height="77.5"/>
+                                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="32"/>
+                                                <state key="normal" title="c24"/>
+                                            </button>
+                                        </subviews>
+                                    </stackView>
+                                </subviews>
+                            </stackView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SEI-Ra-7hA" userLabel="DealButton">
+                                <rect key="frame" x="113" y="614" width="148" height="33"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="33" id="qha-D1-0kE"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
+                                <state key="normal" title="Deal 3 More Cards"/>
+                            </button>
+                        </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="NrL-hI-7bP" secondAttribute="trailing" constant="8" id="04s-qD-xTK"/>
+                            <constraint firstItem="NrL-hI-7bP" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="8" id="4Yq-Oe-q8F"/>
+                            <constraint firstItem="FZZ-US-hGc" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="DAr-wk-h9F"/>
+                            <constraint firstItem="NrL-hI-7bP" firstAttribute="top" secondItem="FZZ-US-hGc" secondAttribute="bottom" constant="20" id="IVA-HN-v5z"/>
+                            <constraint firstItem="FZZ-US-hGc" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="20" id="W9r-BV-cV1"/>
+                            <constraint firstItem="SEI-Ra-7hA" firstAttribute="top" secondItem="NrL-hI-7bP" secondAttribute="bottom" constant="20" id="Xpv-we-OpR"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="SEI-Ra-7hA" secondAttribute="bottom" constant="20" id="dqS-rZ-6Gf"/>
+                            <constraint firstItem="SEI-Ra-7hA" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="ubh-42-DwD"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
+                    <connections>
+                        <outletCollection property="cardButtons" destination="UBT-v9-YbQ" collectionClass="NSMutableArray" id="cCX-Wq-zfn"/>
+                        <outletCollection property="cardButtons" destination="2D9-uY-8Wx" collectionClass="NSMutableArray" id="HK5-tc-5mY"/>
+                        <outletCollection property="cardButtons" destination="YHG-QF-sZI" collectionClass="NSMutableArray" id="u7C-PG-VEJ"/>
+                        <outletCollection property="cardButtons" destination="ukb-FP-xhN" collectionClass="NSMutableArray" id="Yf6-hJ-VQS"/>
+                        <outletCollection property="cardButtons" destination="ZKd-Vg-Eec" collectionClass="NSMutableArray" id="fgI-PI-NRU"/>
+                        <outletCollection property="cardButtons" destination="UPg-Ag-YZB" collectionClass="NSMutableArray" id="3fb-MP-boQ"/>
+                        <outletCollection property="cardButtons" destination="uLS-Xb-I6Y" collectionClass="NSMutableArray" id="tZU-jI-653"/>
+                        <outletCollection property="cardButtons" destination="dCQ-fq-ZFd" collectionClass="NSMutableArray" id="31W-32-2gV"/>
+                        <outletCollection property="cardButtons" destination="Nue-xz-xmB" collectionClass="NSMutableArray" id="X2O-Aj-fJh"/>
+                        <outletCollection property="cardButtons" destination="d6k-1O-FDb" collectionClass="NSMutableArray" id="AhP-Y9-bgk"/>
+                        <outletCollection property="cardButtons" destination="wYR-E0-BxB" collectionClass="NSMutableArray" id="g9G-Yb-gYB"/>
+                        <outletCollection property="cardButtons" destination="5Ud-Kl-eoY" collectionClass="NSMutableArray" id="CkW-NQ-qt5"/>
+                        <outletCollection property="cardButtons" destination="v69-s4-IdQ" collectionClass="NSMutableArray" id="hfi-um-qIg"/>
+                        <outletCollection property="cardButtons" destination="U4d-lz-Cu1" collectionClass="NSMutableArray" id="wtt-EU-RR4"/>
+                        <outletCollection property="cardButtons" destination="kdI-Eh-AIC" collectionClass="NSMutableArray" id="YKk-1o-dKz"/>
+                        <outletCollection property="cardButtons" destination="ZH8-Qn-p0g" collectionClass="NSMutableArray" id="STA-xC-670"/>
+                        <outletCollection property="cardButtons" destination="Z20-oU-v3L" collectionClass="NSMutableArray" id="oDp-j9-LS5"/>
+                        <outletCollection property="cardButtons" destination="L4C-cN-itl" collectionClass="NSMutableArray" id="KSa-Nk-0sh"/>
+                        <outletCollection property="cardButtons" destination="Cb7-dg-cnu" collectionClass="NSMutableArray" id="Xo0-9e-SXQ"/>
+                        <outletCollection property="cardButtons" destination="0H5-8R-BUn" collectionClass="NSMutableArray" id="VnI-e8-mu7"/>
+                        <outletCollection property="cardButtons" destination="9gN-ml-n3z" collectionClass="NSMutableArray" id="m2E-Hg-hQj"/>
+                        <outletCollection property="cardButtons" destination="QpY-VH-HQb" collectionClass="NSMutableArray" id="73I-kO-JVW"/>
+                        <outletCollection property="cardButtons" destination="nKT-ej-2Pc" collectionClass="NSMutableArray" id="9SE-Qs-wXs"/>
+                        <outletCollection property="cardButtons" destination="BNV-EJ-Uv1" collectionClass="NSMutableArray" id="g6v-0E-gEy"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
