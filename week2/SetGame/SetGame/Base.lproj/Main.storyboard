@@ -34,146 +34,218 @@
                                                 <rect key="frame" x="0.0" y="0.0" width="84" height="77.5"/>
                                                 <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="32"/>
                                                 <state key="normal" title="c1"/>
+                                                <connections>
+                                                    <action selector="onCardButtonTap:" destination="BYZ-38-t0r" eventType="touchUpInside" id="g8h-Sr-5nr"/>
+                                                </connections>
                                             </button>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2D9-uY-8Wx" userLabel="card2">
+                                            <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2D9-uY-8Wx" userLabel="card2">
                                                 <rect key="frame" x="92" y="0.0" width="83.5" height="77.5"/>
                                                 <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="32"/>
                                                 <state key="normal" title="c2"/>
+                                                <connections>
+                                                    <action selector="onCardButtonTap:" destination="BYZ-38-t0r" eventType="touchUpInside" id="W57-Vx-0vl"/>
+                                                </connections>
                                             </button>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YHG-QF-sZI" userLabel="card3">
+                                            <button opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YHG-QF-sZI" userLabel="card3">
                                                 <rect key="frame" x="183.5" y="0.0" width="84" height="77.5"/>
                                                 <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="32"/>
                                                 <state key="normal" title="c3"/>
+                                                <connections>
+                                                    <action selector="onCardButtonTap:" destination="BYZ-38-t0r" eventType="touchUpInside" id="84a-tT-1HK"/>
+                                                </connections>
                                             </button>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ukb-FP-xhN" userLabel="card4">
+                                            <button opaque="NO" tag="3" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ukb-FP-xhN" userLabel="card4">
                                                 <rect key="frame" x="275.5" y="0.0" width="83.5" height="77.5"/>
                                                 <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="32"/>
                                                 <state key="normal" title="c4"/>
+                                                <connections>
+                                                    <action selector="onCardButtonTap:" destination="BYZ-38-t0r" eventType="touchUpInside" id="PAz-1p-fDf"/>
+                                                </connections>
                                             </button>
                                         </subviews>
                                     </stackView>
                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="n7R-Zl-UeL" userLabel="HorizontalStackView2">
                                         <rect key="frame" x="0.0" y="85.5" width="359" height="77"/>
                                         <subviews>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZKd-Vg-Eec" userLabel="card5">
+                                            <button opaque="NO" tag="4" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZKd-Vg-Eec" userLabel="card5">
                                                 <rect key="frame" x="0.0" y="0.0" width="84" height="77"/>
                                                 <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="32"/>
                                                 <state key="normal" title="c5"/>
+                                                <connections>
+                                                    <action selector="onCardButtonTap:" destination="BYZ-38-t0r" eventType="touchUpInside" id="IKD-6p-MVB"/>
+                                                </connections>
                                             </button>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UPg-Ag-YZB" userLabel="card6">
+                                            <button opaque="NO" tag="5" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UPg-Ag-YZB" userLabel="card6">
                                                 <rect key="frame" x="92" y="0.0" width="83.5" height="77"/>
                                                 <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="32"/>
                                                 <state key="normal" title="c6"/>
+                                                <connections>
+                                                    <action selector="onCardButtonTap:" destination="BYZ-38-t0r" eventType="touchUpInside" id="1TX-Sc-X57"/>
+                                                </connections>
                                             </button>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uLS-Xb-I6Y" userLabel="card7">
+                                            <button opaque="NO" tag="6" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uLS-Xb-I6Y" userLabel="card7">
                                                 <rect key="frame" x="183.5" y="0.0" width="84" height="77"/>
                                                 <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="32"/>
                                                 <state key="normal" title="c7"/>
+                                                <connections>
+                                                    <action selector="onCardButtonTap:" destination="BYZ-38-t0r" eventType="touchUpInside" id="cf0-Mc-Iqb"/>
+                                                </connections>
                                             </button>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dCQ-fq-ZFd" userLabel="card8">
+                                            <button opaque="NO" tag="7" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dCQ-fq-ZFd" userLabel="card8">
                                                 <rect key="frame" x="275.5" y="0.0" width="83.5" height="77"/>
                                                 <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="32"/>
                                                 <state key="normal" title="c8"/>
+                                                <connections>
+                                                    <action selector="onCardButtonTap:" destination="BYZ-38-t0r" eventType="touchUpInside" id="zCb-Rl-GvF"/>
+                                                </connections>
                                             </button>
                                         </subviews>
                                     </stackView>
                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="RIS-vk-uka" userLabel="HorizontalStackView3">
                                         <rect key="frame" x="0.0" y="170.5" width="359" height="77.5"/>
                                         <subviews>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Nue-xz-xmB" userLabel="card9">
+                                            <button opaque="NO" tag="8" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Nue-xz-xmB" userLabel="card9">
                                                 <rect key="frame" x="0.0" y="0.0" width="84" height="77.5"/>
                                                 <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="32"/>
                                                 <state key="normal" title="c9"/>
+                                                <connections>
+                                                    <action selector="onCardButtonTap:" destination="BYZ-38-t0r" eventType="touchUpInside" id="1A8-DA-pD2"/>
+                                                </connections>
                                             </button>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="d6k-1O-FDb" userLabel="card10">
+                                            <button opaque="NO" tag="9" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="d6k-1O-FDb" userLabel="card10">
                                                 <rect key="frame" x="92" y="0.0" width="83.5" height="77.5"/>
                                                 <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="32"/>
                                                 <state key="normal" title="c10"/>
+                                                <connections>
+                                                    <action selector="onCardButtonTap:" destination="BYZ-38-t0r" eventType="touchUpInside" id="ZId-ME-FWr"/>
+                                                </connections>
                                             </button>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wYR-E0-BxB" userLabel="card11">
+                                            <button opaque="NO" tag="10" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wYR-E0-BxB" userLabel="card11">
                                                 <rect key="frame" x="183.5" y="0.0" width="84" height="77.5"/>
                                                 <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="32"/>
                                                 <state key="normal" title="c11"/>
+                                                <connections>
+                                                    <action selector="onCardButtonTap:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Y6a-B5-M3u"/>
+                                                </connections>
                                             </button>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5Ud-Kl-eoY" userLabel="card12">
+                                            <button opaque="NO" tag="11" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5Ud-Kl-eoY" userLabel="card12">
                                                 <rect key="frame" x="275.5" y="0.0" width="83.5" height="77.5"/>
                                                 <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="32"/>
                                                 <state key="normal" title="c12"/>
+                                                <connections>
+                                                    <action selector="onCardButtonTap:" destination="BYZ-38-t0r" eventType="touchUpInside" id="V2C-mo-eZz"/>
+                                                </connections>
                                             </button>
                                         </subviews>
                                     </stackView>
                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="VlO-ej-jbm" userLabel="HorizontalStackView4">
                                         <rect key="frame" x="0.0" y="256" width="359" height="77.5"/>
                                         <subviews>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="v69-s4-IdQ" userLabel="card13">
+                                            <button opaque="NO" tag="12" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="v69-s4-IdQ" userLabel="card13">
                                                 <rect key="frame" x="0.0" y="0.0" width="84" height="77.5"/>
                                                 <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="32"/>
                                                 <state key="normal" title="c13"/>
+                                                <connections>
+                                                    <action selector="onCardButtonTap:" destination="BYZ-38-t0r" eventType="touchUpInside" id="58U-94-kqq"/>
+                                                </connections>
                                             </button>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="U4d-lz-Cu1" userLabel="card14">
+                                            <button opaque="NO" tag="13" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="U4d-lz-Cu1" userLabel="card14">
                                                 <rect key="frame" x="92" y="0.0" width="83.5" height="77.5"/>
                                                 <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="32"/>
                                                 <state key="normal" title="c14"/>
+                                                <connections>
+                                                    <action selector="onCardButtonTap:" destination="BYZ-38-t0r" eventType="touchUpInside" id="IqJ-Vg-A38"/>
+                                                </connections>
                                             </button>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kdI-Eh-AIC" userLabel="card15">
+                                            <button opaque="NO" tag="14" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kdI-Eh-AIC" userLabel="card15">
                                                 <rect key="frame" x="183.5" y="0.0" width="84" height="77.5"/>
                                                 <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="32"/>
                                                 <state key="normal" title="c15"/>
+                                                <connections>
+                                                    <action selector="onCardButtonTap:" destination="BYZ-38-t0r" eventType="touchUpInside" id="VSZ-Zg-7RA"/>
+                                                </connections>
                                             </button>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZH8-Qn-p0g" userLabel="card16">
+                                            <button opaque="NO" tag="15" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZH8-Qn-p0g" userLabel="card16">
                                                 <rect key="frame" x="275.5" y="0.0" width="83.5" height="77.5"/>
                                                 <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="32"/>
                                                 <state key="normal" title="c16"/>
+                                                <connections>
+                                                    <action selector="onCardButtonTap:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Dgn-G1-qCp"/>
+                                                </connections>
                                             </button>
                                         </subviews>
                                     </stackView>
                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="OTv-Jk-aEd" userLabel="HorizontalStackView5">
                                         <rect key="frame" x="0.0" y="341.5" width="359" height="77"/>
                                         <subviews>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Z20-oU-v3L" userLabel="card17">
+                                            <button opaque="NO" tag="16" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Z20-oU-v3L" userLabel="card17">
                                                 <rect key="frame" x="0.0" y="0.0" width="84" height="77"/>
                                                 <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="32"/>
                                                 <state key="normal" title="c17"/>
+                                                <connections>
+                                                    <action selector="onCardButtonTap:" destination="BYZ-38-t0r" eventType="touchUpInside" id="HI9-wu-OzF"/>
+                                                </connections>
                                             </button>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="L4C-cN-itl" userLabel="card18">
+                                            <button opaque="NO" tag="17" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="L4C-cN-itl" userLabel="card18">
                                                 <rect key="frame" x="92" y="0.0" width="83.5" height="77"/>
                                                 <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="32"/>
                                                 <state key="normal" title="c18"/>
+                                                <connections>
+                                                    <action selector="onCardButtonTap:" destination="BYZ-38-t0r" eventType="touchUpInside" id="GWk-AO-nIu"/>
+                                                </connections>
                                             </button>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Cb7-dg-cnu" userLabel="card19">
+                                            <button opaque="NO" tag="18" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Cb7-dg-cnu" userLabel="card19">
                                                 <rect key="frame" x="183.5" y="0.0" width="84" height="77"/>
                                                 <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="32"/>
                                                 <state key="normal" title="c19"/>
+                                                <connections>
+                                                    <action selector="onCardButtonTap:" destination="BYZ-38-t0r" eventType="touchUpInside" id="ZqW-Qx-Pb5"/>
+                                                </connections>
                                             </button>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0H5-8R-BUn" userLabel="card20">
+                                            <button opaque="NO" tag="19" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0H5-8R-BUn" userLabel="card20">
                                                 <rect key="frame" x="275.5" y="0.0" width="83.5" height="77"/>
                                                 <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="32"/>
                                                 <state key="normal" title="c20"/>
+                                                <connections>
+                                                    <action selector="onCardButtonTap:" destination="BYZ-38-t0r" eventType="touchUpInside" id="d1j-Df-67V"/>
+                                                </connections>
                                             </button>
                                         </subviews>
                                     </stackView>
                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="Aax-Ba-GGT" userLabel="HorizontalStackView6">
                                         <rect key="frame" x="0.0" y="426.5" width="359" height="77.5"/>
                                         <subviews>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9gN-ml-n3z" userLabel="card21">
+                                            <button opaque="NO" tag="20" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9gN-ml-n3z" userLabel="card21">
                                                 <rect key="frame" x="0.0" y="0.0" width="84" height="77.5"/>
                                                 <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="32"/>
                                                 <state key="normal" title="c21"/>
+                                                <connections>
+                                                    <action selector="onCardButtonTap:" destination="BYZ-38-t0r" eventType="touchUpInside" id="9b1-Fb-7mU"/>
+                                                </connections>
                                             </button>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QpY-VH-HQb" userLabel="card22">
+                                            <button opaque="NO" tag="21" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QpY-VH-HQb" userLabel="card22">
                                                 <rect key="frame" x="92" y="0.0" width="83.5" height="77.5"/>
                                                 <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="32"/>
                                                 <state key="normal" title="c22"/>
+                                                <connections>
+                                                    <action selector="onCardButtonTap:" destination="BYZ-38-t0r" eventType="touchUpInside" id="hQT-xe-qu1"/>
+                                                </connections>
                                             </button>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nKT-ej-2Pc" userLabel="card23">
+                                            <button opaque="NO" tag="22" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nKT-ej-2Pc" userLabel="card23">
                                                 <rect key="frame" x="183.5" y="0.0" width="84" height="77.5"/>
                                                 <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="32"/>
                                                 <state key="normal" title="c23"/>
+                                                <connections>
+                                                    <action selector="onCardButtonTap:" destination="BYZ-38-t0r" eventType="touchUpInside" id="tii-GA-fBe"/>
+                                                </connections>
                                             </button>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BNV-EJ-Uv1" userLabel="card24">
+                                            <button opaque="NO" tag="23" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BNV-EJ-Uv1" userLabel="card24">
                                                 <rect key="frame" x="275.5" y="0.0" width="83.5" height="77.5"/>
                                                 <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="32"/>
                                                 <state key="normal" title="c24"/>
+                                                <connections>
+                                                    <action selector="onCardButtonTap:" destination="BYZ-38-t0r" eventType="touchUpInside" id="fLZ-5z-qEf"/>
+                                                </connections>
                                             </button>
                                         </subviews>
                                     </stackView>

@@ -10,14 +10,17 @@ import UIKit
 
 class ViewController: UIViewController {
     
+    private static let selectedCardBorderWidth: CGFloat = 2
+    
     private let numberOfCardsToStart = 12
+    
+    private lazy var cards = Deck(shuffle: true).deal(numberOfCards: numberOfCardsToStart)
 
     @IBOutlet var cardButtons: [UIButton]! {
         didSet {
             cardButtons.forEach { (button) in
-                button.layer.borderWidth = 0.5
-                button.layer.borderColor = UIColor.black.withAlphaComponent(0.35).cgColor
                 button.layer.cornerRadius = 8
+                ViewController.deselect(button)
             }
         }
     }
@@ -25,11 +28,8 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let initiallyDealtCards = Deck(shuffle: true).deal(numberOfCards: numberOfCardsToStart)
-        for idx in 0..<initiallyDealtCards.count {
-            let card = initiallyDealtCards[idx]
-            let button = cardButtons[idx]
-            ViewController.display(button, card)
+        for idx in 0..<cards.count {
+            ViewController.display(cardButtons[idx], cards[idx])
         }
         
         for idx in numberOfCardsToStart..<cardButtons.count {
@@ -62,6 +62,31 @@ class ViewController: UIViewController {
         
         button.setAttributedTitle(attrTitle, for: .normal)
     }
-
+    
+    @IBAction func onCardButtonTap(_ sender: UIButton) {
+        let idx = sender.tag
+        let button = cardButtons[idx]
+        ViewController.toggleSelectionStatus(button)
+    }
+    
+    private static func toggleSelectionStatus(_ button: UIButton) {
+        let selected = button.layer.borderWidth == selectedCardBorderWidth
+        if selected {
+            deselect(button)
+        } else {
+            select(button)
+        }
+    }
+    
+    private static func deselect(_ button: UIButton) {
+        button.layer.borderWidth = 0.5
+        button.layer.borderColor = UIColor.black.withAlphaComponent(0.35).cgColor
+    }
+    
+    private static func select(_ button: UIButton) {
+        button.layer.borderWidth = selectedCardBorderWidth
+        button.layer.borderColor = UIColor.blue.cgColor
+    }
+    
 }
 
