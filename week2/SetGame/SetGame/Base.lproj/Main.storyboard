@@ -18,8 +18,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Score: " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FZZ-US-hGc" userLabel="ScoreLabel">
-                                <rect key="frame" x="147" y="40" width="81" height="30"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Score: 0" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FZZ-US-hGc" userLabel="ScoreLabel">
+                                <rect key="frame" x="139" y="40" width="97.5" height="30"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="25"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -274,6 +274,7 @@
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                     <connections>
+                        <outlet property="scoreLabel" destination="FZZ-US-hGc" id="3ph-1h-J3s"/>
                         <outletCollection property="cardButtons" destination="UBT-v9-YbQ" collectionClass="NSMutableArray" id="cCX-Wq-zfn"/>
                         <outletCollection property="cardButtons" destination="2D9-uY-8Wx" collectionClass="NSMutableArray" id="HK5-tc-5mY"/>
                         <outletCollection property="cardButtons" destination="YHG-QF-sZI" collectionClass="NSMutableArray" id="u7C-PG-VEJ"/>

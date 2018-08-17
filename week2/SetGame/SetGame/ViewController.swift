@@ -25,6 +25,8 @@ class ViewController: UIViewController {
         }
     }
     
+    @IBOutlet weak var scoreLabel: UILabel!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -65,7 +67,11 @@ class ViewController: UIViewController {
     
     private var selectedCardIndices = [Int]()
     private var areSelectedCardsASet = false
-    
+    private var score = 0
+    private let matchScore = 3
+    private let mismatchScore = -5
+    private let deselectionScore = -1
+
     @IBAction func onCardButtonTap(_ sender: UIButton) {
         let btnIdx = sender.tag
 
@@ -80,10 +86,16 @@ class ViewController: UIViewController {
             if selectedCardIndices.count == Deck.SET_SIZE {
                 let selectedCards = selectedCardIndices.map{cards[$0]}
                 areSelectedCardsASet = Deck.isSet(selectedCards)
-                print("Selected Cards form a Set?:", areSelectedCardsASet)
+                selectedCards.forEach { print($0) }
+                print("SET:", areSelectedCardsASet)
+                print("--------")
+                score += areSelectedCardsASet ? matchScore : mismatchScore
+                scoreLabel.text = "Score: \(score)"
             }
         } else {
             selectedCardIndices.remove(at: selectedCardIndices.index(of: btnIdx)!)
+            score += deselectionScore
+            scoreLabel.text = "Score: \(score)"
         }
     }
     
@@ -114,6 +126,7 @@ class ViewController: UIViewController {
             let selectedCardIndex = selectedCardIndices[arrayIndex]
             let button = cardButtons[selectedCardIndex]
             let newCard = newlyDealtCards[arrayIndex]
+            cards[selectedCardIndex] = newCard
             ViewController.deselect(button)
             ViewController.setAttributedTitle(of: button, basedOn: newCard)
         }
