@@ -86,11 +86,9 @@ class ViewController: UIViewController {
             if selectedCardIndices.count == Deck.SET_SIZE {
                 let selectedCards = selectedCardIndices.map{cards[$0]}
                 areSelectedCardsASet = Deck.isSet(selectedCards)
-                selectedCards.forEach { print($0) }
-                print("SET:", areSelectedCardsASet)
-                print("--------")
                 score += areSelectedCardsASet ? matchScore : mismatchScore
                 scoreLabel.text = "Score: \(score)"
+                updateEnabledStatusOfDealButton()
             }
         } else {
             selectedCardIndices.remove(at: selectedCardIndices.index(of: btnIdx)!)
@@ -107,6 +105,13 @@ class ViewController: UIViewController {
         } else {
             addWith(deck.deal())
         }
+        updateEnabledStatusOfDealButton()
+    }
+    
+    private func updateEnabledStatusOfDealButton() {
+        dealButton.isEnabled = !deck.isEmpty
+                                && (selectedCardIndices.count == Deck.SET_SIZE && areSelectedCardsASet
+                                    || cards.count < cardButtons.count)
     }
     
     private func onTapWhen3CardsSelected(_ tappedButtonIndex: Int) {
@@ -114,7 +119,7 @@ class ViewController: UIViewController {
             if deck.isEmpty {
                 hideSelectedCards()
             } else {
-                replaceWith(deck.deal())
+                replaceWith(deck.deal(), completion: updateEnabledStatusOfDealButton)
             }
             selectedCardIndices = selectedCardIndices.contains(tappedButtonIndex) ? [] : [tappedButtonIndex]
             for selectedIdx in selectedCardIndices {
@@ -131,11 +136,13 @@ class ViewController: UIViewController {
     
     private func hideSelectedCards() {
         for selectedIdx in selectedCardIndices {
-            cardButtons[selectedIdx].isHidden = true
+            /* Due to using Stack View we have to set 'alpha = 0' instead of 'isHidden = true' */
+            //cardButtons[selectedIdx].isHidden = true
+            cardButtons[selectedIdx].alpha = 0
         }
     }
     
-    private func replaceWith(_ newlyDealtCards: [Card]) {
+    private func replaceWith(_ newlyDealtCards: [Card], completion: (() -> Void)? = nil) {
         for arrayIndex in newlyDealtCards.indices {
             let selectedCardIndex = selectedCardIndices[arrayIndex]
             let button = cardButtons[selectedCardIndex]
@@ -144,6 +151,7 @@ class ViewController: UIViewController {
             ViewController.deselect(button)
             ViewController.setAttributedTitle(of: button, basedOn: newCard)
         }
+        completion?()
     }
     
     private func addWith(_ newlyDealtCards: [Card]) {
@@ -153,7 +161,6 @@ class ViewController: UIViewController {
             ViewController.setAttributedTitle(of: cardButtons[start + index], basedOn: newlyDealtCards[index])
             cardButtons[start + index].isHidden = false
         }
-
     }
     
     private static func toggleSelectionStatus(_ button: UIButton) -> Bool {
