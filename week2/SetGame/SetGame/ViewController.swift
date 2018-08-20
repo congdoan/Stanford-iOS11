@@ -10,33 +10,58 @@ import UIKit
 
 class ViewController: UIViewController {
     
-    private static let selectedCardBorderWidth: CGFloat = 2
-    
     private let numberOfCardsToStart = 12
     private let deck = Deck()
     private lazy var cards = deck.deal(numberOfCards: numberOfCardsToStart)
 
-    @IBOutlet var cardButtons: [UIButton]! {
-        didSet {
-            cardButtons.forEach { (button) in
-                button.layer.cornerRadius = 8
-                ViewController.deselect(button)
-            }
-        }
-    }
+    @IBOutlet weak var verticalStackView: UIStackView!
+    
+    private var cardButtons: [UIButton]!
     
     @IBOutlet weak var scoreLabel: UILabel!
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
+    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        super.traitCollectionDidChange(previousTraitCollection)
+        
+        verticalStackView.removeAllSubviews()
+        cardButtons = populateVerticalStackView()
         
         for idx in 0..<cards.count {
             ViewController.setAttributedTitle(of: cardButtons[idx], basedOn: cards[idx])
         }
         
-        for idx in numberOfCardsToStart..<cardButtons.count {
-            cardButtons[idx].isHidden = true
+        for idx in cards.count..<cardButtons.count {
+            cardButtons[idx].alpha = 0
         }
+    }
+    
+    private func populateVerticalStackView() -> [UIButton] {
+        let rows = traitCollection.verticalSizeClass == .regular ? Constant.rowsInRegularHeight
+                                                                 : Constant.rowsInCompactHeight
+        let cols = traitCollection.horizontalSizeClass == .regular ? Constant.colsInRegularWidth
+                                                                   : Constant.colsInCompactWidth
+        
+        var cardButtons = [UIButton]()
+        
+        for row in 0..<rows {
+            let horizontalStackView = UIStackView()
+            horizontalStackView.axis = .horizontal
+            horizontalStackView.spacing = Constant.CardButton.spacing
+            horizontalStackView.distribution = .fillEqually
+            for col in 0..<cols {
+                let button = UIButton()
+                button.tag = row * cols + col
+                button.titleLabel?.font = UIFont.boldSystemFont(ofSize: Constant.CardButton.titleFontSize)
+                ViewController.deselect(button)
+                button.layer.cornerRadius = Constant.CardButton.cornerRadius
+                button.addTarget(self, action: #selector(onCardButtonTap(_:)), for: .touchUpInside)
+                horizontalStackView.addArrangedSubview(button)
+                cardButtons.append(button)
+            }
+            verticalStackView.addArrangedSubview(horizontalStackView)
+        }
+        
+        return cardButtons
     }
     
     private static func setAttributedTitle(of button: UIButton, basedOn card: Card) {
@@ -46,11 +71,11 @@ class ViewController: UIViewController {
         let attr: [NSAttributedStringKey : Any]
         switch card.shading {
         case .outline:
-            attr = [.strokeWidth: 2, .strokeColor: color]
+            attr = [.strokeWidth: Constant.CardShading.strokeWidthOfOutline, .strokeColor: color]
         case .solid: //filled
-            attr = [.strokeWidth: -1, .foregroundColor: color]
+            attr = [.strokeWidth: Constant.CardShading.strokeWidthOfSolid, .foregroundColor: color]
         case .striped:
-            attr = [.foregroundColor: color.withAlphaComponent(0.20)]
+            attr = [.foregroundColor: color.withAlphaComponent(Constant.CardShading.alphaComponentOfStriped)]
         }
         
         let attrSymbol = NSAttributedString(string: symbol, attributes: attr)
@@ -68,11 +93,8 @@ class ViewController: UIViewController {
     private var selectedCardIndices = [Int]()
     private var areSelectedCardsASet = false
     private var score = 0
-    private let matchScore = 3
-    private let mismatchScore = -5
-    private let deselectionScore = -1
 
-    @IBAction func onCardButtonTap(_ sender: UIButton) {
+    @objc func onCardButtonTap(_ sender: UIButton) {
         let btnIdx = sender.tag
 
         if selectedCardIndices.count == Deck.SET_SIZE {
@@ -86,13 +108,13 @@ class ViewController: UIViewController {
             if selectedCardIndices.count == Deck.SET_SIZE {
                 let selectedCards = selectedCardIndices.map{cards[$0]}
                 areSelectedCardsASet = Deck.isSet(selectedCards)
-                score += areSelectedCardsASet ? matchScore : mismatchScore
+                score += areSelectedCardsASet ? Constant.Score.match : Constant.Score.mismatch
                 scoreLabel.text = "Score: \(score)"
                 updateEnabledStatusOfDealButton()
             }
         } else {
             selectedCardIndices.remove(at: selectedCardIndices.index(of: btnIdx)!)
-            score += deselectionScore
+            score += Constant.Score.deselect
             scoreLabel.text = "Score: \(score)"
         }
     }
@@ -136,7 +158,7 @@ class ViewController: UIViewController {
     
     private func hideSelectedCards() {
         for selectedIdx in selectedCardIndices {
-            /* Due to using Stack View we have to set 'alpha = 0' instead of 'isHidden = true' */
+            /* Since use Stack View we set 'alpha = 0' instead of 'isHidden = true' */
             //cardButtons[selectedIdx].isHidden = true
             cardButtons[selectedIdx].alpha = 0
         }
@@ -159,12 +181,12 @@ class ViewController: UIViewController {
         cards.append(contentsOf: newlyDealtCards)
         for index in newlyDealtCards.indices {
             ViewController.setAttributedTitle(of: cardButtons[start + index], basedOn: newlyDealtCards[index])
-            cardButtons[start + index].isHidden = false
+            cardButtons[start + index].alpha = 1
         }
     }
     
     private static func toggleSelectionStatus(_ button: UIButton) -> Bool {
-        let selected = button.layer.borderWidth == selectedCardBorderWidth
+        let selected = button.layer.borderWidth == Constant.CardButton.borderWidthOfSelected
         if selected {
             deselect(button)
             return false
@@ -175,14 +197,13 @@ class ViewController: UIViewController {
     }
     
     private static func deselect(_ button: UIButton) {
-        button.layer.borderWidth = 0.5
-        button.layer.borderColor = UIColor.black.withAlphaComponent(0.35).cgColor
+        button.layer.borderWidth = Constant.CardButton.borderWidthOfUnselected
+        button.layer.borderColor = Constant.CardButton.borderColorOfUnselected
     }
     
     private static func select(_ button: UIButton) {
-        button.layer.borderWidth = selectedCardBorderWidth
-        button.layer.borderColor = UIColor.blue.cgColor
+        button.layer.borderWidth = Constant.CardButton.borderWidthOfSelected
+        button.layer.borderColor = Constant.CardButton.borderColorOfSelected
     }
     
 }
-

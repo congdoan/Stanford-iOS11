@@ -16,6 +16,8 @@
 		F49261362125280D009DC54C /* Deck.swift in Sources */ = {isa = PBXBuildFile; fileRef = F49261352125280D009DC54C /* Deck.swift */; };
 		F492613821252E48009DC54C /* Array+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = F492613721252E48009DC54C /* Array+Ext.swift */; };
 		F492613A2125306A009DC54C /* Int+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = F49261392125306A009DC54C /* Int+Ext.swift */; };
+		F4C5C25A212A4A62001A2183 /* UIStackView+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4C5C259212A4A62001A2183 /* UIStackView+Ext.swift */; };
+		F4C5C25C212A5021001A2183 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4C5C25B212A5021001A2183 /* Constants.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -30,6 +32,8 @@
 		F49261352125280D009DC54C /* Deck.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Deck.swift; sourceTree = "<group>"; };
 		F492613721252E48009DC54C /* Array+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array+Ext.swift"; sourceTree = "<group>"; };
 		F49261392125306A009DC54C /* Int+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Int+Ext.swift"; sourceTree = "<group>"; };
+		F4C5C259212A4A62001A2183 /* UIStackView+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIStackView+Ext.swift"; sourceTree = "<group>"; };
+		F4C5C25B212A5021001A2183 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -63,8 +67,10 @@
 			isa = PBXGroup;
 			children = (
 				F492613221252364009DC54C /* Model */,
+				F4C5C258212A4A16001A2183 /* View */,
 				F49261202125213C009DC54C /* AppDelegate.swift */,
 				F49261222125213C009DC54C /* ViewController.swift */,
+				F4C5C25B212A5021001A2183 /* Constants.swift */,
 				F49261242125213C009DC54C /* Main.storyboard */,
 				F49261272125213C009DC54C /* Assets.xcassets */,
 				F49261292125213C009DC54C /* LaunchScreen.storyboard */,
@@ -82,6 +88,14 @@
 				F49261392125306A009DC54C /* Int+Ext.swift */,
 			);
 			path = Model;
+			sourceTree = "<group>";
+		};
+		F4C5C258212A4A16001A2183 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				F4C5C259212A4A62001A2183 /* UIStackView+Ext.swift */,
+			);
+			path = View;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -155,12 +169,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F4C5C25A212A4A62001A2183 /* UIStackView+Ext.swift in Sources */,
 				F49261362125280D009DC54C /* Deck.swift in Sources */,
 				F49261232125213C009DC54C /* ViewController.swift in Sources */,
 				F492613821252E48009DC54C /* Array+Ext.swift in Sources */,
 				F49261342125237D009DC54C /* Card.swift in Sources */,
 				F49261212125213C009DC54C /* AppDelegate.swift in Sources */,
 				F492613A2125306A009DC54C /* Int+Ext.swift in Sources */,
+				F4C5C25C212A5021001A2183 /* Constants.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -307,6 +323,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = R8VH3WZA2V;
 				INFOPLIST_FILE = SetGame/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -325,6 +342,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = R8VH3WZA2V;
 				INFOPLIST_FILE = SetGame/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
