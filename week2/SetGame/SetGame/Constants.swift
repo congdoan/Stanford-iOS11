@@ -22,7 +22,7 @@ enum Constant {
     }
     
     enum CardButton {
-        static let titleFontSize: CGFloat = 34
+        static let titleFontSizeOverButtonWidth: CGFloat = 34 / 127.5
         
         static let spacing: CGFloat = 8
         

@@ -51,6 +51,8 @@ class ViewController: UIViewController {
         
         var cardButtons = [UIButton]()
         
+        let fontSize = Constant.CardButton.titleFontSizeOverButtonWidth
+                        * ((view.bounds.width - (CGFloat(cols + 1) * Constant.CardButton.spacing)) / CGFloat(cols))
         for row in 0..<rows {
             let horizontalStackView = UIStackView()
             horizontalStackView.axis = .horizontal
@@ -59,7 +61,7 @@ class ViewController: UIViewController {
             for col in 0..<cols {
                 let button = UIButton()
                 button.tag = row * cols + col
-                button.titleLabel?.font = UIFont.boldSystemFont(ofSize: Constant.CardButton.titleFontSize)
+                button.titleLabel?.font = UIFont.boldSystemFont(ofSize: fontSize)
                 ViewController.deselect(button)
                 button.layer.cornerRadius = Constant.CardButton.cornerRadius
                 button.addTarget(self, action: #selector(onCardButtonTap(_:)), for: .touchUpInside)
