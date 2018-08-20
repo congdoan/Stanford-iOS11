@@ -33,6 +33,10 @@ class ViewController: UIViewController {
         for idx in cards.count..<cardButtons.count {
             cardButtons[idx].alpha = 0
         }
+        
+        for selectedIdx in selectedCardIndices {
+            ViewController.select(cardButtons[selectedIdx])
+        }
     }
     
     private func populateVerticalStackView() -> [UIButton] {
