@@ -18,7 +18,7 @@ enum Constant {
     enum CardShading {
         static let strokeWidthOfOutline: CGFloat = 2
         static let strokeWidthOfSolid: CGFloat = -1
-        static let alphaComponentOfStriped: CGFloat = 0.15
+        static let alphaComponentOfStriped: CGFloat = 0.17
     }
     
     enum CardButton {

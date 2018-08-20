@@ -25,19 +25,36 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="NrL-hI-7bP" userLabel="VerticalStackView">
-                                <rect key="frame" x="8" y="90" width="359" height="504"/>
+                                <rect key="frame" x="8" y="90" width="359" height="489"/>
                             </stackView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SEI-Ra-7hA" userLabel="DealButton">
-                                <rect key="frame" x="113" y="614" width="148" height="33"/>
+                            <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" alignment="center" spacing="30" translatesAutoresizingMaskIntoConstraints="NO" id="Ych-nN-pEG" userLabel="ButtonsStackView">
+                                <rect key="frame" x="28" y="599" width="319" height="48"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SEI-Ra-7hA" userLabel="DealButton">
+                                        <rect key="frame" x="0.0" y="0.0" width="180" height="48"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="180" id="JxI-tD-vQe"/>
+                                            <constraint firstAttribute="height" constant="48" id="LRp-Oi-8iO"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
+                                        <state key="normal" title="Deal 3 More Cards"/>
+                                        <connections>
+                                            <action selector="onDealButtonTap:" destination="BYZ-38-t0r" eventType="touchUpInside" id="GOC-M0-F4w"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="A8e-b1-Sfd">
+                                        <rect key="frame" x="210" y="6" width="109" height="36"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="36" id="7h7-5c-qWr"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <state key="normal" title="New Game"/>
+                                    </button>
+                                </subviews>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="33" id="qha-D1-0kE"/>
+                                    <constraint firstAttribute="height" constant="48" id="Mpp-AS-Sh1"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
-                                <state key="normal" title="Deal 3 More Cards"/>
-                                <connections>
-                                    <action selector="onDealButtonTap:" destination="BYZ-38-t0r" eventType="touchUpInside" id="GOC-M0-F4w"/>
-                                </connections>
-                            </button>
+                            </stackView>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
@@ -45,15 +62,16 @@
                             <constraint firstItem="NrL-hI-7bP" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="8" id="4Yq-Oe-q8F"/>
                             <constraint firstItem="FZZ-US-hGc" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="DAr-wk-h9F"/>
                             <constraint firstItem="NrL-hI-7bP" firstAttribute="top" secondItem="FZZ-US-hGc" secondAttribute="bottom" constant="20" id="IVA-HN-v5z"/>
+                            <constraint firstItem="Ych-nN-pEG" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="J3X-GL-CCd"/>
                             <constraint firstItem="FZZ-US-hGc" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="20" id="W9r-BV-cV1"/>
-                            <constraint firstItem="SEI-Ra-7hA" firstAttribute="top" secondItem="NrL-hI-7bP" secondAttribute="bottom" constant="20" id="Xpv-we-OpR"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="SEI-Ra-7hA" secondAttribute="bottom" constant="20" id="dqS-rZ-6Gf"/>
-                            <constraint firstItem="SEI-Ra-7hA" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="ubh-42-DwD"/>
+                            <constraint firstItem="Ych-nN-pEG" firstAttribute="top" secondItem="NrL-hI-7bP" secondAttribute="bottom" constant="20" id="hvn-lX-pbh"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="Ych-nN-pEG" secondAttribute="bottom" constant="20" id="jTg-fA-kRT"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                     <connections>
                         <outlet property="dealButton" destination="SEI-Ra-7hA" id="MNl-Fq-qAh"/>
+                        <outlet property="newGameButton" destination="A8e-b1-Sfd" id="1be-em-Gn9"/>
                         <outlet property="scoreLabel" destination="FZZ-US-hGc" id="3ph-1h-J3s"/>
                         <outlet property="verticalStackView" destination="NrL-hI-7bP" id="XSn-Og-1sp"/>
                     </connections>

@@ -11,7 +11,7 @@ import UIKit
 class ViewController: UIViewController {
     
     private let numberOfCardsToStart = 12
-    private let deck = Deck()
+    private var deck = Deck()
     private lazy var cards = deck.deal(numberOfCards: numberOfCardsToStart)
 
     @IBOutlet weak var verticalStackView: UIStackView!
@@ -23,6 +23,10 @@ class ViewController: UIViewController {
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
         super.traitCollectionDidChange(previousTraitCollection)
         
+        handleTraitCollectionChange()
+    }
+    
+    private func handleTraitCollectionChange() {
         verticalStackView.removeAllSubviews()
         cardButtons = populateVerticalStackView()
         
@@ -96,7 +100,11 @@ class ViewController: UIViewController {
     
     private var selectedCardIndices = [Int]()
     private var areSelectedCardsASet = false
-    private var score = 0
+    private var score = 0 {
+        didSet {
+            scoreLabel.text = "Score: \(score)"
+        }
+    }
 
     @objc func onCardButtonTap(_ sender: UIButton) {
         let btnIdx = sender.tag
@@ -113,17 +121,21 @@ class ViewController: UIViewController {
                 let selectedCards = selectedCardIndices.map{cards[$0]}
                 areSelectedCardsASet = Deck.isSet(selectedCards)
                 score += areSelectedCardsASet ? Constant.Score.match : Constant.Score.mismatch
-                scoreLabel.text = "Score: \(score)"
                 updateEnabledStatusOfDealButton()
             }
         } else {
             selectedCardIndices.remove(at: selectedCardIndices.index(of: btnIdx)!)
             score += Constant.Score.deselect
-            scoreLabel.text = "Score: \(score)"
         }
     }
     
-    @IBOutlet weak var dealButton: UIButton!
+    @IBOutlet weak var dealButton: UIButton! {
+        didSet {
+            dealButton.layer.cornerRadius = dealButton.bounds.height / 2
+            dealButton.layer.borderColor = #colorLiteral(red: 1, green: 0.2527923882, blue: 1, alpha: 1)
+            dealButton.layer.borderWidth = 2
+        }
+    }
     @IBAction func onDealButtonTap(_ sender: Any) {
         if selectedCardIndices.count == Deck.SET_SIZE && areSelectedCardsASet {
             replaceWith(deck.deal())
@@ -132,6 +144,25 @@ class ViewController: UIViewController {
             addWith(deck.deal())
         }
         updateEnabledStatusOfDealButton()
+    }
+    
+    @IBOutlet weak var newGameButton: UIButton! {
+        didSet {
+            newGameButton.layer.cornerRadius = newGameButton.bounds.height / 2
+            newGameButton.layer.borderColor = #colorLiteral(red: 1, green: 0.2527923882, blue: 1, alpha: 1)
+            newGameButton.layer.borderWidth = 1
+            
+            newGameButton.addTarget(self, action: #selector(onNewGameButtonTap), for: .touchUpInside)
+        }
+    }
+    
+    @objc func onNewGameButtonTap() {
+        deck = Deck()
+        cards = deck.deal(numberOfCards: numberOfCardsToStart)
+        selectedCardIndices = []
+        score = 0
+        
+        handleTraitCollectionChange()
     }
     
     private func updateEnabledStatusOfDealButton() {
