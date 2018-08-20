@@ -20,15 +20,38 @@ class ViewController: UIViewController {
     
     @IBOutlet weak var scoreLabel: UILabel!
     
+    private var rows: Int!, cols: Int!
+    
+    override func willTransition(to newCollection: UITraitCollection, with coordinator: UIViewControllerTransitionCoordinator) {
+        super.willTransition(to: newCollection, with: coordinator)
+        
+        updateRowsCols(traitCollection: newCollection)
+    }
+    
+    private func updateRowsCols(traitCollection: UITraitCollection) {
+        rows = traitCollection.verticalSizeClass == .regular ? Constant.rowsInRegularHeight
+                                                             : Constant.rowsInCompactHeight
+        cols = traitCollection.horizontalSizeClass == .regular ? Constant.colsInRegularWidth
+                                                               : Constant.colsInCompactWidth
+    }
+    
+    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+        super.viewWillTransition(to: size, with: coordinator)
+        
+        handleViewSizeChange(newSize: size)
+    }
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
         super.traitCollectionDidChange(previousTraitCollection)
         
-        handleTraitCollectionChange()
+        if verticalStackView.subviews.isEmpty {
+            updateRowsCols(traitCollection: traitCollection)
+            handleViewSizeChange(newSize: view.bounds.size)
+        }
     }
     
-    private func handleTraitCollectionChange() {
+    private func handleViewSizeChange(newSize: CGSize) {
         verticalStackView.removeAllSubviews()
-        cardButtons = populateVerticalStackView()
+        cardButtons = populateVerticalStackView(newSize: newSize)
         
         for idx in 0..<cards.count {
             ViewController.setAttributedTitle(of: cardButtons[idx], basedOn: cards[idx])
@@ -43,16 +66,11 @@ class ViewController: UIViewController {
         }
     }
     
-    private func populateVerticalStackView() -> [UIButton] {
-        let rows = traitCollection.verticalSizeClass == .regular ? Constant.rowsInRegularHeight
-                                                                 : Constant.rowsInCompactHeight
-        let cols = traitCollection.horizontalSizeClass == .regular ? Constant.colsInRegularWidth
-                                                                   : Constant.colsInCompactWidth
-        
+    private func populateVerticalStackView(newSize: CGSize) -> [UIButton] {
         var cardButtons = [UIButton]()
         
         let fontSize = Constant.CardButton.titleFontSizeOverButtonWidth
-                        * ((view.bounds.width - (CGFloat(cols + 1) * Constant.CardButton.spacing)) / CGFloat(cols))
+                        * ((newSize.width - (CGFloat(cols + 1) * Constant.CardButton.spacing)) / CGFloat(cols))
         for row in 0..<rows {
             let horizontalStackView = UIStackView()
             horizontalStackView.axis = .horizontal
@@ -164,7 +182,7 @@ class ViewController: UIViewController {
         selectedCardIndices = []
         score = 0
         
-        handleTraitCollectionChange()
+        handleViewSizeChange(newSize: view.bounds.size)
     }
     
     private func updateEnabledStatusOfDealButton() {
