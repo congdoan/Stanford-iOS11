@@ -25,14 +25,11 @@ class ViewController: UIViewController {
     override func willTransition(to newCollection: UITraitCollection, with coordinator: UIViewControllerTransitionCoordinator) {
         super.willTransition(to: newCollection, with: coordinator)
         
-        updateRowsCols(traitCollection: newCollection)
+        updateRows(verticalSizeClass: newCollection.verticalSizeClass)
     }
     
-    private func updateRowsCols(traitCollection: UITraitCollection) {
-        rows = traitCollection.verticalSizeClass == .regular ? Constant.rowsInRegularHeight
-                                                             : Constant.rowsInCompactHeight
-        cols = traitCollection.horizontalSizeClass == .regular ? Constant.colsInRegularWidth
-                                                               : Constant.colsInCompactWidth
+    private func updateRows(verticalSizeClass: UIUserInterfaceSizeClass) {
+        rows = verticalSizeClass == .regular ? Constant.rowsInRegularHeight : Constant.rowsInCompactHeight
     }
     
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
@@ -44,16 +41,23 @@ class ViewController: UIViewController {
         super.traitCollectionDidChange(previousTraitCollection)
         
         if verticalStackView.subviews.isEmpty {
-            updateRowsCols(traitCollection: traitCollection)
+            updateRows(verticalSizeClass: traitCollection.verticalSizeClass)
             handleViewSizeChange(newSize: view.bounds.size)
         }
     }
     
     private func handleViewSizeChange(newSize: CGSize) {
+        cols = newSize.width >= Constant.iPhone4sLargerDimension ? 6 : 3
+        
         verticalStackView.removeAllSubviews()
         cardButtons = populateVerticalStackView(newSize: newSize)
         
+        for matchedIdx in hiddenMatchedCardIndices {
+            cardButtons[matchedIdx].alpha = 0
+        }
+
         for idx in 0..<cards.count {
+            if cardButtons[idx].alpha == 0 { continue }
             ViewController.setAttributedTitle(of: cardButtons[idx], basedOn: cards[idx])
         }
         
@@ -149,13 +153,14 @@ class ViewController: UIViewController {
         }
     }
     
-    @IBOutlet weak var dealButton: UIButton! {
+    @IBOutlet weak var dealButton: UIButton!/* {
         didSet {
-            dealButton.layer.cornerRadius = dealButton.bounds.height / 2
-            dealButton.layer.borderColor = #colorLiteral(red: 1, green: 0.2527923882, blue: 1, alpha: 1)
-            dealButton.layer.borderWidth = 2
+            let titleLabel = dealButton.titleLabel!
+            titleLabel.minimumScaleFactor = 0.3
+            titleLabel.adjustsFontSizeToFitWidth = true
+            titleLabel.baselineAdjustment = .alignCenters
         }
-    }
+    }*/
     @IBAction func onDealButtonTap(_ sender: Any) {
         if selectedCardIndices.count == Deck.SET_SIZE && areSelectedCardsASet {
             replaceWith(deck.deal())
@@ -166,21 +171,13 @@ class ViewController: UIViewController {
         updateEnabledStatusOfDealButton()
     }
     
-    @IBOutlet weak var newGameButton: UIButton! {
-        didSet {
-            newGameButton.layer.cornerRadius = newGameButton.bounds.height / 2
-            newGameButton.layer.borderColor = #colorLiteral(red: 1, green: 0.2527923882, blue: 1, alpha: 1)
-            newGameButton.layer.borderWidth = 1
-            
-            newGameButton.addTarget(self, action: #selector(onNewGameButtonTap), for: .touchUpInside)
-        }
-    }
-    
-    @objc func onNewGameButtonTap() {
+    @IBAction func onNewGameButtonTap(_ sender: Any) {
         deck = Deck()
         cards = deck.deal(numberOfCards: numberOfCardsToStart)
         selectedCardIndices = []
+        hiddenMatchedCardIndices = []
         score = 0
+        dealButton.isEnabled = true
         
         handleViewSizeChange(newSize: view.bounds.size)
     }
@@ -194,7 +191,7 @@ class ViewController: UIViewController {
     private func onTapWhen3CardsSelected(_ tappedButtonIndex: Int) {
         if areSelectedCardsASet {
             if deck.isEmpty {
-                hideSelectedCards()
+                hideSETOfSelectedCards()
             } else {
                 replaceWith(deck.deal(), completion: updateEnabledStatusOfDealButton)
             }
@@ -202,6 +199,7 @@ class ViewController: UIViewController {
             for selectedIdx in selectedCardIndices {
                 ViewController.select(cardButtons[selectedIdx])
             }
+            updateEnabledStatusOfDealButton()
         } else {
             for selectedIdx in selectedCardIndices {
                 ViewController.deselect(cardButtons[selectedIdx])
@@ -211,7 +209,9 @@ class ViewController: UIViewController {
         }
     }
     
-    private func hideSelectedCards() {
+    private var hiddenMatchedCardIndices = [Int]()
+    private func hideSETOfSelectedCards() {
+        hiddenMatchedCardIndices.append(contentsOf: selectedCardIndices)
         for selectedIdx in selectedCardIndices {
             /* Since use Stack View we set 'alpha = 0' instead of 'isHidden = true' */
             //cardButtons[selectedIdx].isHidden = true

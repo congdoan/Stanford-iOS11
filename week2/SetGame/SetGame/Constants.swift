@@ -14,6 +14,8 @@ enum Constant {
     
     static let rowsInCompactHeight = 4
     static let colsInRegularWidth = 6
+    
+    static let iPhone4sLargerDimension: CGFloat = 480
 
     enum CardShading {
         static let strokeWidthOfOutline: CGFloat = 2
