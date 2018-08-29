@@ -26,13 +26,6 @@
                                     <constraint firstAttribute="width" secondItem="Ssh-2H-REx" secondAttribute="height" multiplier="5:8" id="HFp-dO-ts3"/>
                                     <constraint firstAttribute="width" priority="750" constant="1000" id="HUP-tn-4Na"/>
                                 </constraints>
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="number" keyPath="rank">
-                                        <integer key="value" value="3"/>
-                                    </userDefinedRuntimeAttribute>
-                                    <userDefinedRuntimeAttribute type="string" keyPath="suit" value="♠"/>
-                                    <userDefinedRuntimeAttribute type="boolean" keyPath="isFaceUp" value="NO"/>
-                                </userDefinedRuntimeAttributes>
                             </view>
                         </subviews>
                         <color key="backgroundColor" red="1" green="0.57637232540000005" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

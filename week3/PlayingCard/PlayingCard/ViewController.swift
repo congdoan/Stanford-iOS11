@@ -9,6 +9,8 @@
 import UIKit
 
 class ViewController: UIViewController {
+    
+    private var deck = PlayingCardDeck()
 
     @IBOutlet weak var cardView: PlayingCardView! {
         didSet {
@@ -18,34 +20,12 @@ class ViewController: UIViewController {
     }
     
     @objc func onCardViewTap() {
-        if cardView.isFaceUp {
-            let randomBool = Bool.arc4random
-            if randomBool {
-                cardView.rank = (cardView.rank % 13) + 1
-                cardView.suit = nextSuit(of: cardView.suit)
-            } else {
-                cardView.isFaceUp = false
-            }
-        } else {
-            cardView.isFaceUp = true
+        if deck.cards.isEmpty {
+            deck = PlayingCardDeck()
         }
-    }
-    
-    private func nextSuit(of suit: String) -> String {
-        switch suit {
-        case "♠": return "♣"
-        case "♣": return "♦"
-        case "♦": return "❤️"
-        case "❤️": return "♠"
-        default: return "♠"
-        }
+        let card = deck.draw()!
+        cardView.rank = card.rank.order
+        cardView.suit = card.suit.rawValue
     }
     
 }
-
-extension Bool {
-    static var arc4random: Bool {
-        return arc4random_uniform(2) == 1 ? true : false
-    }
-}
-
