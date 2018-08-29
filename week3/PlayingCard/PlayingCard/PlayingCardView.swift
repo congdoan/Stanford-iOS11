@@ -31,7 +31,15 @@ class PlayingCardView: UIView {
     @IBInspectable
     var isFaceUp: Bool = true { didSet { setNeedsDisplay(); setNeedsLayout() } }
     
-    var faceCardScale = SizeRatio.faceCardImageSizeToBoundsSize
+    var faceCardScale = SizeRatio.faceCardImageSizeToBoundsSize { didSet { setNeedsDisplay() } }
+    
+    @objc func adjustFaceCardScale(byHandlingPinchRecognizedBy recognizer: UIPinchGestureRecognizer) {
+        guard rank > 10 && isFaceUp else { return }
+        if [UIGestureRecognizerState.changed, .ended].contains(recognizer.state) {
+            faceCardScale *= recognizer.scale
+            recognizer.scale = 1
+        }
+    }
     
     private lazy var upperLeftCornerLabel = createCornerLabel()
     private lazy var lowerRightCornerLabel = createCornerLabel()

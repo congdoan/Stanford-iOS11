@@ -14,18 +14,28 @@ class ViewController: UIViewController {
 
     @IBOutlet weak var cardView: PlayingCardView! {
         didSet {
-            let tapRecognizer = UITapGestureRecognizer(target: self, action: #selector(onCardViewTap))
-            cardView.addGestureRecognizer(tapRecognizer)
+            let swipeRecognizer = UISwipeGestureRecognizer(target: self, action: #selector(nextCard))
+            swipeRecognizer.direction = [.left, .right]
+            cardView.addGestureRecognizer(swipeRecognizer)
+            
+            let pinchRecognizer = UIPinchGestureRecognizer(
+                                    target: cardView,
+                                    action: #selector(PlayingCardView.adjustFaceCardScale(byHandlingPinchRecognizedBy:)))
+            cardView.addGestureRecognizer(pinchRecognizer)
         }
     }
     
-    @objc func onCardViewTap() {
-        if deck.cards.isEmpty {
-            deck = PlayingCardDeck()
+    @objc func nextCard() {
+        if let card = deck.draw() {
+            cardView.rank = card.rank.order
+            cardView.suit = card.suit.rawValue
         }
-        let card = deck.draw()!
-        cardView.rank = card.rank.order
-        cardView.suit = card.suit.rawValue
+    }
+    
+    @IBAction func flipCard(_ sender: UITapGestureRecognizer) {
+        if sender.state == .ended {
+            cardView.isFaceUp = !cardView.isFaceUp
+        }
     }
     
 }
