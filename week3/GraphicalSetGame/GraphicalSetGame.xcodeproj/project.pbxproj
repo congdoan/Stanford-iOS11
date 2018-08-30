@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		F45C53CC2137C94100701697 /* CardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F45C53CB2137C94100701697 /* CardView.swift */; };
 		F49261212125213C009DC54C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F49261202125213C009DC54C /* AppDelegate.swift */; };
 		F49261232125213C009DC54C /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F49261222125213C009DC54C /* ViewController.swift */; };
 		F49261262125213C009DC54C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F49261242125213C009DC54C /* Main.storyboard */; };
@@ -23,6 +24,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		F45C53CB2137C94100701697 /* CardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardView.swift; sourceTree = "<group>"; };
 		F492611D2125213C009DC54C /* GraphicalSetGame.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GraphicalSetGame.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F49261202125213C009DC54C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		F49261222125213C009DC54C /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -108,6 +110,7 @@
 				F4F37D4D212E3FB8006CE887 /* RoundedBorderedButton.swift */,
 				F4F37D4C212E3FB8006CE887 /* RoundedButton.swift */,
 				F4C5C259212A4A62001A2183 /* UIStackView+Ext.swift */,
+				F45C53CB2137C94100701697 /* CardView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -192,6 +195,7 @@
 				F4F37D4F212E3FB8006CE887 /* RoundedBorderedButton.swift in Sources */,
 				F49261212125213C009DC54C /* AppDelegate.swift in Sources */,
 				F492613A2125306A009DC54C /* Int+Ext.swift in Sources */,
+				F45C53CC2137C94100701697 /* CardView.swift in Sources */,
 				F4C5C25C212A5021001A2183 /* Constants.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

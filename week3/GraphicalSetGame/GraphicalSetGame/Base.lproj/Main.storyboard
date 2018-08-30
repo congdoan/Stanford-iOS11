@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="gZg-6Q-kiz">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -14,7 +15,7 @@
         <!--View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="SetGame" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="GraphicalSetGame" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -40,7 +41,7 @@
                             <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" spacing="30" translatesAutoresizingMaskIntoConstraints="NO" id="Ych-nN-pEG" userLabel="ButtonsStackView">
                                 <rect key="frame" x="36.5" y="603.5" width="302" height="43.5"/>
                                 <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SEI-Ra-7hA" userLabel="DealButton" customClass="RoundedBorderedButton" customModule="SetGame" customModuleProvider="target">
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SEI-Ra-7hA" userLabel="DealButton" customClass="RoundedBorderedButton" customModule="GraphicalSetGame" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="0.0" width="170" height="43.5"/>
                                         <constraints>
                                             <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="150" id="eTn-Wl-jcb">
@@ -72,7 +73,7 @@
                                             <action selector="onDealButtonTap:" destination="BYZ-38-t0r" eventType="touchUpInside" id="GOC-M0-F4w"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="A8e-b1-Sfd" userLabel="NewGameButton" customClass="RoundedBorderedButton" customModule="SetGame" customModuleProvider="target">
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="A8e-b1-Sfd" userLabel="NewGameButton" customClass="RoundedBorderedButton" customModule="GraphicalSetGame" customModuleProvider="target">
                                         <rect key="frame" x="200" y="0.0" width="102" height="43.5"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <state key="normal" title="New Game"/>
@@ -129,6 +130,37 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="996" y="-196"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="hIP-81-nqh">
+            <objects>
+                <viewController id="gZg-6Q-kiz" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="qhY-J2-ZGr">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="pe4-bf-1Qd" userLabel="CardView" customClass="CardView" customModule="GraphicalSetGame" customModuleProvider="target">
+                                <rect key="frame" x="46.5" y="120.5" width="281.5" height="447"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="pe4-bf-1Qd" secondAttribute="height" multiplier="165:262" id="2DO-pV-yDt"/>
+                                    <constraint firstAttribute="width" priority="750" constant="400" id="Hwc-lE-Jfb"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" red="1" green="0.57637232540000005" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="pe4-bf-1Qd" firstAttribute="centerX" secondItem="w7s-XU-UO6" secondAttribute="centerX" id="6sd-Cx-EEe"/>
+                            <constraint firstItem="pe4-bf-1Qd" firstAttribute="width" relation="lessThanOrEqual" secondItem="w7s-XU-UO6" secondAttribute="width" multiplier="0.75" id="cQA-PV-Seh"/>
+                            <constraint firstItem="pe4-bf-1Qd" firstAttribute="centerY" secondItem="w7s-XU-UO6" secondAttribute="centerY" id="qxY-A7-Sf7"/>
+                            <constraint firstItem="pe4-bf-1Qd" firstAttribute="height" relation="lessThanOrEqual" secondItem="w7s-XU-UO6" secondAttribute="height" multiplier="0.75" id="wPf-Q7-3Zg"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="w7s-XU-UO6"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="TMK-f8-BQa" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1804" y="-197"/>
         </scene>
     </scenes>
 </document>
