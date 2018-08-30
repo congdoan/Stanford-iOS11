@@ -51,6 +51,16 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		F419A025213791EC001C6FED /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				F49261202125213C009DC54C /* AppDelegate.swift */,
+				F49261272125213C009DC54C /* Assets.xcassets */,
+				F49261292125213C009DC54C /* LaunchScreen.storyboard */,
+			);
+			path = "Supporting Files";
+			sourceTree = "<group>";
+		};
 		F49261142125213C009DC54C = {
 			isa = PBXGroup;
 			children = (
@@ -72,13 +82,11 @@
 			children = (
 				F492613221252364009DC54C /* Model */,
 				F4C5C258212A4A16001A2183 /* View */,
-				F49261202125213C009DC54C /* AppDelegate.swift */,
 				F49261222125213C009DC54C /* ViewController.swift */,
 				F4C5C25B212A5021001A2183 /* Constants.swift */,
 				F49261242125213C009DC54C /* Main.storyboard */,
-				F49261272125213C009DC54C /* Assets.xcassets */,
-				F49261292125213C009DC54C /* LaunchScreen.storyboard */,
 				F492612C2125213C009DC54C /* Info.plist */,
+				F419A025213791EC001C6FED /* Supporting Files */,
 			);
 			path = SetGame;
 			sourceTree = "<group>";
