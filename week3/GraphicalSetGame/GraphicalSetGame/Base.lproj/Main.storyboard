@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--View Controller-->
+        <scene sceneID="tne-QT-ifu">
+            <objects>
+                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="SetGame" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Score: 0" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FZZ-US-hGc" userLabel="ScoreLabel">
+                                <rect key="frame" x="137" y="40" width="101.5" height="27"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="19.5" id="E9s-G5-aRC"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                                <variation key="heightClass=regular">
+                                    <fontDescription key="fontDescription" type="boldSystem" pointSize="26"/>
+                                </variation>
+                                <variation key="heightClass=regular-widthClass=regular">
+                                    <fontDescription key="fontDescription" type="boldSystem" pointSize="35"/>
+                                </variation>
+                            </label>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="NrL-hI-7bP" userLabel="VerticalStackView">
+                                <rect key="frame" x="8" y="87" width="359" height="496.5"/>
+                            </stackView>
+                            <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" spacing="30" translatesAutoresizingMaskIntoConstraints="NO" id="Ych-nN-pEG" userLabel="ButtonsStackView">
+                                <rect key="frame" x="36.5" y="603.5" width="302" height="43.5"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SEI-Ra-7hA" userLabel="DealButton" customClass="RoundedBorderedButton" customModule="SetGame" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="0.0" width="170" height="43.5"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="150" id="eTn-Wl-jcb">
+                                                <variation key="heightClass=regular" constant="170"/>
+                                                <variation key="widthClass=regular" constant="190"/>
+                                                <variation key="heightClass=regular-widthClass=regular" constant="300"/>
+                                            </constraint>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="14"/>
+                                        <state key="normal" title="Deal 3 More Cards"/>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
+                                                <real key="value" value="2"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                                                <color key="value" red="1" green="0.2527923882" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
+                                        <variation key="heightClass=regular">
+                                            <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="16.5"/>
+                                        </variation>
+                                        <variation key="widthClass=regular">
+                                            <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="16.5"/>
+                                        </variation>
+                                        <variation key="heightClass=regular-widthClass=regular">
+                                            <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="29"/>
+                                        </variation>
+                                        <connections>
+                                            <action selector="onDealButtonTap:" destination="BYZ-38-t0r" eventType="touchUpInside" id="GOC-M0-F4w"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="A8e-b1-Sfd" userLabel="NewGameButton" customClass="RoundedBorderedButton" customModule="SetGame" customModuleProvider="target">
+                                        <rect key="frame" x="200" y="0.0" width="102" height="43.5"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <state key="normal" title="New Game"/>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
+                                                <real key="value" value="1"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                                                <color key="value" red="1" green="0.2527923882" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
+                                        <variation key="heightClass=regular">
+                                            <fontDescription key="fontDescription" type="system" pointSize="16.5"/>
+                                        </variation>
+                                        <variation key="widthClass=regular">
+                                            <fontDescription key="fontDescription" type="system" pointSize="16.5"/>
+                                        </variation>
+                                        <variation key="heightClass=regular-widthClass=regular">
+                                            <fontDescription key="fontDescription" type="system" pointSize="29"/>
+                                        </variation>
+                                        <connections>
+                                            <action selector="onNewGameButtonTap:" destination="BYZ-38-t0r" eventType="touchUpInside" id="uVm-rk-1xg"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="30" id="Ovg-wL-zYU"/>
+                                    <constraint firstItem="A8e-b1-Sfd" firstAttribute="width" secondItem="SEI-Ra-7hA" secondAttribute="width" multiplier="0.6" id="YI0-QU-3Bl"/>
+                                </constraints>
+                                <variation key="widthClass=regular" spacing="50"/>
+                            </stackView>
+                        </subviews>
+                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="NrL-hI-7bP" secondAttribute="trailing" constant="8" id="04s-qD-xTK"/>
+                            <constraint firstItem="NrL-hI-7bP" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="8" id="4Yq-Oe-q8F"/>
+                            <constraint firstItem="FZZ-US-hGc" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="DAr-wk-h9F"/>
+                            <constraint firstItem="FZZ-US-hGc" firstAttribute="height" secondItem="8bC-Xf-vdC" secondAttribute="height" multiplier="0.04077" priority="751" id="ILR-Yy-fYt"/>
+                            <constraint firstItem="NrL-hI-7bP" firstAttribute="top" secondItem="FZZ-US-hGc" secondAttribute="bottom" constant="20" id="IVA-HN-v5z"/>
+                            <constraint firstItem="Ych-nN-pEG" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="J3X-GL-CCd"/>
+                            <constraint firstItem="FZZ-US-hGc" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="20" id="W9r-BV-cV1"/>
+                            <constraint firstItem="Ych-nN-pEG" firstAttribute="height" secondItem="8bC-Xf-vdC" secondAttribute="height" multiplier="0.0652174" priority="750" id="dmj-vE-SX9"/>
+                            <constraint firstItem="Ych-nN-pEG" firstAttribute="top" secondItem="NrL-hI-7bP" secondAttribute="bottom" constant="20" id="hvn-lX-pbh"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="Ych-nN-pEG" secondAttribute="bottom" constant="20" id="jTg-fA-kRT"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
+                    </view>
+                    <connections>
+                        <outlet property="dealButton" destination="SEI-Ra-7hA" id="MNl-Fq-qAh"/>
+                        <outlet property="scoreLabel" destination="FZZ-US-hGc" id="3ph-1h-J3s"/>
+                        <outlet property="verticalStackView" destination="NrL-hI-7bP" id="XSn-Og-1sp"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="996" y="-196"/>
+        </scene>
+    </scenes>
+</document>
