@@ -19,21 +19,21 @@ struct Card: CustomStringConvertible {
     static let allNumbers = [Number.one, .two, .three]
     
     enum Shape {
-        case triangle, rectangle, circle
+        case triangle, square, circle
         
         var unicodeString: String {
             switch self {
             case .triangle:
                 return "▲"
-            case .rectangle:
-                return "▮"
+            case .square:
+                return "■"
             case .circle:
                 return "●"
             }
         }
     }
     
-    static let allShapes = [Shape.triangle, .rectangle, .circle]
+    static let allShapes = [Shape.triangle, .square, .circle]
     
     enum Shading {
         case solid, striped, outline
