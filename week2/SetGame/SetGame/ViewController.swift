@@ -153,14 +153,8 @@ class ViewController: UIViewController {
         }
     }
     
-    @IBOutlet weak var dealButton: UIButton!/* {
-        didSet {
-            let titleLabel = dealButton.titleLabel!
-            titleLabel.minimumScaleFactor = 0.3
-            titleLabel.adjustsFontSizeToFitWidth = true
-            titleLabel.baselineAdjustment = .alignCenters
-        }
-    }*/
+    @IBOutlet weak var dealButton: UIButton!
+    
     @IBAction func onDealButtonTap(_ sender: Any) {
         if selectedCardIndices.count == Deck.SET_SIZE && areSelectedCardsASet {
             replaceWith(deck.deal())
@@ -214,7 +208,6 @@ class ViewController: UIViewController {
         hiddenMatchedCardIndices.append(contentsOf: selectedCardIndices)
         for selectedIdx in selectedCardIndices {
             /* Since use Stack View we set 'alpha = 0' instead of 'isHidden = true' */
-            //cardButtons[selectedIdx].isHidden = true
             cardButtons[selectedIdx].alpha = 0
         }
     }

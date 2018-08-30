@@ -25,12 +25,6 @@ class RoundedButton: UIButton {
         super.layoutSubviews()
 
         cornerRadius = min(bounds.height / 2, 30)
-        
-        /*
-        let fontSizeOverHeight: CGFloat = 18 / 48
-        let fontSize = fontSizeOverHeight * bounds.height
-        titleLabel?.font = UIFont.systemFont(ofSize: fontSize)
-        */
     }
 
 }
