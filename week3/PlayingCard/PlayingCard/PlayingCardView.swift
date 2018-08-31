@@ -31,7 +31,7 @@ class PlayingCardView: UIView {
     @IBInspectable
     var isFaceUp: Bool = true { didSet { setNeedsDisplay(); setNeedsLayout() } }
     
-    var faceCardScale = SizeRatio.faceCardImageSizeToBoundsSize { didSet { setNeedsDisplay() } }
+    private var faceCardScale = SizeRatio.faceCardImageSizeToBoundsSize { didSet { setNeedsDisplay() } }
     
     @objc func adjustFaceCardScale(byHandlingPinchRecognizedBy recognizer: UIPinchGestureRecognizer) {
         guard rank > 10 && isFaceUp else { return }
