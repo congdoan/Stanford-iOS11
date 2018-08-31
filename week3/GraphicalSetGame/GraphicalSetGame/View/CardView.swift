@@ -8,33 +8,61 @@
 
 import UIKit
 
+@IBDesignable
 class CardView: UIView {
     
-    enum Filling {
+    enum Filling: Int {
         case none, solid, striped
     }
     
-    enum Shape {
+    enum Shape: Int {
         case diamon, oval, squiggle
     }
     
-    var number = 2
-    var color = UIColor.purple
-    var fillingKind = Filling.striped
-    var shape = Shape.squiggle
+    @IBInspectable
+    var number: Int = 2 { didSet { setNeedsDisplay() } }
+    
+    @IBInspectable
+    var color: UIColor = .purple { didSet { setNeedsDisplay() } }
+    
+    var fillingKind: Filling = .none { didSet { setNeedsDisplay() } }
+    
+    @available(*, unavailable, message: "This property is reserved for Interface Builder. Use 'fillingKind' instead.")
+    @IBInspectable var fillingAsInt: Int = 0 {
+        willSet(fillingKindIndex) {
+            fillingKind = Filling(rawValue: fillingKindIndex) ?? .none
+        }
+    }
 
+    var shape: Shape = .diamon { didSet { setNeedsDisplay() } }
+    
+    @available(*, unavailable, message: "This property is reserved for Interface Builder. Use 'shape' instead.")
+    @IBInspectable var shapeAsInt: Int = 0 {
+        willSet(shapeIndex) {
+            shape = Shape(rawValue: shapeIndex) ?? .diamon
+        }
+    }
+
+    private var shapeSizeScale: CGFloat = 1 { didSet { setNeedsDisplay() } }
+
+    @IBAction func onPinchRecognizedBy(_ recognizer: UIPinchGestureRecognizer) {
+        guard recognizer.state == .ended else  {return }
+        shapeSizeScale = recognizer.scale
+        recognizer.scale = 1
+    }
+    
     override func draw(_ rect: CGRect) {
         let shapeWidth = bounds.width * SizeRatio.shapeWidthOverCardWidth
         let shapeHeight = bounds.height * SizeRatio.shapeHeightOverCardHeight
         let shapesDistance = bounds.height * SizeRatio.shapesDistanceOverCardHeight
         let totalHeight = CGFloat(number) * shapeHeight + CGFloat(number - 1) * shapesDistance
         var  shapeBounds = CGRect(origin: CGPoint(x: bounds.midX - shapeWidth/2, y: bounds.midY - totalHeight/2),
-                                  size: CGSize(width: shapeWidth, height: shapeHeight))
+                                  size: CGSize(width: shapeWidth, height: shapeHeight)).zoomed(by: shapeSizeScale)
         let drawingContext = fillingKind == .striped ? UIGraphicsGetCurrentContext()! : nil
         for _ in 1...number {
             drawShape(in: shapeBounds)
             drawingContext?.resetClip()
-            shapeBounds.origin.y += shapeHeight + shapesDistance
+            shapeBounds.origin.y += (shapeHeight + shapesDistance) * shapeSizeScale
         }
     }
     
@@ -123,5 +151,13 @@ extension CardView {
         
         static let outlinedLineWidthOverCardHeight: CGFloat = 2/88.75
         static let stripedLineWidthOverOutlinedLineWidth: CGFloat = 0.45/2
+    }
+}
+
+extension CGRect {
+    func zoomed(by scale: CGFloat) -> CGRect {
+        let zoomedWidth = width * scale, zoomedHeight = height * scale
+        return CGRect(x: origin.x + (width - zoomedWidth) / 2, y: origin.y + (height - zoomedHeight) / 2,
+                      width: zoomedWidth, height: zoomedHeight)
     }
 }
