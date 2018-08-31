@@ -139,9 +139,9 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="pe4-bf-1Qd" userLabel="CardView" customClass="CardView" customModule="GraphicalSetGame" customModuleProvider="target">
-                                <rect key="frame" x="46.5" y="120.5" width="281.5" height="447"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pe4-bf-1Qd" userLabel="CardView" customClass="CardView" customModule="GraphicalSetGame" customModuleProvider="target">
+                                <rect key="frame" x="47" y="120" width="281" height="447"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <gestureRecognizers/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="pe4-bf-1Qd" secondAttribute="height" multiplier="165:262" id="2DO-pV-yDt"/>
@@ -153,9 +153,6 @@
                                     </userDefinedRuntimeAttribute>
                                     <userDefinedRuntimeAttribute type="color" keyPath="color">
                                         <color key="value" red="1" green="0.57637232540000005" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                    </userDefinedRuntimeAttribute>
-                                    <userDefinedRuntimeAttribute type="number" keyPath="fillingKindAsInt">
-                                        <integer key="value" value="2"/>
                                     </userDefinedRuntimeAttribute>
                                     <userDefinedRuntimeAttribute type="number" keyPath="fillingAsInt">
                                         <integer key="value" value="2"/>

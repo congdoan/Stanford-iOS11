@@ -21,7 +21,6 @@ class CardViewController: UIViewController {
     }
     
     @objc func onSwipeGesture(recognizedBy recognizer: UISwipeGestureRecognizer) {
-        print(recognizer.state)
         let newCard = deck.deal(numberOfCards: 1)[0]
         populateCardView(with: newCard)
     }

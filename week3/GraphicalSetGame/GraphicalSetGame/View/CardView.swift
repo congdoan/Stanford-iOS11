@@ -52,6 +52,10 @@ class CardView: UIView {
     }
     
     override func draw(_ rect: CGRect) {
+        let roundedCornersPath = UIBezierPath(roundedRect: bounds, cornerRadius: bounds.width * SizeRatio.cornerRadiusOverWidth)
+        UIColor.white.setFill()
+        roundedCornersPath.fill()
+        
         let shapeWidth = bounds.width * SizeRatio.shapeWidthOverCardWidth
         let shapeHeight = bounds.height * SizeRatio.shapeHeightOverCardHeight
         let shapesDistance = bounds.height * SizeRatio.shapesDistanceOverCardHeight
@@ -140,7 +144,7 @@ class CardView: UIView {
         path.close()
         return path
     }
-
+    
 }
 
 extension CardView {
@@ -151,6 +155,8 @@ extension CardView {
         
         static let outlinedLineWidthOverCardHeight: CGFloat = 2/88.75
         static let stripedLineWidthOverOutlinedLineWidth: CGFloat = 0.45/2
+        
+        static let cornerRadiusOverWidth: CGFloat = 1/20
     }
 }
 
