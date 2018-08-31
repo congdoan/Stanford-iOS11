@@ -131,10 +131,10 @@
             </objects>
             <point key="canvasLocation" x="996" y="-196"/>
         </scene>
-        <!--View Controller-->
+        <!--Card View Controller-->
         <scene sceneID="hIP-81-nqh">
             <objects>
-                <viewController id="gZg-6Q-kiz" sceneMemberID="viewController">
+                <viewController id="gZg-6Q-kiz" customClass="CardViewController" customModule="GraphicalSetGame" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="qhY-J2-ZGr">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -142,10 +142,31 @@
                             <view contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="pe4-bf-1Qd" userLabel="CardView" customClass="CardView" customModule="GraphicalSetGame" customModuleProvider="target">
                                 <rect key="frame" x="46.5" y="120.5" width="281.5" height="447"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <gestureRecognizers/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="pe4-bf-1Qd" secondAttribute="height" multiplier="165:262" id="2DO-pV-yDt"/>
                                     <constraint firstAttribute="width" priority="750" constant="400" id="Hwc-lE-Jfb"/>
                                 </constraints>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="number">
+                                        <integer key="value" value="2"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="color">
+                                        <color key="value" red="1" green="0.57637232540000005" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="fillingKindAsInt">
+                                        <integer key="value" value="2"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="fillingAsInt">
+                                        <integer key="value" value="2"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="shapeAsInt">
+                                        <integer key="value" value="2"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <outletCollection property="gestureRecognizers" destination="hIf-qZ-fWh" appends="YES" id="0eU-5c-h8L"/>
+                                </connections>
                             </view>
                         </subviews>
                         <color key="backgroundColor" red="1" green="0.57637232540000005" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -157,8 +178,16 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="w7s-XU-UO6"/>
                     </view>
+                    <connections>
+                        <outlet property="cardView" destination="pe4-bf-1Qd" id="T1x-WU-s7M"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="TMK-f8-BQa" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <pinchGestureRecognizer id="hIf-qZ-fWh">
+                    <connections>
+                        <action selector="onPinchRecognizedBy:" destination="pe4-bf-1Qd" id="Onh-GO-09Z"/>
+                    </connections>
+                </pinchGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="1804" y="-197"/>
         </scene>

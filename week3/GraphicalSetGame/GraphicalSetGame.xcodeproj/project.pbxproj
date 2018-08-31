@@ -19,6 +19,7 @@
 		F492613A2125306A009DC54C /* Int+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = F49261392125306A009DC54C /* Int+Ext.swift */; };
 		F4C5C25A212A4A62001A2183 /* UIStackView+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4C5C259212A4A62001A2183 /* UIStackView+Ext.swift */; };
 		F4C5C25C212A5021001A2183 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4C5C25B212A5021001A2183 /* Constants.swift */; };
+		F4D2C8552138F5C200EB4460 /* CardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4D2C8542138F5C200EB4460 /* CardViewController.swift */; };
 		F4F37D4E212E3FB8006CE887 /* RoundedButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4F37D4C212E3FB8006CE887 /* RoundedButton.swift */; };
 		F4F37D4F212E3FB8006CE887 /* RoundedBorderedButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4F37D4D212E3FB8006CE887 /* RoundedBorderedButton.swift */; };
 /* End PBXBuildFile section */
@@ -38,6 +39,7 @@
 		F49261392125306A009DC54C /* Int+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Int+Ext.swift"; sourceTree = "<group>"; };
 		F4C5C259212A4A62001A2183 /* UIStackView+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIStackView+Ext.swift"; sourceTree = "<group>"; };
 		F4C5C25B212A5021001A2183 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		F4D2C8542138F5C200EB4460 /* CardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardViewController.swift; sourceTree = "<group>"; };
 		F4F37D4C212E3FB8006CE887 /* RoundedButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoundedButton.swift; sourceTree = "<group>"; };
 		F4F37D4D212E3FB8006CE887 /* RoundedBorderedButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoundedBorderedButton.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -87,6 +89,7 @@
 				F49261222125213C009DC54C /* ViewController.swift */,
 				F4C5C25B212A5021001A2183 /* Constants.swift */,
 				F49261242125213C009DC54C /* Main.storyboard */,
+				F4D2C8542138F5C200EB4460 /* CardViewController.swift */,
 				F492612C2125213C009DC54C /* Info.plist */,
 				F419A025213791EC001C6FED /* Supporting Files */,
 			);
@@ -194,6 +197,7 @@
 				F49261342125237D009DC54C /* Card.swift in Sources */,
 				F4F37D4F212E3FB8006CE887 /* RoundedBorderedButton.swift in Sources */,
 				F49261212125213C009DC54C /* AppDelegate.swift in Sources */,
+				F4D2C8552138F5C200EB4460 /* CardViewController.swift in Sources */,
 				F492613A2125306A009DC54C /* Int+Ext.swift in Sources */,
 				F45C53CC2137C94100701697 /* CardView.swift in Sources */,
 				F4C5C25C212A5021001A2183 /* Constants.swift in Sources */,
