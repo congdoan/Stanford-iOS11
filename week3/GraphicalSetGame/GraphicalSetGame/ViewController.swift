@@ -20,6 +20,9 @@ class ViewController: UIViewController {
             let swipe = UISwipeGestureRecognizer(target: self, action: #selector(dealMorecards))
             swipe.direction = [.right, .down, .left, .up]
             cardsContainerView.addGestureRecognizer(swipe)
+            
+            let rotatation = UIRotationGestureRecognizer(target: self, action: #selector(onRotationGesture(_:)))
+            cardsContainerView.addGestureRecognizer(rotatation)
         }
     }
     
@@ -187,6 +190,25 @@ class ViewController: UIViewController {
             let tapRecognizer = UITapGestureRecognizer(target: self, action: #selector(onCardViewTap(recognizedBy:)))
             newCardView.gestureRecognizers = [tapRecognizer]
             populateCardView(newCardView, with: newCard)
+        }
+    }
+    
+    @objc private func onRotationGesture(_ recognizer: UIRotationGestureRecognizer) {
+        if recognizer.state == .ended {
+            let selectedCards = selectedCardIndices.map { cards[$0] }
+            cards.shuffle()
+            for shuffledIdx in cards.indices {
+                populateCardView(cardViews[shuffledIdx], with: cards[shuffledIdx])
+            }
+            for selectedCardIdx in selectedCardIndices {
+                cardViews[selectedCardIdx].isSelected = false
+            }
+            selectedCardIndices = selectedCards.map { selectedCard in
+                cards.index(where: { shuffledCard in shuffledCard == selectedCard })!
+            }
+            for selectedCardIdx in selectedCardIndices {
+                cardViews[selectedCardIdx].isSelected = true
+            }
         }
     }
     

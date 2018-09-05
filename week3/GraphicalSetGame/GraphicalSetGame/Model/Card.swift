@@ -8,7 +8,7 @@
 
 import UIKit
 
-struct Card: CustomStringConvertible {
+struct Card: Equatable, CustomStringConvertible {
     
     enum Number: Int {
         case one = 1
