@@ -12,6 +12,7 @@ class ViewController: UIViewController {
     
     private var deck = Deck()
     
+    private let numberOfCardsToStart = 12
     private lazy var cards = deck.deal(numberOfCards: numberOfCardsToStart)
 
     @IBOutlet weak var cardsContainerView: UIView!
@@ -35,7 +36,6 @@ class ViewController: UIViewController {
         populateCardsContainerView()
     }
     
-    private let numberOfCardsToStart = 12
     private func populateCardsContainerView() {
         for cardView in cardViews {
             cardView.removeFromSuperview()
