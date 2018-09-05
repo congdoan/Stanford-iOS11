@@ -42,8 +42,10 @@ class CardView: UIView {
             shape = Shape(rawValue: shapeIndex) ?? .diamon
         }
     }
-
+    
     private var shapeSizeScale: CGFloat = 1 { didSet { setNeedsDisplay() } }
+    
+    private var cornerRadius: CGFloat { return bounds.width * SizeRatio.cornerRadiusOverWidth }
 
     @IBAction func onPinchRecognizedBy(_ recognizer: UIPinchGestureRecognizer) {
         guard recognizer.state == .ended else  {return }
@@ -52,13 +54,13 @@ class CardView: UIView {
     }
     
     override func draw(_ rect: CGRect) {
-        let roundedCornersPath = UIBezierPath(roundedRect: bounds, cornerRadius: bounds.width * SizeRatio.cornerRadiusOverWidth)
+        let roundedCornersPath = UIBezierPath(roundedRect: bounds, cornerRadius: cornerRadius)
         UIColor.white.setFill()
         roundedCornersPath.fill()
         
-        let shapeWidth = bounds.width * SizeRatio.shapeWidthOverCardWidth
-        let shapeHeight = bounds.height * SizeRatio.shapeHeightOverCardHeight
-        let shapesDistance = bounds.height * SizeRatio.shapesDistanceOverCardHeight
+        let shapeWidth = bounds.width * SizeRatio.shapeWidthOverWidth
+        let shapeHeight = bounds.height * SizeRatio.shapeHeightOverHeight
+        let shapesDistance = bounds.height * SizeRatio.shapesDistanceOverHeight
         let totalHeight = CGFloat(number) * shapeHeight + CGFloat(number - 1) * shapesDistance
         var  shapeBounds = CGRect(origin: CGPoint(x: bounds.midX - shapeWidth/2, y: bounds.midY - totalHeight/2),
                                   size: CGSize(width: shapeWidth, height: shapeHeight)).zoomed(by: shapeSizeScale)
@@ -74,7 +76,7 @@ class CardView: UIView {
         let path = createShapePath(in: bounds)
         switch fillingKind {
         case .none:
-            path.lineWidth = bounds.height * SizeRatio.outlinedLineWidthOverCardHeight
+            path.lineWidth = bounds.width * SizeRatio.outlinedWidthOverShapeWidth
             color.setStroke()
             path.stroke()
         case .solid:
@@ -82,16 +84,16 @@ class CardView: UIView {
             path.fill()
         case .striped:
             color.setStroke()
-            path.lineWidth = bounds.height * SizeRatio.outlinedLineWidthOverCardHeight
+            path.lineWidth = bounds.width * SizeRatio.outlinedWidthOverShapeWidth
             path.stroke()
             path.addClip()
-            let numberOfStrips = 20
+            let numberOfStrips = Int(bounds.width * SizeRatio.numberOfStripsOverShapeWidth)
             for stripeNumber in 1...numberOfStrips {
                 let x = bounds.minX + bounds.width * CGFloat(stripeNumber) / CGFloat(numberOfStrips + 1)
                 path.move(to: CGPoint(x: x, y: bounds.minY))
                 path.addLine(to: CGPoint(x: x, y: bounds.maxY))
             }
-            path.lineWidth = path.lineWidth * SizeRatio.stripedLineWidthOverOutlinedLineWidth
+            path.lineWidth = path.lineWidth * SizeRatio.stripedWidthOverOutlinedWidth
             path.stroke()
         }
     }
@@ -148,15 +150,39 @@ class CardView: UIView {
 }
 
 extension CardView {
+    var isSelected: Bool {
+        get {
+            return layer.cornerRadius != 0
+        }
+        set {
+            if newValue {
+                layer.borderWidth = max(min(bounds.width * bounds.height * SizeRatio.borderWidthOverArea,
+                                            SizeRatio.maxBorderWidth),
+                                        SizeRatio.minBorderWidth)
+                layer.cornerRadius = cornerRadius
+                layer.borderColor = #colorLiteral(red: 0.1176470588, green: 0.09411764706, blue: 0.1137254902, alpha: 1)
+            } else {
+                layer.borderWidth = 0
+                layer.cornerRadius = 0
+                layer.borderColor = nil
+            }
+        }
+    }
+    
     private enum SizeRatio {
-        static let shapeWidthOverCardWidth: CGFloat = 102/165
-        static let shapeHeightOverCardHeight: CGFloat = 52/262
-        static let shapesDistanceOverCardHeight: CGFloat = 16/262
+        static let shapeWidthOverWidth: CGFloat = 112/165  //102/165
+        static let shapeHeightOverHeight: CGFloat = 61/262 //52/262
+        static let shapesDistanceOverHeight: CGFloat = 16/262
         
-        static let outlinedLineWidthOverCardHeight: CGFloat = 2/88.75
-        static let stripedLineWidthOverOutlinedLineWidth: CGFloat = 0.45/2
-        
+        static let outlinedWidthOverShapeWidth: CGFloat = 3/108
+        static let stripedWidthOverOutlinedWidth: CGFloat = 0.8/2
+        static let numberOfStripsOverShapeWidth: CGFloat = 26/108
+
         static let cornerRadiusOverWidth: CGFloat = 1/20
+        
+        static let borderWidthOverArea: CGFloat = 2.92082033080672/7328.71574129429
+        static let maxBorderWidth: CGFloat = 12.5
+        static let minBorderWidth: CGFloat = 1.3
     }
 }
 
