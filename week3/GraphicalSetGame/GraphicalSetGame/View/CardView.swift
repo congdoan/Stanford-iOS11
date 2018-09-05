@@ -43,16 +43,8 @@ class CardView: UIView {
         }
     }
     
-    private var shapeSizeScale: CGFloat = 1 { didSet { setNeedsDisplay() } }
-    
     private var cornerRadius: CGFloat { return bounds.width * SizeRatio.cornerRadiusOverWidth }
 
-    @IBAction func onPinchRecognizedBy(_ recognizer: UIPinchGestureRecognizer) {
-        guard recognizer.state == .ended else  {return }
-        shapeSizeScale = recognizer.scale
-        recognizer.scale = 1
-    }
-    
     override func draw(_ rect: CGRect) {
         let roundedCornersPath = UIBezierPath(roundedRect: bounds, cornerRadius: cornerRadius)
         UIColor.white.setFill()
@@ -62,18 +54,18 @@ class CardView: UIView {
         let shapeHeight = bounds.height * SizeRatio.shapeHeightOverHeight
         let shapesDistance = bounds.height * SizeRatio.shapesDistanceOverHeight
         let totalHeight = CGFloat(number) * shapeHeight + CGFloat(number - 1) * shapesDistance
-        var  shapeBounds = CGRect(origin: CGPoint(x: bounds.midX - shapeWidth/2, y: bounds.midY - totalHeight/2),
-                                  size: CGSize(width: shapeWidth, height: shapeHeight)).zoomed(by: shapeSizeScale)
-        let drawingContext = fillingKind == .striped ? UIGraphicsGetCurrentContext()! : nil
+        let origin = CGPoint(x: bounds.midX - shapeWidth/2, y: bounds.midY - totalHeight/2)
+        var  shapeBounds = CGRect(origin: origin, size: CGSize(width: shapeWidth, height: shapeHeight))
+        let combinedPath = UIBezierPath()
         for _ in 1...number {
-            drawShape(in: shapeBounds)
-            drawingContext?.resetClip()
-            shapeBounds.origin.y += (shapeHeight + shapesDistance) * shapeSizeScale
+            combinedPath.append(createShapePath(in: shapeBounds))
+            shapeBounds.origin.y += (shapeHeight + shapesDistance)
         }
+        let totalBounds = CGRect(origin: origin, size: CGSize(width: shapeWidth, height: totalHeight))
+        drawPath(combinedPath, in: totalBounds)
     }
     
-    private func drawShape(in bounds: CGRect) {
-        let path = createShapePath(in: bounds)
+    private func drawPath(_ path: UIBezierPath, in bounds: CGRect) {
         switch fillingKind {
         case .none:
             path.lineWidth = bounds.width * SizeRatio.outlinedWidthOverShapeWidth
@@ -97,7 +89,7 @@ class CardView: UIView {
             path.stroke()
         }
     }
-    
+
     private func createShapePath(in bounds: CGRect) -> UIBezierPath {
         switch shape {
         case .diamon:
@@ -183,13 +175,5 @@ extension CardView {
         static let borderWidthOverArea: CGFloat = 2.92082033080672/7328.71574129429
         static let maxBorderWidth: CGFloat = 12.5
         static let minBorderWidth: CGFloat = 1.3
-    }
-}
-
-extension CGRect {
-    func zoomed(by scale: CGFloat) -> CGRect {
-        let zoomedWidth = width * scale, zoomedHeight = height * scale
-        return CGRect(x: origin.x + (width - zoomedWidth) / 2, y: origin.y + (height - zoomedHeight) / 2,
-                      width: zoomedWidth, height: zoomedHeight)
     }
 }
