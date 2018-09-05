@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="gZg-6Q-kiz">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -21,7 +21,8 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Score: 0" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FZZ-US-hGc" userLabel="ScoreLabel">
-                                <rect key="frame" x="137" y="40" width="101.5" height="27"/>
+                                <rect key="frame" x="137" y="30" width="101.5" height="27"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="19.5" id="E9s-G5-aRC"/>
                                 </constraints>
@@ -35,11 +36,12 @@
                                     <fontDescription key="fontDescription" type="boldSystem" pointSize="35"/>
                                 </variation>
                             </label>
-                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="NrL-hI-7bP" userLabel="VerticalStackView">
-                                <rect key="frame" x="8" y="87" width="359" height="496.5"/>
-                            </stackView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="QxB-M2-7iB" userLabel="CardsContainerView" customClass="CardContainerView" customModule="GraphicalSetGame" customModuleProvider="target">
+                                <rect key="frame" x="8" y="69" width="359" height="524.5"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </view>
                             <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" spacing="30" translatesAutoresizingMaskIntoConstraints="NO" id="Ych-nN-pEG" userLabel="ButtonsStackView">
-                                <rect key="frame" x="36.5" y="603.5" width="302" height="43.5"/>
+                                <rect key="frame" x="36.5" y="607.5" width="302" height="43.5"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SEI-Ra-7hA" userLabel="DealButton" customClass="RoundedBorderedButton" customModule="GraphicalSetGame" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="0.0" width="170" height="43.5"/>
@@ -51,13 +53,15 @@
                                             </constraint>
                                         </constraints>
                                         <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="14"/>
-                                        <state key="normal" title="Deal 3 More Cards"/>
+                                        <state key="normal" title="Deal 3 More Cards">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        </state>
                                         <userDefinedRuntimeAttributes>
                                             <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
                                                 <real key="value" value="2"/>
                                             </userDefinedRuntimeAttribute>
                                             <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
-                                                <color key="value" red="1" green="0.2527923882" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <color key="value" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             </userDefinedRuntimeAttribute>
                                         </userDefinedRuntimeAttributes>
                                         <variation key="heightClass=regular">
@@ -76,13 +80,15 @@
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="A8e-b1-Sfd" userLabel="NewGameButton" customClass="RoundedBorderedButton" customModule="GraphicalSetGame" customModuleProvider="target">
                                         <rect key="frame" x="200" y="0.0" width="102" height="43.5"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                        <state key="normal" title="New Game"/>
+                                        <state key="normal" title="New Game">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        </state>
                                         <userDefinedRuntimeAttributes>
                                             <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
                                                 <real key="value" value="1"/>
                                             </userDefinedRuntimeAttribute>
                                             <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
-                                                <color key="value" red="1" green="0.2527923882" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <color key="value" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             </userDefinedRuntimeAttribute>
                                         </userDefinedRuntimeAttributes>
                                         <variation key="heightClass=regular">
@@ -106,25 +112,49 @@
                                 <variation key="widthClass=regular" spacing="50"/>
                             </stackView>
                         </subviews>
-                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="backgroundColor" red="0.80215054750442505" green="0.37472683191299438" blue="0.15116295218467712" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="NrL-hI-7bP" secondAttribute="trailing" constant="8" id="04s-qD-xTK"/>
-                            <constraint firstItem="NrL-hI-7bP" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="8" id="4Yq-Oe-q8F"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="QxB-M2-7iB" secondAttribute="trailing" constant="10" id="9bf-dv-bZR">
+                                <variation key="widthClass=compact" constant="8"/>
+                                <variation key="widthClass=regular" constant="12"/>
+                                <variation key="heightClass=regular-widthClass=regular" constant="16"/>
+                            </constraint>
                             <constraint firstItem="FZZ-US-hGc" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="DAr-wk-h9F"/>
                             <constraint firstItem="FZZ-US-hGc" firstAttribute="height" secondItem="8bC-Xf-vdC" secondAttribute="height" multiplier="0.04077" priority="751" id="ILR-Yy-fYt"/>
-                            <constraint firstItem="NrL-hI-7bP" firstAttribute="top" secondItem="FZZ-US-hGc" secondAttribute="bottom" constant="20" id="IVA-HN-v5z"/>
                             <constraint firstItem="Ych-nN-pEG" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="J3X-GL-CCd"/>
-                            <constraint firstItem="FZZ-US-hGc" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="20" id="W9r-BV-cV1"/>
+                            <constraint firstItem="QxB-M2-7iB" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="10" id="NJc-Ib-hfN">
+                                <variation key="widthClass=compact" constant="8"/>
+                                <variation key="widthClass=regular" constant="12"/>
+                                <variation key="heightClass=regular-widthClass=regular" constant="16"/>
+                            </constraint>
+                            <constraint firstItem="FZZ-US-hGc" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="20" id="W9r-BV-cV1">
+                                <variation key="heightClass=compact" constant="6"/>
+                                <variation key="heightClass=regular" constant="10"/>
+                                <variation key="heightClass=regular-widthClass=regular" constant="16"/>
+                            </constraint>
+                            <constraint firstItem="QxB-M2-7iB" firstAttribute="top" secondItem="FZZ-US-hGc" secondAttribute="bottom" constant="10" id="WoN-My-zeU">
+                                <variation key="heightClass=compact" constant="7"/>
+                                <variation key="heightClass=regular" constant="12"/>
+                                <variation key="heightClass=regular-widthClass=regular" constant="20"/>
+                            </constraint>
                             <constraint firstItem="Ych-nN-pEG" firstAttribute="height" secondItem="8bC-Xf-vdC" secondAttribute="height" multiplier="0.0652174" priority="750" id="dmj-vE-SX9"/>
-                            <constraint firstItem="Ych-nN-pEG" firstAttribute="top" secondItem="NrL-hI-7bP" secondAttribute="bottom" constant="20" id="hvn-lX-pbh"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="Ych-nN-pEG" secondAttribute="bottom" constant="20" id="jTg-fA-kRT"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="Ych-nN-pEG" secondAttribute="bottom" constant="20" id="jTg-fA-kRT">
+                                <variation key="heightClass=compact" constant="8"/>
+                                <variation key="heightClass=regular" constant="16"/>
+                                <variation key="heightClass=regular-widthClass=regular" constant="20"/>
+                            </constraint>
+                            <constraint firstItem="Ych-nN-pEG" firstAttribute="top" secondItem="QxB-M2-7iB" secondAttribute="bottom" constant="12" id="rMk-Gy-Vqf">
+                                <variation key="heightClass=compact" constant="8"/>
+                                <variation key="heightClass=regular" constant="14"/>
+                                <variation key="heightClass=regular-widthClass=regular" constant="24"/>
+                            </constraint>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                     <connections>
+                        <outlet property="cardsContainerView" destination="QxB-M2-7iB" id="LNZ-Ji-e5z"/>
                         <outlet property="dealButton" destination="SEI-Ra-7hA" id="MNl-Fq-qAh"/>
                         <outlet property="scoreLabel" destination="FZZ-US-hGc" id="3ph-1h-J3s"/>
-                        <outlet property="verticalStackView" destination="NrL-hI-7bP" id="XSn-Og-1sp"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
