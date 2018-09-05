@@ -15,7 +15,13 @@ class ViewController: UIViewController {
     private let numberOfCardsToStart = 12
     private lazy var cards = deck.deal(numberOfCards: numberOfCardsToStart)
 
-    @IBOutlet weak var cardsContainerView: UIView!
+    @IBOutlet weak var cardsContainerView: UIView! {
+        didSet {
+            let swipe = UISwipeGestureRecognizer(target: self, action: #selector(dealMorecards))
+            swipe.direction = [.right, .down, .left, .up]
+            cardsContainerView.addGestureRecognizer(swipe)
+        }
+    }
     
     private var cardViews: [CardView] { return cardsContainerView.subviews as! [CardView] }
     @IBOutlet weak var scoreLabel: UILabel!
@@ -80,6 +86,10 @@ class ViewController: UIViewController {
     @IBOutlet weak var dealButton: UIButton!
     
     @IBAction func onDealButtonTap(_ sender: Any) {
+        dealMorecards()
+    }
+    
+    @objc private func dealMorecards() {
         if selectedCardIndices.count == Deck.SET_SIZE && areSelectedCardsASet {
             replaceWith(deck.deal())
             selectedCardIndices = []
