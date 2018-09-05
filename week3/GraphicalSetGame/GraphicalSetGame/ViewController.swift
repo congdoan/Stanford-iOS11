@@ -10,117 +10,14 @@ import UIKit
 
 class ViewController: UIViewController {
     
-    private let numberOfCardsToStart = 12
     private var deck = Deck()
+    
     private lazy var cards = deck.deal(numberOfCards: numberOfCardsToStart)
 
-    @IBOutlet weak var verticalStackView: UIStackView!
+    @IBOutlet weak var cardsContainerView: UIView!
     
-    private var cardButtons: [UIButton]!
-    
+    private var cardViews: [CardView] { return cardsContainerView.subviews as! [CardView] }
     @IBOutlet weak var scoreLabel: UILabel!
-    
-    private var rows: Int!, cols: Int!
-    
-    override func willTransition(to newCollection: UITraitCollection, with coordinator: UIViewControllerTransitionCoordinator) {
-        super.willTransition(to: newCollection, with: coordinator)
-        
-        updateRows(verticalSizeClass: newCollection.verticalSizeClass)
-    }
-    
-    private func updateRows(verticalSizeClass: UIUserInterfaceSizeClass) {
-        rows = verticalSizeClass == .regular ? Constant.rowsInRegularHeight : Constant.rowsInCompactHeight
-    }
-    
-    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
-        super.viewWillTransition(to: size, with: coordinator)
-        
-        handleViewSizeChange(newSize: size)
-    }
-    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
-        super.traitCollectionDidChange(previousTraitCollection)
-        
-        if verticalStackView.subviews.isEmpty {
-            updateRows(verticalSizeClass: traitCollection.verticalSizeClass)
-            handleViewSizeChange(newSize: view.bounds.size)
-        }
-    }
-    
-    private func handleViewSizeChange(newSize: CGSize) {
-        cols = newSize.width >= Constant.iPhone4sLargerDimension ? 6 : 3
-        
-        verticalStackView.removeAllSubviews()
-        cardButtons = populateVerticalStackView(newSize: newSize)
-        
-        for matchedIdx in hiddenMatchedCardIndices {
-            cardButtons[matchedIdx].alpha = 0
-        }
-
-        for idx in 0..<cards.count {
-            if cardButtons[idx].alpha == 0 { continue }
-            ViewController.setAttributedTitle(of: cardButtons[idx], basedOn: cards[idx])
-        }
-        
-        for idx in cards.count..<cardButtons.count {
-            cardButtons[idx].alpha = 0
-        }
-        
-        for selectedIdx in selectedCardIndices {
-            ViewController.select(cardButtons[selectedIdx])
-        }
-    }
-    
-    private func populateVerticalStackView(newSize: CGSize) -> [UIButton] {
-        var cardButtons = [UIButton]()
-        
-        let fontSize = Constant.CardButton.titleFontSizeOverButtonWidth
-                        * ((newSize.width - (CGFloat(cols + 1) * Constant.CardButton.spacing)) / CGFloat(cols))
-        for row in 0..<rows {
-            let horizontalStackView = UIStackView()
-            horizontalStackView.axis = .horizontal
-            horizontalStackView.spacing = Constant.CardButton.spacing
-            horizontalStackView.distribution = .fillEqually
-            for col in 0..<cols {
-                let button = UIButton()
-                button.tag = row * cols + col
-                button.titleLabel?.font = UIFont.boldSystemFont(ofSize: fontSize)
-                ViewController.deselect(button)
-                button.layer.cornerRadius = Constant.CardButton.cornerRadius
-                button.addTarget(self, action: #selector(onCardButtonTap(_:)), for: .touchUpInside)
-                horizontalStackView.addArrangedSubview(button)
-                cardButtons.append(button)
-            }
-            verticalStackView.addArrangedSubview(horizontalStackView)
-        }
-        
-        return cardButtons
-    }
-    
-    private static func setAttributedTitle(of button: UIButton, basedOn card: Card) {
-        let symbol = card.shape.unicodeString
-        let color = card.color.uiColor
-        
-        let attr: [NSAttributedStringKey : Any]
-        switch card.shading {
-        case .outline:
-            attr = [.strokeWidth: Constant.CardShading.strokeWidthOfOutline, .strokeColor: color]
-        case .solid: //filled
-            attr = [.strokeWidth: Constant.CardShading.strokeWidthOfSolid, .foregroundColor: color]
-        case .striped:
-            attr = [.foregroundColor: color.withAlphaComponent(Constant.CardShading.alphaComponentOfStriped)]
-        }
-        
-        let attrSymbol = NSAttributedString(string: symbol, attributes: attr)
-        let attrTitle = NSMutableAttributedString(attributedString: attrSymbol)
-        let number = card.number.rawValue
-        if number >= 2 {
-            for _ in 2...number {
-                attrTitle.append(attrSymbol)
-            }
-        }
-        
-        button.setAttributedTitle(attrTitle, for: .normal)
-    }
     
     private var selectedCardIndices = [Int]()
     private var areSelectedCardsASet = false
@@ -129,18 +26,45 @@ class ViewController: UIViewController {
             scoreLabel.text = "Score: \(score)"
         }
     }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        view.backgroundColor = UIColor.init(patternImage: #imageLiteral(resourceName: "table_surface"))
+        
+        populateCardsContainerView()
+    }
+    
+    private let numberOfCardsToStart = 12
+    private func populateCardsContainerView() {
+        for cardView in cardViews {
+            cardView.removeFromSuperview()
+        }
+        
+        for idx in cards.indices {
+            let cardView = CardView()
+            cardView.backgroundColor = .clear
+            cardsContainerView.addSubview(cardView)
+            cardView.tag = idx
+            // Cannot assign a single gesture recognizer object to more than one view objects
+            let tapRecognizer = UITapGestureRecognizer(target: self, action: #selector(onCardViewTap(recognizedBy:)))
+            cardView.gestureRecognizers = [tapRecognizer]
+            populateCardView(cardView, with: cards[idx])
+        }
+    }
 
-    @objc func onCardButtonTap(_ sender: UIButton) {
-        let btnIdx = sender.tag
+    @objc func onCardViewTap(recognizedBy tapRecognizer: UITapGestureRecognizer) {
+        let cardView = tapRecognizer.view as! CardView
+        let cardIdx = cardView.tag
 
         if selectedCardIndices.count == Deck.SET_SIZE {
-            onTapWhen3CardsSelected(btnIdx)
+            onTapWhen3CardsSelected(cardIdx)
             return
         }
 
-        let button = cardButtons[btnIdx]
-        if ViewController.toggleSelectionStatus(button) {
-            selectedCardIndices.append(btnIdx)
+        cardView.isSelected = !cardView.isSelected
+        if cardView.isSelected {
+            selectedCardIndices.append(cardIdx)
             if selectedCardIndices.count == Deck.SET_SIZE {
                 let selectedCards = selectedCardIndices.map{cards[$0]}
                 areSelectedCardsASet = Deck.isSet(selectedCards)
@@ -148,7 +72,7 @@ class ViewController: UIViewController {
                 updateEnabledStatusOfDealButton()
             }
         } else {
-            selectedCardIndices.remove(at: selectedCardIndices.index(of: btnIdx)!)
+            selectedCardIndices.remove(at: selectedCardIndices.index(of: cardIdx)!)
             score += Constant.Score.deselect
         }
     }
@@ -168,90 +92,110 @@ class ViewController: UIViewController {
     @IBAction func onNewGameButtonTap(_ sender: Any) {
         deck = Deck()
         cards = deck.deal(numberOfCards: numberOfCardsToStart)
+        populateCardsContainerView()
         selectedCardIndices = []
-        hiddenMatchedCardIndices = []
         score = 0
         dealButton.isEnabled = true
-        
-        handleViewSizeChange(newSize: view.bounds.size)
+        dealButton.setTitleColor(.white, for: .normal)
     }
     
     private func updateEnabledStatusOfDealButton() {
-        dealButton.isEnabled = !deck.isEmpty
-                                && (selectedCardIndices.count == Deck.SET_SIZE && areSelectedCardsASet
-                                    || cards.count < cardButtons.count)
+        if deck.isEmpty {
+            dealButton.isEnabled = false
+            dealButton.setTitleColor(.lightGray, for: .normal)
+        }
     }
     
-    private func onTapWhen3CardsSelected(_ tappedButtonIndex: Int) {
+    private func onTapWhen3CardsSelected(_ tappedCardIndex: Int) {
         if areSelectedCardsASet {
             if deck.isEmpty {
-                hideSETOfSelectedCards()
+                removeSelectedCards(tappedCardIndex)
             } else {
                 replaceWith(deck.deal(), completion: updateEnabledStatusOfDealButton)
+                selectedCardIndices = selectedCardIndices.contains(tappedCardIndex) ? [] : [tappedCardIndex]
             }
-            selectedCardIndices = selectedCardIndices.contains(tappedButtonIndex) ? [] : [tappedButtonIndex]
             for selectedIdx in selectedCardIndices {
-                ViewController.select(cardButtons[selectedIdx])
+                cardViews[selectedIdx].isSelected = true
             }
             updateEnabledStatusOfDealButton()
         } else {
             for selectedIdx in selectedCardIndices {
-                ViewController.deselect(cardButtons[selectedIdx])
+                cardViews[selectedIdx].isSelected = false
             }
-            ViewController.select(cardButtons[tappedButtonIndex])
-            selectedCardIndices = [tappedButtonIndex]
+            cardViews[tappedCardIndex].isSelected = true
+            selectedCardIndices = [tappedCardIndex]
         }
     }
     
-    private var hiddenMatchedCardIndices = [Int]()
-    private func hideSETOfSelectedCards() {
-        hiddenMatchedCardIndices.append(contentsOf: selectedCardIndices)
-        for selectedIdx in selectedCardIndices {
-            /* Since use Stack View we set 'alpha = 0' instead of 'isHidden = true' */
-            cardButtons[selectedIdx].alpha = 0
+    private func removeSelectedCards(_ tappedCardIndex: Int) {
+        selectedCardIndices.sort()
+        
+        cards.remove(positions: selectedCardIndices, true)
+        
+        for reversedIdx in selectedCardIndices.indices.reversed() {
+            let selectedCardIdxLargeToSmall = selectedCardIndices[reversedIdx]
+            cardViews[selectedCardIdxLargeToSmall].removeFromSuperview()
+        }
+        
+        let minSelectedCardIdx = selectedCardIndices.first!
+        for idx in minSelectedCardIdx..<cardViews.count {
+            cardViews[idx].tag = idx
+        }
+        
+        var numSelectedIndicesLessThanTappedOne = 0
+        for selectedCardIndex in selectedCardIndices {
+            if selectedCardIndex < tappedCardIndex {
+                numSelectedIndicesLessThanTappedOne += 1
+            } else if selectedCardIndex == tappedCardIndex {
+                selectedCardIndices = []
+                break
+            }
+        }
+        if selectedCardIndices.count == Deck.SET_SIZE {
+            selectedCardIndices = [tappedCardIndex - numSelectedIndicesLessThanTappedOne]
         }
     }
     
     private func replaceWith(_ newlyDealtCards: [Card], completion: (() -> Void)? = nil) {
         for arrayIndex in newlyDealtCards.indices {
             let selectedCardIndex = selectedCardIndices[arrayIndex]
-            let button = cardButtons[selectedCardIndex]
             let newCard = newlyDealtCards[arrayIndex]
             cards[selectedCardIndex] = newCard
-            ViewController.deselect(button)
-            ViewController.setAttributedTitle(of: button, basedOn: newCard)
+            populateCardView(cardViews[selectedCardIndex], with: newCard)
+            cardViews[selectedCardIndex].isSelected = false
         }
         completion?()
     }
     
     private func addWith(_ newlyDealtCards: [Card]) {
-        let start = cards.count
-        cards.append(contentsOf: newlyDealtCards)
-        for index in newlyDealtCards.indices {
-            ViewController.setAttributedTitle(of: cardButtons[start + index], basedOn: newlyDealtCards[index])
-            cardButtons[start + index].alpha = 1
+        for newCard in newlyDealtCards {
+            cards.append(newCard)
+            let newCardView = CardView()
+            newCardView.backgroundColor = .clear
+            newCardView.tag = cardViews.count
+            cardsContainerView.addSubview(newCardView)
+            let tapRecognizer = UITapGestureRecognizer(target: self, action: #selector(onCardViewTap(recognizedBy:)))
+            newCardView.gestureRecognizers = [tapRecognizer]
+            populateCardView(newCardView, with: newCard)
         }
     }
     
-    private static func toggleSelectionStatus(_ button: UIButton) -> Bool {
-        let selected = button.layer.borderWidth == Constant.CardButton.borderWidthOfSelected
-        if selected {
-            deselect(button)
-            return false
-        } else {
-            select(button)
-            return true
-        }
+}
+
+private func populateCardView(_ cardView: CardView, with card: Card) {
+    cardView.number = card.number.rawValue
+    
+    cardView.color = card.color.uiColor
+    
+    switch card.shading {
+    case .outline: cardView.fillingKind = .none
+    case .solid: cardView.fillingKind = .solid
+    case .striped: cardView.fillingKind = .striped
     }
     
-    private static func deselect(_ button: UIButton) {
-        button.layer.borderWidth = Constant.CardButton.borderWidthOfUnselected
-        button.layer.borderColor = Constant.CardButton.borderColorOfUnselected
+    switch card.shape {
+    case .circle: cardView.shape = .oval
+    case .square: cardView.shape = .diamon
+    case .triangle: cardView.shape = .squiggle
     }
-    
-    private static func select(_ button: UIButton) {
-        button.layer.borderWidth = Constant.CardButton.borderWidthOfSelected
-        button.layer.borderColor = Constant.CardButton.borderColorOfSelected
-    }
-    
 }

@@ -21,4 +21,24 @@ extension Array {
         }
     }
     
+    @discardableResult
+    mutating func remove(positions: [Int], _ positionsSorted: Bool = false) -> [Element] {
+        let removedElements = positions.map { self[$0] }
+        moveToLast(positions: positions, positionsSorted)
+        removeLast(positions.count)
+        return removedElements
+    }
+    
+    mutating func moveToLast(positions: [Int], _ positionsSorted: Bool = false) {
+        guard let minPos = positionsSorted ? positions.first : positions.min() else { return }
+        let idxSet = Set(positions)
+        var pos = minPos
+        for idx in minPos+1..<count {
+            if !idxSet.contains(idx) {
+                swapAt(idx, pos)
+                pos += 1
+            }
+        }
+    }
+    
 }
