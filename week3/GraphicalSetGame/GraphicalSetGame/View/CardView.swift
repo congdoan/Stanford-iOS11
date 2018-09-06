@@ -16,7 +16,7 @@ class CardView: UIView {
     }
     
     enum Shape: Int {
-        case diamon, oval, squiggle
+        case diamond, oval, squiggle
     }
     
     @IBInspectable
@@ -34,12 +34,26 @@ class CardView: UIView {
         }
     }
 
-    var shape: Shape = .diamon { didSet { setNeedsDisplay() } }
+    var shape: Shape = .diamond { didSet { setNeedsDisplay() } }
     
     @available(*, unavailable, message: "This property is reserved for Interface Builder. Use 'shape' instead.")
     @IBInspectable var shapeAsInt: Int = 0 {
         willSet(shapeIndex) {
-            shape = Shape(rawValue: shapeIndex) ?? .diamon
+            shape = Shape(rawValue: shapeIndex) ?? .diamond
+        }
+    }
+    
+    var isSelected: Bool = false {
+        didSet {
+            if isSelected {
+                layer.borderWidth = sqrt(bounds.width * bounds.height) * SizeRatio.borderWidthOverSqrtArea
+                layer.cornerRadius = cornerRadius
+                layer.borderColor = #colorLiteral(red: 0.1176470588, green: 0.09411764706, blue: 0.1137254902, alpha: 1)
+            } else {
+                layer.borderWidth = 0
+                layer.cornerRadius = 0
+                layer.borderColor = nil
+            }
         }
     }
     
@@ -92,7 +106,7 @@ class CardView: UIView {
 
     private func createShapePath(in bounds: CGRect) -> UIBezierPath {
         switch shape {
-        case .diamon:
+        case .diamond:
             return createDiamonPath(in: bounds)
         case .oval:
             return UIBezierPath(ovalIn: bounds)
@@ -142,28 +156,9 @@ class CardView: UIView {
 }
 
 extension CardView {
-    var isSelected: Bool {
-        get {
-            return layer.cornerRadius != 0
-        }
-        set {
-            if newValue {
-                layer.borderWidth = max(min(bounds.width * bounds.height * SizeRatio.borderWidthOverArea,
-                                            SizeRatio.maxBorderWidth),
-                                        SizeRatio.minBorderWidth)
-                layer.cornerRadius = cornerRadius
-                layer.borderColor = #colorLiteral(red: 0.1176470588, green: 0.09411764706, blue: 0.1137254902, alpha: 1)
-            } else {
-                layer.borderWidth = 0
-                layer.cornerRadius = 0
-                layer.borderColor = nil
-            }
-        }
-    }
-    
     private enum SizeRatio {
-        static let shapeWidthOverWidth: CGFloat = 112/165  //102/165
-        static let shapeHeightOverHeight: CGFloat = 61/262 //52/262
+        static let shapeWidthOverWidth: CGFloat = 112/165
+        static let shapeHeightOverHeight: CGFloat = 61/262
         static let shapesDistanceOverHeight: CGFloat = 16/262
         
         static let outlinedWidthOverShapeWidth: CGFloat = 3/108
@@ -172,8 +167,6 @@ extension CardView {
 
         static let cornerRadiusOverWidth: CGFloat = 1/20
         
-        static let borderWidthOverArea: CGFloat = 2.92082033080672/7328.71574129429
-        static let maxBorderWidth: CGFloat = 12.5
-        static let minBorderWidth: CGFloat = 1.3
+        static let borderWidthOverSqrtArea: CGFloat = 0.04
     }
 }

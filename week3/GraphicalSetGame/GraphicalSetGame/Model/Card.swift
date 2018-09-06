@@ -19,27 +19,16 @@ struct Card: Equatable, CustomStringConvertible {
     static let allNumbers = [Number.one, .two, .three]
     
     enum Shape {
-        case triangle, square, circle
-        
-        var unicodeString: String {
-            switch self {
-            case .triangle:
-                return "▲"
-            case .square:
-                return "■"
-            case .circle:
-                return "●"
-            }
-        }
+        case diamond, oval, squiggle
     }
     
-    static let allShapes = [Shape.triangle, .square, .circle]
+    static let allShapes = [Shape.diamond, .oval, .squiggle]
     
     enum Shading {
-        case solid, striped, outline
+        case solid, striped, outlined
     }
     
-    static let allShadings = [Shading.solid, .striped, .outline]
+    static let allShadings = [Shading.solid, .striped, .outlined]
     
     enum Color {
         case red, green, purple

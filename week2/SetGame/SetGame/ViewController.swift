@@ -193,7 +193,6 @@ class ViewController: UIViewController {
             for selectedIdx in selectedCardIndices {
                 ViewController.select(cardButtons[selectedIdx])
             }
-            updateEnabledStatusOfDealButton()
         } else {
             for selectedIdx in selectedCardIndices {
                 ViewController.deselect(cardButtons[selectedIdx])

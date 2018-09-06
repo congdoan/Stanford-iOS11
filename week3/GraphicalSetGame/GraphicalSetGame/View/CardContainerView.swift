@@ -34,9 +34,8 @@ class CardContainerView: UIView {
         }
         cardW = w / CGFloat(cols)
         cardH = h / CGFloat(rows)
-        let spacing = max(min(cardW * cardH * SizeRatio.cardSpacingOverCardArea,
-                              cardW * SizeRatio.maxCardSpacingOverCardWidth),
-                          SizeRatio.minCardSpacing)
+        let spacing = sqrt(cardW * cardH) * SizeRatio.cardSpacingOverSqrtCardArea
+        print(spacing)
         cardW -= CGFloat(cols - 1) * spacing / CGFloat(cols)
         cardH -= CGFloat(rows - 1) * spacing / CGFloat(rows)
         for idx in subviews.indices {
@@ -52,8 +51,6 @@ class CardContainerView: UIView {
 extension CardContainerView {
     private enum SizeRatio {
         static let cardHeightOverCardWidth: CGFloat = 1.7
-        static let cardSpacingOverCardArea: CGFloat = 8/5553
-        static let maxCardSpacingOverCardWidth: CGFloat = 1/3.5
-        static let minCardSpacing: CGFloat = 2.75
+        static let cardSpacingOverSqrtCardArea: CGFloat = 0.1
     }
 }

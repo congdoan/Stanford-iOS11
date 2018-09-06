@@ -53,6 +53,7 @@ class ViewController: UIViewController {
         for idx in cards.indices {
             let cardView = CardView()
             cardView.backgroundColor = .clear
+            cardView.contentMode = .redraw
             cardsContainerView.addSubview(cardView)
             cardView.tag = idx
             // Cannot assign a single gesture recognizer object to more than one view objects
@@ -78,7 +79,6 @@ class ViewController: UIViewController {
                 let selectedCards = selectedCardIndices.map{cards[$0]}
                 areSelectedCardsASet = Deck.isSet(selectedCards)
                 score += areSelectedCardsASet ? Constant.Score.match : Constant.Score.mismatch
-                updateEnabledStatusOfDealButton()
             }
         } else {
             selectedCardIndices.remove(at: selectedCardIndices.index(of: cardIdx)!)
@@ -93,6 +93,7 @@ class ViewController: UIViewController {
     }
     
     @objc private func dealMorecards() {
+        if deck.isEmpty { return }
         if selectedCardIndices.count == Deck.SET_SIZE && areSelectedCardsASet {
             replaceWith(deck.deal())
             selectedCardIndices = []
@@ -130,7 +131,6 @@ class ViewController: UIViewController {
             for selectedIdx in selectedCardIndices {
                 cardViews[selectedIdx].isSelected = true
             }
-            updateEnabledStatusOfDealButton()
         } else {
             for selectedIdx in selectedCardIndices {
                 cardViews[selectedIdx].isSelected = false
@@ -185,6 +185,7 @@ class ViewController: UIViewController {
             cards.append(newCard)
             let newCardView = CardView()
             newCardView.backgroundColor = .clear
+            newCardView.contentMode = .redraw
             newCardView.tag = cardViews.count
             cardsContainerView.addSubview(newCardView)
             let tapRecognizer = UITapGestureRecognizer(target: self, action: #selector(onCardViewTap(recognizedBy:)))
@@ -220,14 +221,14 @@ private func populateCardView(_ cardView: CardView, with card: Card) {
     cardView.color = card.color.uiColor
     
     switch card.shading {
-    case .outline: cardView.fillingKind = .none
+    case .outlined: cardView.fillingKind = .none
     case .solid: cardView.fillingKind = .solid
     case .striped: cardView.fillingKind = .striped
     }
     
     switch card.shape {
-    case .circle: cardView.shape = .oval
-    case .square: cardView.shape = .diamon
-    case .triangle: cardView.shape = .squiggle
+    case .oval: cardView.shape = .oval
+    case .diamond: cardView.shape = .diamond
+    case .squiggle: cardView.shape = .squiggle
     }
 }

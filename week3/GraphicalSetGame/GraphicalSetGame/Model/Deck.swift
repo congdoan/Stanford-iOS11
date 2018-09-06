@@ -47,12 +47,10 @@ class Deck {
     }
     
     func deal(numberOfCards: Int = 3) -> [Card] {
-        guard cards.count >= numberOfCards else {
-            fatalError("Not enough cards to deal")
-        }
-        let start = cards.count - numberOfCards
+        let numDealedCards = min(numberOfCards, cards.count)
+        let start = cards.count - numDealedCards
         let dealedCards = Array(cards[start...])
-        cards.removeLast(numberOfCards)
+        cards.removeLast(numDealedCards)
         return dealedCards
     }
     
