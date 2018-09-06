@@ -31,4 +31,8 @@ extension Array {
         }
     }
     
+    var randomElement: Element? {
+        return !isEmpty ? self[count.arc4random] : nil
+    }
+    
 }

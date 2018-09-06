@@ -16,18 +16,8 @@ class ConcentrationViewController: UIViewController {
     //private lazy var game = ConcentrationByMichel(numberOfPairsOfCards: numberOfPairs)
     private lazy var game = Concentration(numberOfPairsOfCards: numberOfPairs)
 
-    private let emojiThemes = ["🐝🐶🐸🦅🐠🦓🐒🐘🦔🕷",
-                               "🎾⚽️🏀🚴‍♀️🏊‍♂️🏓🏋️‍♂️🤺🏹🏑",
-                               "🍏🍎🍐🍊🍋🍌🍉🍇🍓🍈",
-                               "🚗🚕🚙🚌🚎🏎🚓🚑🚒🚐",
-                               "⌚️📱💻⌨️🖥🖨🖲🕹📽📷",
-                               "🏁🚩🏳️‍🌈🇦🇫🇦🇽🇦🇱🇩🇿🇦🇸🇦🇩🇦🇴"]
     var theme: String!
-    private lazy var emojiChoices: [String] = {
-        var emojiTheme = theme.map { String($0) }
-        emojiTheme.shuffle()
-        return emojiTheme
-    }()
+    private lazy var emojiChoices = initializeEmojiChoices()
     private var card2Emoji = [Card: String]()
     
     @IBOutlet private var cardButtons: [UIButton]!
@@ -41,14 +31,6 @@ class ConcentrationViewController: UIViewController {
     private let scoreNumberAttr: [NSAttributedStringKey: Any] = [.foregroundColor: #colorLiteral(red: 1, green: 0.5763723254, blue: 0, alpha: 1)]
 
     @IBOutlet private weak var flipCountLabel: UILabel!
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
-        if theme == nil {
-            theme = emojiThemes[emojiThemes.count.arc4random]
-        }
-    }
     
     @IBAction private func tapCard(_ button: UIButton) {
         guard let cardNumber = cardButtons.index(of: button) else { return }
@@ -65,6 +47,12 @@ class ConcentrationViewController: UIViewController {
             }
         }
         refreshScoreAndFlipCountLabels()
+    }
+    
+    private func initializeEmojiChoices() -> [String] {
+        var emojiTheme = theme.map { String($0) }
+        emojiTheme.shuffle()
+        return emojiTheme
     }
     
     private func emoji(for card: Card) -> String {
@@ -95,6 +83,7 @@ class ConcentrationViewController: UIViewController {
         game = Concentration(numberOfPairsOfCards: numberOfPairs)
         refreshScoreAndFlipCountLabels()
         card2Emoji.removeAll(keepingCapacity: true)
+        emojiChoices = initializeEmojiChoices()
     }
     
 }

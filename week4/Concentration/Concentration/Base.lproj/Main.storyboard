@@ -20,10 +20,10 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" alignment="center" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="I77-fJ-39s">
-                                <rect key="frame" x="131.5" y="223.5" width="112" height="284"/>
+                                <rect key="frame" x="108.5" y="199" width="158" height="333"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9ix-PF-FwW">
-                                        <rect key="frame" x="15.5" y="0.0" width="81" height="39"/>
+                                        <rect key="frame" x="38.5" y="0.0" width="81" height="39"/>
                                         <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="22"/>
                                         <state key="normal" title="Animals"/>
                                         <connections>
@@ -31,7 +31,7 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8AD-BQ-uuX">
-                                        <rect key="frame" x="22.5" y="49" width="67" height="39"/>
+                                        <rect key="frame" x="45.5" y="49" width="67" height="39"/>
                                         <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="22"/>
                                         <state key="normal" title="Sports"/>
                                         <connections>
@@ -39,7 +39,7 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XlQ-C6-zOy">
-                                        <rect key="frame" x="27" y="98" width="58" height="39"/>
+                                        <rect key="frame" x="50" y="98" width="58" height="39"/>
                                         <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="22"/>
                                         <state key="normal" title="Fruits"/>
                                         <connections>
@@ -47,7 +47,7 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1eX-lp-wwE">
-                                        <rect key="frame" x="32.5" y="147" width="47" height="39"/>
+                                        <rect key="frame" x="55.5" y="147" width="47" height="39"/>
                                         <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="22"/>
                                         <state key="normal" title="Cars"/>
                                         <connections>
@@ -55,7 +55,7 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="R7T-Fd-kbh">
-                                        <rect key="frame" x="0.0" y="196" width="112" height="39"/>
+                                        <rect key="frame" x="23" y="196" width="112" height="39"/>
                                         <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="22"/>
                                         <state key="normal" title="Electronics"/>
                                         <connections>
@@ -63,11 +63,19 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vDk-kl-hZV">
-                                        <rect key="frame" x="29" y="245" width="54" height="39"/>
+                                        <rect key="frame" x="52" y="245" width="54" height="39"/>
                                         <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="22"/>
                                         <state key="normal" title="Flags"/>
                                         <connections>
                                             <segue destination="BYZ-38-t0r" kind="show" identifier="Choose Theme" id="tTM-en-Sic"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6hk-WE-LB0">
+                                        <rect key="frame" x="0.0" y="294" width="158" height="39"/>
+                                        <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="22"/>
+                                        <state key="normal" title="Random Theme"/>
+                                        <connections>
+                                            <segue destination="BYZ-38-t0r" kind="show" identifier="Choose Theme" id="XdO-uI-GcH"/>
                                         </connections>
                                     </button>
                                 </subviews>
@@ -330,6 +338,6 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="cdO-FH-HPE"/>
+        <segue reference="XdO-uI-GcH"/>
     </inferredMetricsTieBreakers>
 </document>
