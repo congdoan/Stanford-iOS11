@@ -21,6 +21,12 @@ class ThemeChooserViewController: UIViewController {
         return Array(themes.values).randomElement!
     }
     
+    // MARK: - Action
+    
+    @IBAction func chooseTheme(_ sender: Any) {
+        performSegue(withIdentifier: "Choose Theme", sender: sender)
+    }
+    
     // MARK: - Navigation
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
