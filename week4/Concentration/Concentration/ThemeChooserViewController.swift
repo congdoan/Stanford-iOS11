@@ -10,14 +10,14 @@ import UIKit
 
 class ThemeChooserViewController: UIViewController {
     
-    private let themes = ["Animals"     : "🐝🐶🐸🦅🐠🦓🐒🐘🦔🕷",
-                          "Sports"      : "🎾⚽️🏀🚴‍♀️🏊‍♂️🏓🏋️‍♂️🤺🏹🏑",
-                          "Fruits"      : "🍏🍎🍐🍊🍋🍌🍉🍇🍓🍈",
-                          "Cars"        : "🚗🚕🚙🚌🚎🏎🚓🚑🚒🚐",
-                          "Electronics" : "⌚️📱💻⌨️🖥🖨🖲🕹📽📷",
-                          "Flags"       : "🏁🚩🏳️‍🌈🇦🇫🇦🇽🇦🇱🇩🇿🇦🇸🇦🇩🇦🇴"]
+    private static let themes = ["Animals"     : "🐝🐶🐸🦅🐠🦓🐒🐘🦔🕷",
+                                 "Sports"      : "🎾⚽️🏀🚴‍♀️🏊‍♂️🏓🏋️‍♂️🤺🏹🏑",
+                                 "Fruits"      : "🍏🍎🍐🍊🍋🍌🍉🍇🍓🍈",
+                                 "Cars"        : "🚗🚕🚙🚌🚎🏎🚓🚑🚒🚐",
+                                 "Electronics" : "⌚️📱💻⌨️🖥🖨🖲🕹📽📷",
+                                 "Flags"       : "🏁🚩🏳️‍🌈🇦🇫🇦🇽🇦🇱🇩🇿🇦🇸🇦🇩🇦🇴"]
     
-    private var randomTheme: String {
+    static var randomTheme: String {
         return Array(themes.values).randomElement!
     }
     
@@ -26,7 +26,7 @@ class ThemeChooserViewController: UIViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         guard segue.identifier == "Choose Theme" else { return }
         if let themeName = (sender as? UIButton)?.currentTitle {
-            let theme = themes[themeName] ?? randomTheme
+            let theme = ThemeChooserViewController.themes[themeName] ?? ThemeChooserViewController.randomTheme
             if let cvc = segue.destination as? ConcentrationViewController {
                 cvc.theme = theme
             }

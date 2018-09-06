@@ -50,7 +50,7 @@ class ConcentrationViewController: UIViewController {
     }
     
     private func initializeEmojiChoices() -> [String] {
-        var emojiTheme = theme.map { String($0) }
+        var emojiTheme = (theme ?? ThemeChooserViewController.randomTheme).map { String($0) }
         emojiTheme.shuffle()
         return emojiTheme
     }
