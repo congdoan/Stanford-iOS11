@@ -16,10 +16,10 @@ class ConcentrationViewController: UIViewController {
     //private lazy var game = ConcentrationByMichel(numberOfPairsOfCards: numberOfPairs)
     private lazy var game = Concentration(numberOfPairsOfCards: numberOfPairs)
 
-    var theme = ThemeChooserViewController.randomTheme {
+    //var theme = ThemeChooserViewController.randomTheme {
+    var theme: String? {
         didSet {
             if oldValue != theme {
-                card2Emoji = [:]
                 updateViewFromModel()
             }
         }
@@ -31,11 +31,6 @@ class ConcentrationViewController: UIViewController {
     
     @IBOutlet private var cardButtons: [UIButton]! {
         didSet {
-            if let nvc = splitViewController?.viewControllers.first as? UINavigationController,
-               let tcvc = nvc.viewControllers.first as? ThemeChooserViewController {
-                tcvc.lastSeguedToConcentrationViewController = self
-            }
-            
             updateViewFromModel()
         }
     }
@@ -60,7 +55,8 @@ class ConcentrationViewController: UIViewController {
     }
     
     private func updateViewFromModel() {
-        emojis = theme.shuffledSingleCharacterStrings
+        emojis = (theme ?? ThemeChooserViewController.randomTheme).shuffledSingleCharacterStrings
+        card2Emoji = [:]
         if cardButtons == nil {
             return
         }
@@ -106,7 +102,6 @@ class ConcentrationViewController: UIViewController {
         //game = ConcentrationByMichel(numberOfPairsOfCards: numberOfPairs)
         game = Concentration(numberOfPairsOfCards: numberOfPairs)
         refreshScoreAndFlipCountLabels()
-        card2Emoji.removeAll(keepingCapacity: true)
         updateViewFromModel()
     }
     

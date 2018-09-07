@@ -38,8 +38,7 @@ class ThemeChooserViewController: UIViewController {
     
     // MARK: - Navigation
     
-    //private var lastSeguedToConcentrationViewController: ConcentrationViewController?
-    var lastSeguedToConcentrationViewController: ConcentrationViewController?
+    private var lastSeguedToConcentrationViewController: ConcentrationViewController?
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         guard segue.identifier == "Choose Theme" else { return }
@@ -54,6 +53,25 @@ class ThemeChooserViewController: UIViewController {
             let theme = ThemeChooserViewController.themes[themeName] ?? ThemeChooserViewController.randomTheme
             cvc.theme = theme
         }
+    }
+    
+}
+
+extension ThemeChooserViewController: UISplitViewControllerDelegate {
+    
+    override func awakeFromNib() {
+        splitViewController?.delegate = self
+    }
+    
+    func splitViewController(_ splitViewController: UISplitViewController,
+                             collapseSecondary secondaryViewController: UIViewController,
+                             onto primaryViewController: UIViewController) -> Bool {
+        if let cvc = secondaryViewController as? ConcentrationViewController {
+            if cvc.theme == nil {
+                return true
+            }
+        }
+        return false
     }
     
 }
