@@ -22,7 +22,7 @@ class ViewController: UIViewController {
             }
             cards.shuffle()
             for cardView in cardViews {
-                cardView.isFaceUp = true
+                cardView.isFaceUp = false
                 let card = cards.removeLast()
                 cardView.rank = card.rank.order
                 cardView.suit = card.suit.rawValue
@@ -32,16 +32,30 @@ class ViewController: UIViewController {
         }
     }
     
+    private var facedUpCardViews: [PlayingCardView] {
+        return cardViews.filter { $0.isFaceUp }
+    }
+    
     @IBAction func flipCard(_ sender: UITapGestureRecognizer) {
-        if sender.state == .ended {
-            let cardView = sender.view as! PlayingCardView
-            UIView.transition(with: cardView,
-                              duration: 0.6,
-                              options: [cardView.isFaceUp ? .transitionFlipFromLeft : .transitionFlipFromRight],
-                              animations: {
-                                    cardView.isFaceUp = !cardView.isFaceUp
-                              })
-        }
+        if sender.state != .ended { return }
+        let cardView = sender.view as! PlayingCardView
+        UIView.transition(with: cardView,
+                          duration: 0.6,
+                          options: [cardView.isFaceUp ? .transitionFlipFromLeft : .transitionFlipFromRight],
+                          animations: {
+                                cardView.isFaceUp = !cardView.isFaceUp
+                          },
+                          completion: { finished in
+                                if self.facedUpCardViews.count != 2 { return }
+                                self.facedUpCardViews.forEach { facedUpCardView in
+                                    UIView.transition(with: facedUpCardView,
+                                                      duration: 0.6,
+                                                      options: [.transitionFlipFromLeft],
+                                                      animations: {
+                                                            facedUpCardView.isFaceUp = false
+                                                      })
+                                }
+                          })
     }
     
 }
