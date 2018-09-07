@@ -18,8 +18,10 @@ class ConcentrationViewController: UIViewController {
 
     var theme = ThemeChooserViewController.randomTheme {
         didSet {
-            card2Emoji = [:]
-            updateViewFromModel()
+            if oldValue != theme {
+                card2Emoji = [:]
+                updateViewFromModel()
+            }
         }
     }
     //private var emojis: [String]!
