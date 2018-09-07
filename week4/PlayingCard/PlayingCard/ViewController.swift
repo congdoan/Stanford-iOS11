@@ -35,7 +35,12 @@ class ViewController: UIViewController {
     @IBAction func flipCard(_ sender: UITapGestureRecognizer) {
         if sender.state == .ended {
             let cardView = sender.view as! PlayingCardView
-            cardView.isFaceUp = !cardView.isFaceUp
+            UIView.transition(with: cardView,
+                              duration: 0.6,
+                              options: [cardView.isFaceUp ? .transitionFlipFromLeft : .transitionFlipFromRight],
+                              animations: {
+                                    cardView.isFaceUp = !cardView.isFaceUp
+                              })
         }
     }
     
