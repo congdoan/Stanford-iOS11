@@ -22,7 +22,9 @@ class ConcentrationViewController: UIViewController {
             updateViewFromModel()
         }
     }
-    private var emojis: [String]!
+    //private var emojis: [String]!
+    //private lazy var emojis = theme.shuffledSingleCharacterStrings
+    private var emojis = [String]()
     private var card2Emoji = [Card: String]()
     
     @IBOutlet private var cardButtons: [UIButton]! {

@@ -57,5 +57,4 @@ extension String {
         arrayOfSingleCharacterStrings.shuffle()
         return arrayOfSingleCharacterStrings
     }
-    
 }
