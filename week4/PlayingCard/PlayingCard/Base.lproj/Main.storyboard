@@ -1,0 +1,295 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--View Controller-->
+        <scene sceneID="tne-QT-ifu">
+            <objects>
+                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="PlayingCard" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view opaque="NO" contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="Ssh-2H-REx" customClass="PlayingCardView" customModule="PlayingCard" customModuleProvider="target">
+                                <rect key="frame" x="16" y="85" width="60" height="96"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <gestureRecognizers/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="60" id="0aS-gb-Suc"/>
+                                    <constraint firstAttribute="width" secondItem="Ssh-2H-REx" secondAttribute="height" multiplier="5:8" id="HFp-dO-ts3"/>
+                                </constraints>
+                                <connections>
+                                    <outletCollection property="gestureRecognizers" destination="Rrv-0n-o0B" appends="YES" id="0zT-0n-RGA"/>
+                                </connections>
+                            </view>
+                            <view opaque="NO" contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="w06-6o-lgb" customClass="PlayingCardView" customModule="PlayingCard" customModuleProvider="target">
+                                <rect key="frame" x="299" y="560" width="60" height="96"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <gestureRecognizers/>
+                                <connections>
+                                    <outletCollection property="gestureRecognizers" destination="tS7-Fs-Mcx" appends="YES" id="SUV-fG-thC"/>
+                                </connections>
+                            </view>
+                            <view opaque="NO" contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="wFF-qG-xdZ" customClass="PlayingCardView" customModule="PlayingCard" customModuleProvider="target">
+                                <rect key="frame" x="132" y="64" width="60" height="96"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <gestureRecognizers/>
+                                <connections>
+                                    <outletCollection property="gestureRecognizers" destination="KCc-9w-Vdr" appends="YES" id="GDr-eY-Ui3"/>
+                                </connections>
+                            </view>
+                            <view opaque="NO" contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="odD-d0-Eqv" customClass="PlayingCardView" customModule="PlayingCard" customModuleProvider="target">
+                                <rect key="frame" x="292" y="30" width="60" height="96"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <gestureRecognizers/>
+                                <connections>
+                                    <outletCollection property="gestureRecognizers" destination="RGd-8t-LHC" appends="YES" id="eQv-aL-l8B"/>
+                                </connections>
+                            </view>
+                            <view opaque="NO" contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="bHp-0U-SSE" customClass="PlayingCardView" customModule="PlayingCard" customModuleProvider="target">
+                                <rect key="frame" x="260" y="204" width="60" height="96"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <gestureRecognizers/>
+                                <connections>
+                                    <outletCollection property="gestureRecognizers" destination="LsL-T2-pEx" appends="YES" id="7Pt-kJ-XV6"/>
+                                </connections>
+                            </view>
+                            <view opaque="NO" contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="tzH-3S-64K" customClass="PlayingCardView" customModule="PlayingCard" customModuleProvider="target">
+                                <rect key="frame" x="25" y="243" width="60" height="96"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <gestureRecognizers/>
+                                <connections>
+                                    <outletCollection property="gestureRecognizers" destination="lND-jg-7FW" appends="YES" id="0wU-2I-vwh"/>
+                                </connections>
+                            </view>
+                            <view opaque="NO" contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="Obe-PK-OWR" customClass="PlayingCardView" customModule="PlayingCard" customModuleProvider="target">
+                                <rect key="frame" x="123" y="283" width="60" height="96"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <gestureRecognizers/>
+                                <connections>
+                                    <outletCollection property="gestureRecognizers" destination="eLg-GM-77b" appends="YES" id="Mkw-fL-sMs"/>
+                                </connections>
+                            </view>
+                            <view opaque="NO" contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="LgL-YF-OI1" customClass="PlayingCardView" customModule="PlayingCard" customModuleProvider="target">
+                                <rect key="frame" x="10" y="481" width="60" height="96"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <gestureRecognizers/>
+                                <connections>
+                                    <outletCollection property="gestureRecognizers" destination="PIa-Fi-3Rj" appends="YES" id="jgN-pQ-0J0"/>
+                                </connections>
+                            </view>
+                            <view opaque="NO" contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="u12-Cn-Abu" customClass="PlayingCardView" customModule="PlayingCard" customModuleProvider="target">
+                                <rect key="frame" x="181" y="533" width="60" height="96"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <gestureRecognizers/>
+                                <connections>
+                                    <outletCollection property="gestureRecognizers" destination="DQE-zj-rgR" appends="YES" id="aDA-wd-28I"/>
+                                </connections>
+                            </view>
+                            <view opaque="NO" contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="gR4-H7-hCW" customClass="PlayingCardView" customModule="PlayingCard" customModuleProvider="target">
+                                <rect key="frame" x="308" y="435" width="60" height="96"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <gestureRecognizers/>
+                                <connections>
+                                    <outletCollection property="gestureRecognizers" destination="Lmc-f4-CAT" appends="YES" id="1ht-Wg-EkA"/>
+                                </connections>
+                            </view>
+                            <view opaque="NO" contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="Q7C-7H-j8o" customClass="PlayingCardView" customModule="PlayingCard" customModuleProvider="target">
+                                <rect key="frame" x="89" y="540" width="60" height="96"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <gestureRecognizers/>
+                                <connections>
+                                    <outletCollection property="gestureRecognizers" destination="96Z-Dw-zgO" appends="YES" id="khZ-eX-T9o"/>
+                                </connections>
+                            </view>
+                            <view opaque="NO" contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="azY-y8-GTc" customClass="PlayingCardView" customModule="PlayingCard" customModuleProvider="target">
+                                <rect key="frame" x="224" y="329" width="60" height="96"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <gestureRecognizers/>
+                                <connections>
+                                    <outletCollection property="gestureRecognizers" destination="Ncb-GD-ysb" appends="YES" id="tTg-x6-F7w"/>
+                                </connections>
+                            </view>
+                            <view opaque="NO" contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="Kx2-Ea-9KZ" customClass="PlayingCardView" customModule="PlayingCard" customModuleProvider="target">
+                                <rect key="frame" x="89" y="396" width="60" height="96"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <gestureRecognizers/>
+                                <connections>
+                                    <outletCollection property="gestureRecognizers" destination="KWy-3h-TOj" appends="YES" id="FUW-Ri-dLQ"/>
+                                </connections>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" red="1" green="0.57637232540000005" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="w06-6o-lgb" firstAttribute="width" secondItem="Ssh-2H-REx" secondAttribute="width" id="0Rf-5O-nj1"/>
+                            <constraint firstItem="azY-y8-GTc" firstAttribute="width" secondItem="azY-y8-GTc" secondAttribute="height" multiplier="5:8" id="1L6-fR-Fce"/>
+                            <constraint firstItem="Obe-PK-OWR" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="123" id="1fL-rH-cAT"/>
+                            <constraint firstItem="Q7C-7H-j8o" firstAttribute="width" secondItem="Ssh-2H-REx" secondAttribute="width" id="1uG-bg-Cj2"/>
+                            <constraint firstItem="gR4-H7-hCW" firstAttribute="width" secondItem="gR4-H7-hCW" secondAttribute="height" multiplier="5:8" id="3dg-w6-BW7"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="LgL-YF-OI1" secondAttribute="bottom" constant="90" id="4oA-4D-v8U"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="odD-d0-Eqv" secondAttribute="trailing" constant="23" id="6hR-KU-ECw"/>
+                            <constraint firstItem="Kx2-Ea-9KZ" firstAttribute="width" secondItem="Kx2-Ea-9KZ" secondAttribute="height" multiplier="5:8" id="6ht-mY-F79"/>
+                            <constraint firstItem="odD-d0-Eqv" firstAttribute="width" secondItem="odD-d0-Eqv" secondAttribute="height" multiplier="5:8" id="724-kr-Gyb"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="bHp-0U-SSE" secondAttribute="trailing" constant="55" id="7pG-o4-0B3"/>
+                            <constraint firstItem="tzH-3S-64K" firstAttribute="width" secondItem="tzH-3S-64K" secondAttribute="height" multiplier="5:8" id="8Hs-TT-TsQ"/>
+                            <constraint firstItem="LgL-YF-OI1" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="10" id="AbF-kO-81M"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="Kx2-Ea-9KZ" secondAttribute="bottom" constant="175" id="B10-ws-m4j"/>
+                            <constraint firstItem="Obe-PK-OWR" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="263" id="BFy-3b-wHn"/>
+                            <constraint firstItem="Obe-PK-OWR" firstAttribute="width" secondItem="Obe-PK-OWR" secondAttribute="height" multiplier="5:8" id="CRW-RA-RJx"/>
+                            <constraint firstItem="Q7C-7H-j8o" firstAttribute="height" secondItem="Ssh-2H-REx" secondAttribute="height" id="E4p-kY-pP0"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="w06-6o-lgb" secondAttribute="bottom" constant="11" id="FhR-8z-KbM"/>
+                            <constraint firstItem="gR4-H7-hCW" firstAttribute="height" secondItem="Ssh-2H-REx" secondAttribute="height" id="FoM-mT-cLz"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="azY-y8-GTc" secondAttribute="bottom" constant="242" id="H0c-Of-Rd3"/>
+                            <constraint firstItem="LgL-YF-OI1" firstAttribute="height" secondItem="Ssh-2H-REx" secondAttribute="height" id="Hj8-Ld-7YA"/>
+                            <constraint firstItem="Q7C-7H-j8o" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="89" id="I5e-fZ-g15"/>
+                            <constraint firstItem="tzH-3S-64K" firstAttribute="height" secondItem="Ssh-2H-REx" secondAttribute="height" id="IK7-BB-8DD"/>
+                            <constraint firstItem="azY-y8-GTc" firstAttribute="width" secondItem="Ssh-2H-REx" secondAttribute="width" id="Jht-Ts-fYo"/>
+                            <constraint firstItem="u12-Cn-Abu" firstAttribute="width" secondItem="u12-Cn-Abu" secondAttribute="height" multiplier="5:8" id="KE1-vP-m1z"/>
+                            <constraint firstItem="Kx2-Ea-9KZ" firstAttribute="width" secondItem="Kx2-Ea-9KZ" secondAttribute="height" multiplier="5:8" id="KU1-LM-j6u"/>
+                            <constraint firstItem="w06-6o-lgb" firstAttribute="height" secondItem="Ssh-2H-REx" secondAttribute="height" id="KWq-74-0Hg"/>
+                            <constraint firstItem="gR4-H7-hCW" firstAttribute="width" secondItem="Ssh-2H-REx" secondAttribute="width" id="Lx4-YF-rbp"/>
+                            <constraint firstItem="tzH-3S-64K" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="25" id="MFN-G5-eVm"/>
+                            <constraint firstItem="Obe-PK-OWR" firstAttribute="height" secondItem="Ssh-2H-REx" secondAttribute="height" id="ONw-pJ-ilF"/>
+                            <constraint firstItem="Q7C-7H-j8o" firstAttribute="width" secondItem="Q7C-7H-j8o" secondAttribute="height" multiplier="5:8" id="OvY-5k-DWi"/>
+                            <constraint firstItem="tzH-3S-64K" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="223" id="Ozm-yR-l61"/>
+                            <constraint firstItem="bHp-0U-SSE" firstAttribute="width" secondItem="bHp-0U-SSE" secondAttribute="height" multiplier="5:8" id="Piu-99-DgH"/>
+                            <constraint firstItem="azY-y8-GTc" firstAttribute="width" secondItem="azY-y8-GTc" secondAttribute="height" multiplier="5:8" id="PvQ-P2-BEn"/>
+                            <constraint firstItem="tzH-3S-64K" firstAttribute="width" secondItem="tzH-3S-64K" secondAttribute="height" multiplier="5:8" id="Q7P-2v-ZhN"/>
+                            <constraint firstItem="LgL-YF-OI1" firstAttribute="width" secondItem="LgL-YF-OI1" secondAttribute="height" multiplier="5:8" id="QJQ-0r-gjD"/>
+                            <constraint firstItem="odD-d0-Eqv" firstAttribute="width" secondItem="odD-d0-Eqv" secondAttribute="height" multiplier="5:8" id="QjM-VU-flH"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="gR4-H7-hCW" secondAttribute="trailing" constant="7" id="RGC-ed-MXg"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="w06-6o-lgb" secondAttribute="trailing" constant="16" id="RjJ-Oe-cpg"/>
+                            <constraint firstItem="bHp-0U-SSE" firstAttribute="width" secondItem="Ssh-2H-REx" secondAttribute="width" id="T1h-qD-laQ"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="gR4-H7-hCW" secondAttribute="bottom" constant="136" id="TvU-Hu-vKA"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="u12-Cn-Abu" secondAttribute="trailing" constant="134" id="Uwu-lC-eEN"/>
+                            <constraint firstItem="gR4-H7-hCW" firstAttribute="width" secondItem="gR4-H7-hCW" secondAttribute="height" multiplier="5:8" id="VMY-cT-iTe"/>
+                            <constraint firstItem="bHp-0U-SSE" firstAttribute="height" secondItem="Ssh-2H-REx" secondAttribute="height" id="X8E-Yz-Txv"/>
+                            <constraint firstItem="odD-d0-Eqv" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="10" id="YKa-Mz-shV"/>
+                            <constraint firstItem="Kx2-Ea-9KZ" firstAttribute="height" secondItem="Ssh-2H-REx" secondAttribute="height" id="ZD2-bz-tNc"/>
+                            <constraint firstItem="Kx2-Ea-9KZ" firstAttribute="width" secondItem="Ssh-2H-REx" secondAttribute="width" id="ZGR-Wh-FaG"/>
+                            <constraint firstItem="u12-Cn-Abu" firstAttribute="width" secondItem="Ssh-2H-REx" secondAttribute="width" id="aDp-CX-iyB"/>
+                            <constraint firstItem="Ssh-2H-REx" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="16" id="b51-CT-ibe"/>
+                            <constraint firstItem="LgL-YF-OI1" firstAttribute="width" secondItem="Ssh-2H-REx" secondAttribute="width" id="bzZ-gd-5FZ"/>
+                            <constraint firstItem="wFF-qG-xdZ" firstAttribute="width" secondItem="Ssh-2H-REx" secondAttribute="width" id="cNT-xe-Bkc"/>
+                            <constraint firstItem="Kx2-Ea-9KZ" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="89" id="dBa-Zd-pYP"/>
+                            <constraint firstItem="wFF-qG-xdZ" firstAttribute="width" secondItem="wFF-qG-xdZ" secondAttribute="height" multiplier="5:8" id="eYP-E2-MXA"/>
+                            <constraint firstItem="azY-y8-GTc" firstAttribute="height" secondItem="Ssh-2H-REx" secondAttribute="height" id="fH6-o5-CNE"/>
+                            <constraint firstItem="tzH-3S-64K" firstAttribute="width" secondItem="Ssh-2H-REx" secondAttribute="width" id="fxu-AS-ufA"/>
+                            <constraint firstItem="wFF-qG-xdZ" firstAttribute="height" secondItem="Ssh-2H-REx" secondAttribute="height" id="g2a-Ri-dnx"/>
+                            <constraint firstItem="Obe-PK-OWR" firstAttribute="width" secondItem="Ssh-2H-REx" secondAttribute="width" id="iFu-2v-4HK"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="Q7C-7H-j8o" secondAttribute="bottom" constant="31" id="iNi-qR-GHR"/>
+                            <constraint firstItem="wFF-qG-xdZ" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="44" id="k44-pz-k6I"/>
+                            <constraint firstItem="LgL-YF-OI1" firstAttribute="width" secondItem="LgL-YF-OI1" secondAttribute="height" multiplier="5:8" id="kKi-V7-B0M"/>
+                            <constraint firstItem="w06-6o-lgb" firstAttribute="width" secondItem="w06-6o-lgb" secondAttribute="height" multiplier="5:8" id="oCq-pz-oHN"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="azY-y8-GTc" secondAttribute="trailing" constant="91" id="oWe-dR-B4Y"/>
+                            <constraint firstItem="wFF-qG-xdZ" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="132" id="osa-UY-YWj"/>
+                            <constraint firstItem="odD-d0-Eqv" firstAttribute="height" secondItem="Ssh-2H-REx" secondAttribute="height" id="pbc-wl-pYw"/>
+                            <constraint firstItem="bHp-0U-SSE" firstAttribute="width" secondItem="bHp-0U-SSE" secondAttribute="height" multiplier="5:8" id="rJW-og-BJJ"/>
+                            <constraint firstItem="u12-Cn-Abu" firstAttribute="height" secondItem="Ssh-2H-REx" secondAttribute="height" id="t6f-sM-eVN"/>
+                            <constraint firstItem="wFF-qG-xdZ" firstAttribute="width" secondItem="wFF-qG-xdZ" secondAttribute="height" multiplier="5:8" id="u36-UJ-i8Z"/>
+                            <constraint firstItem="bHp-0U-SSE" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="184" id="uKD-h2-Moj"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="u12-Cn-Abu" secondAttribute="bottom" constant="38" id="ucR-pk-gDy"/>
+                            <constraint firstItem="Q7C-7H-j8o" firstAttribute="width" secondItem="Q7C-7H-j8o" secondAttribute="height" multiplier="5:8" id="wiA-Aa-GWc"/>
+                            <constraint firstItem="Obe-PK-OWR" firstAttribute="width" secondItem="Obe-PK-OWR" secondAttribute="height" multiplier="5:8" id="yL3-lc-9Ul"/>
+                            <constraint firstItem="Ssh-2H-REx" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="65" id="yYl-fl-QAp"/>
+                            <constraint firstItem="u12-Cn-Abu" firstAttribute="width" secondItem="u12-Cn-Abu" secondAttribute="height" multiplier="5:8" id="ywx-wl-I53"/>
+                            <constraint firstItem="odD-d0-Eqv" firstAttribute="width" secondItem="Ssh-2H-REx" secondAttribute="width" id="zxC-4g-QcZ"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
+                    </view>
+                    <connections>
+                        <outletCollection property="cardViews" destination="Ssh-2H-REx" collectionClass="NSMutableArray" id="TJp-DU-ooh"/>
+                        <outletCollection property="cardViews" destination="wFF-qG-xdZ" collectionClass="NSMutableArray" id="uZ9-Yv-wWd"/>
+                        <outletCollection property="cardViews" destination="odD-d0-Eqv" collectionClass="NSMutableArray" id="03d-xl-Uen"/>
+                        <outletCollection property="cardViews" destination="bHp-0U-SSE" collectionClass="NSMutableArray" id="OnX-82-VdK"/>
+                        <outletCollection property="cardViews" destination="tzH-3S-64K" collectionClass="NSMutableArray" id="f4W-XP-NTf"/>
+                        <outletCollection property="cardViews" destination="Obe-PK-OWR" collectionClass="NSMutableArray" id="1F8-jN-AUj"/>
+                        <outletCollection property="cardViews" destination="azY-y8-GTc" collectionClass="NSMutableArray" id="ScC-K5-vp1"/>
+                        <outletCollection property="cardViews" destination="Kx2-Ea-9KZ" collectionClass="NSMutableArray" id="rMn-lx-hkA"/>
+                        <outletCollection property="cardViews" destination="gR4-H7-hCW" collectionClass="NSMutableArray" id="lJL-em-otL"/>
+                        <outletCollection property="cardViews" destination="LgL-YF-OI1" collectionClass="NSMutableArray" id="QZE-09-ywl"/>
+                        <outletCollection property="cardViews" destination="Q7C-7H-j8o" collectionClass="NSMutableArray" id="aMg-tP-198"/>
+                        <outletCollection property="cardViews" destination="u12-Cn-Abu" collectionClass="NSMutableArray" id="uSx-D5-njY"/>
+                        <outletCollection property="cardViews" destination="w06-6o-lgb" collectionClass="NSMutableArray" id="53N-2K-VKV"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+                <tapGestureRecognizer id="Rrv-0n-o0B">
+                    <connections>
+                        <action selector="flipCard:" destination="BYZ-38-t0r" id="M5r-De-1PD"/>
+                    </connections>
+                </tapGestureRecognizer>
+                <tapGestureRecognizer id="KCc-9w-Vdr">
+                    <connections>
+                        <action selector="flipCard:" destination="BYZ-38-t0r" id="XUe-HT-3Xe"/>
+                    </connections>
+                </tapGestureRecognizer>
+                <tapGestureRecognizer id="RGd-8t-LHC">
+                    <connections>
+                        <action selector="flipCard:" destination="BYZ-38-t0r" id="kgZ-H6-VFC"/>
+                    </connections>
+                </tapGestureRecognizer>
+                <tapGestureRecognizer id="LsL-T2-pEx">
+                    <connections>
+                        <action selector="flipCard:" destination="BYZ-38-t0r" id="0tf-3M-XXw"/>
+                    </connections>
+                </tapGestureRecognizer>
+                <tapGestureRecognizer id="lND-jg-7FW">
+                    <connections>
+                        <action selector="flipCard:" destination="BYZ-38-t0r" id="UoM-Nr-Frg"/>
+                    </connections>
+                </tapGestureRecognizer>
+                <tapGestureRecognizer id="eLg-GM-77b">
+                    <connections>
+                        <action selector="flipCard:" destination="BYZ-38-t0r" id="du8-4f-eVU"/>
+                    </connections>
+                </tapGestureRecognizer>
+                <tapGestureRecognizer id="Ncb-GD-ysb">
+                    <connections>
+                        <action selector="flipCard:" destination="BYZ-38-t0r" id="LbH-fq-4kP"/>
+                    </connections>
+                </tapGestureRecognizer>
+                <tapGestureRecognizer id="KWy-3h-TOj">
+                    <connections>
+                        <action selector="flipCard:" destination="BYZ-38-t0r" id="Vqk-58-oU9"/>
+                    </connections>
+                </tapGestureRecognizer>
+                <tapGestureRecognizer id="Lmc-f4-CAT">
+                    <connections>
+                        <action selector="flipCard:" destination="BYZ-38-t0r" id="g8P-wZ-aiJ"/>
+                    </connections>
+                </tapGestureRecognizer>
+                <tapGestureRecognizer id="PIa-Fi-3Rj">
+                    <connections>
+                        <action selector="flipCard:" destination="BYZ-38-t0r" id="uyF-QI-wFY"/>
+                    </connections>
+                </tapGestureRecognizer>
+                <tapGestureRecognizer id="96Z-Dw-zgO">
+                    <connections>
+                        <action selector="flipCard:" destination="BYZ-38-t0r" id="oOW-k0-CXC"/>
+                    </connections>
+                </tapGestureRecognizer>
+                <tapGestureRecognizer id="DQE-zj-rgR">
+                    <connections>
+                        <action selector="flipCard:" destination="BYZ-38-t0r" id="F7c-pK-gBR"/>
+                    </connections>
+                </tapGestureRecognizer>
+                <tapGestureRecognizer id="tS7-Fs-Mcx">
+                    <connections>
+                        <action selector="flipCard:" destination="BYZ-38-t0r" id="wAA-t5-RYH"/>
+                    </connections>
+                </tapGestureRecognizer>
+            </objects>
+            <point key="canvasLocation" x="136.80000000000001" y="132.68365817091455"/>
+        </scene>
+    </scenes>
+</document>
