@@ -38,8 +38,9 @@ class ThemeChooserViewController: UIViewController {
     
     // MARK: - Navigation
     
-    private var lastSeguedToConcentrationViewController: ConcentrationViewController?
-    
+    //private var lastSeguedToConcentrationViewController: ConcentrationViewController?
+    var lastSeguedToConcentrationViewController: ConcentrationViewController?
+
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         guard segue.identifier == "Choose Theme" else { return }
         if let cvc = segue.destination as? ConcentrationViewController {

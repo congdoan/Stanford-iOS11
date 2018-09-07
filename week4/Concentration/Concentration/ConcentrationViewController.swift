@@ -31,6 +31,11 @@ class ConcentrationViewController: UIViewController {
     
     @IBOutlet private var cardButtons: [UIButton]! {
         didSet {
+            if let nvc = splitViewController?.viewControllers.first as? UINavigationController,
+               let tcvc = nvc.viewControllers.first as? ThemeChooserViewController {
+                tcvc.lastSeguedToConcentrationViewController = self
+            }
+            
             updateViewFromModel()
         }
     }
