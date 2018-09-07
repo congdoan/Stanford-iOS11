@@ -24,6 +24,9 @@ class ThemeChooserViewController: UIViewController {
     @IBAction func chooseTheme(_ sender: Any) {
         if let cvc = splitViewDetailConcentrationViewController {
             setThemeForConcentrationViewController(sender, cvc)
+        } else if let cvc = lastSeguedToConcentrationViewController {
+            setThemeForConcentrationViewController(sender, cvc)
+            navigationController?.pushViewController(cvc, animated: true)
         } else {
             performSegue(withIdentifier: "Choose Theme", sender: sender)
         }
@@ -35,10 +38,13 @@ class ThemeChooserViewController: UIViewController {
     
     // MARK: - Navigation
     
+    private var lastSeguedToConcentrationViewController: ConcentrationViewController?
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         guard segue.identifier == "Choose Theme" else { return }
         if let cvc = segue.destination as? ConcentrationViewController {
             setThemeForConcentrationViewController(sender, cvc)
+            lastSeguedToConcentrationViewController = cvc
         }
     }
     
