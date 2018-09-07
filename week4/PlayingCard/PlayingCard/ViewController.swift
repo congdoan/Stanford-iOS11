@@ -26,6 +26,8 @@ class ViewController: UIViewController {
                 let card = cards.removeLast()
                 cardView.rank = card.rank.order
                 cardView.suit = card.suit.rawValue
+                
+                cardView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(flipCard(_:))))
             }
         }
     }

@@ -27,105 +27,66 @@
                                     <constraint firstAttribute="width" constant="60" id="0aS-gb-Suc"/>
                                     <constraint firstAttribute="width" secondItem="Ssh-2H-REx" secondAttribute="height" multiplier="5:8" id="HFp-dO-ts3"/>
                                 </constraints>
-                                <connections>
-                                    <outletCollection property="gestureRecognizers" destination="Rrv-0n-o0B" appends="YES" id="0zT-0n-RGA"/>
-                                </connections>
                             </view>
                             <view opaque="NO" contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="w06-6o-lgb" customClass="PlayingCardView" customModule="PlayingCard" customModuleProvider="target">
                                 <rect key="frame" x="299" y="560" width="60" height="96"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <gestureRecognizers/>
-                                <connections>
-                                    <outletCollection property="gestureRecognizers" destination="tS7-Fs-Mcx" appends="YES" id="SUV-fG-thC"/>
-                                </connections>
                             </view>
                             <view opaque="NO" contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="wFF-qG-xdZ" customClass="PlayingCardView" customModule="PlayingCard" customModuleProvider="target">
                                 <rect key="frame" x="132" y="64" width="60" height="96"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <gestureRecognizers/>
-                                <connections>
-                                    <outletCollection property="gestureRecognizers" destination="KCc-9w-Vdr" appends="YES" id="GDr-eY-Ui3"/>
-                                </connections>
                             </view>
                             <view opaque="NO" contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="odD-d0-Eqv" customClass="PlayingCardView" customModule="PlayingCard" customModuleProvider="target">
                                 <rect key="frame" x="292" y="30" width="60" height="96"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <gestureRecognizers/>
-                                <connections>
-                                    <outletCollection property="gestureRecognizers" destination="RGd-8t-LHC" appends="YES" id="eQv-aL-l8B"/>
-                                </connections>
                             </view>
                             <view opaque="NO" contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="bHp-0U-SSE" customClass="PlayingCardView" customModule="PlayingCard" customModuleProvider="target">
                                 <rect key="frame" x="260" y="204" width="60" height="96"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <gestureRecognizers/>
-                                <connections>
-                                    <outletCollection property="gestureRecognizers" destination="LsL-T2-pEx" appends="YES" id="7Pt-kJ-XV6"/>
-                                </connections>
                             </view>
                             <view opaque="NO" contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="tzH-3S-64K" customClass="PlayingCardView" customModule="PlayingCard" customModuleProvider="target">
                                 <rect key="frame" x="25" y="243" width="60" height="96"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <gestureRecognizers/>
-                                <connections>
-                                    <outletCollection property="gestureRecognizers" destination="lND-jg-7FW" appends="YES" id="0wU-2I-vwh"/>
-                                </connections>
                             </view>
                             <view opaque="NO" contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="Obe-PK-OWR" customClass="PlayingCardView" customModule="PlayingCard" customModuleProvider="target">
                                 <rect key="frame" x="123" y="283" width="60" height="96"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <gestureRecognizers/>
-                                <connections>
-                                    <outletCollection property="gestureRecognizers" destination="eLg-GM-77b" appends="YES" id="Mkw-fL-sMs"/>
-                                </connections>
                             </view>
                             <view opaque="NO" contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="LgL-YF-OI1" customClass="PlayingCardView" customModule="PlayingCard" customModuleProvider="target">
                                 <rect key="frame" x="10" y="481" width="60" height="96"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <gestureRecognizers/>
-                                <connections>
-                                    <outletCollection property="gestureRecognizers" destination="PIa-Fi-3Rj" appends="YES" id="jgN-pQ-0J0"/>
-                                </connections>
                             </view>
                             <view opaque="NO" contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="u12-Cn-Abu" customClass="PlayingCardView" customModule="PlayingCard" customModuleProvider="target">
                                 <rect key="frame" x="181" y="533" width="60" height="96"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <gestureRecognizers/>
-                                <connections>
-                                    <outletCollection property="gestureRecognizers" destination="DQE-zj-rgR" appends="YES" id="aDA-wd-28I"/>
-                                </connections>
                             </view>
                             <view opaque="NO" contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="gR4-H7-hCW" customClass="PlayingCardView" customModule="PlayingCard" customModuleProvider="target">
                                 <rect key="frame" x="308" y="435" width="60" height="96"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <gestureRecognizers/>
-                                <connections>
-                                    <outletCollection property="gestureRecognizers" destination="Lmc-f4-CAT" appends="YES" id="1ht-Wg-EkA"/>
-                                </connections>
                             </view>
                             <view opaque="NO" contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="Q7C-7H-j8o" customClass="PlayingCardView" customModule="PlayingCard" customModuleProvider="target">
                                 <rect key="frame" x="89" y="540" width="60" height="96"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <gestureRecognizers/>
-                                <connections>
-                                    <outletCollection property="gestureRecognizers" destination="96Z-Dw-zgO" appends="YES" id="khZ-eX-T9o"/>
-                                </connections>
                             </view>
                             <view opaque="NO" contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="azY-y8-GTc" customClass="PlayingCardView" customModule="PlayingCard" customModuleProvider="target">
                                 <rect key="frame" x="224" y="329" width="60" height="96"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <gestureRecognizers/>
-                                <connections>
-                                    <outletCollection property="gestureRecognizers" destination="Ncb-GD-ysb" appends="YES" id="tTg-x6-F7w"/>
-                                </connections>
                             </view>
                             <view opaque="NO" contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="Kx2-Ea-9KZ" customClass="PlayingCardView" customModule="PlayingCard" customModuleProvider="target">
                                 <rect key="frame" x="89" y="396" width="60" height="96"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <gestureRecognizers/>
-                                <connections>
-                                    <outletCollection property="gestureRecognizers" destination="KWy-3h-TOj" appends="YES" id="FUW-Ri-dLQ"/>
-                                </connections>
                             </view>
                         </subviews>
                         <color key="backgroundColor" red="1" green="0.57637232540000005" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -223,71 +184,6 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
-                <tapGestureRecognizer id="Rrv-0n-o0B">
-                    <connections>
-                        <action selector="flipCard:" destination="BYZ-38-t0r" id="M5r-De-1PD"/>
-                    </connections>
-                </tapGestureRecognizer>
-                <tapGestureRecognizer id="KCc-9w-Vdr">
-                    <connections>
-                        <action selector="flipCard:" destination="BYZ-38-t0r" id="XUe-HT-3Xe"/>
-                    </connections>
-                </tapGestureRecognizer>
-                <tapGestureRecognizer id="RGd-8t-LHC">
-                    <connections>
-                        <action selector="flipCard:" destination="BYZ-38-t0r" id="kgZ-H6-VFC"/>
-                    </connections>
-                </tapGestureRecognizer>
-                <tapGestureRecognizer id="LsL-T2-pEx">
-                    <connections>
-                        <action selector="flipCard:" destination="BYZ-38-t0r" id="0tf-3M-XXw"/>
-                    </connections>
-                </tapGestureRecognizer>
-                <tapGestureRecognizer id="lND-jg-7FW">
-                    <connections>
-                        <action selector="flipCard:" destination="BYZ-38-t0r" id="UoM-Nr-Frg"/>
-                    </connections>
-                </tapGestureRecognizer>
-                <tapGestureRecognizer id="eLg-GM-77b">
-                    <connections>
-                        <action selector="flipCard:" destination="BYZ-38-t0r" id="du8-4f-eVU"/>
-                    </connections>
-                </tapGestureRecognizer>
-                <tapGestureRecognizer id="Ncb-GD-ysb">
-                    <connections>
-                        <action selector="flipCard:" destination="BYZ-38-t0r" id="LbH-fq-4kP"/>
-                    </connections>
-                </tapGestureRecognizer>
-                <tapGestureRecognizer id="KWy-3h-TOj">
-                    <connections>
-                        <action selector="flipCard:" destination="BYZ-38-t0r" id="Vqk-58-oU9"/>
-                    </connections>
-                </tapGestureRecognizer>
-                <tapGestureRecognizer id="Lmc-f4-CAT">
-                    <connections>
-                        <action selector="flipCard:" destination="BYZ-38-t0r" id="g8P-wZ-aiJ"/>
-                    </connections>
-                </tapGestureRecognizer>
-                <tapGestureRecognizer id="PIa-Fi-3Rj">
-                    <connections>
-                        <action selector="flipCard:" destination="BYZ-38-t0r" id="uyF-QI-wFY"/>
-                    </connections>
-                </tapGestureRecognizer>
-                <tapGestureRecognizer id="96Z-Dw-zgO">
-                    <connections>
-                        <action selector="flipCard:" destination="BYZ-38-t0r" id="oOW-k0-CXC"/>
-                    </connections>
-                </tapGestureRecognizer>
-                <tapGestureRecognizer id="DQE-zj-rgR">
-                    <connections>
-                        <action selector="flipCard:" destination="BYZ-38-t0r" id="F7c-pK-gBR"/>
-                    </connections>
-                </tapGestureRecognizer>
-                <tapGestureRecognizer id="tS7-Fs-Mcx">
-                    <connections>
-                        <action selector="flipCard:" destination="BYZ-38-t0r" id="wAA-t5-RYH"/>
-                    </connections>
-                </tapGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="136.80000000000001" y="132.68365817091455"/>
         </scene>
