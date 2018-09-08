@@ -14,23 +14,6 @@ class ViewController: UIViewController {
     
     private lazy var animator = UIDynamicAnimator(referenceView: view)
     
-    private lazy var collisionBehavior: UICollisionBehavior = {
-        let behavior = UICollisionBehavior()
-        behavior.translatesReferenceBoundsIntoBoundary = true
-        //behavior.collisionMode = .everything // The default value is everything
-        animator.addBehavior(behavior)
-        return behavior
-    }()
-    
-    private lazy var itemBehavior: UIDynamicItemBehavior = {
-        let behavior = UIDynamicItemBehavior()
-        behavior.allowsRotation = false
-        behavior.elasticity = 1
-        behavior.resistance = 0
-        animator.addBehavior(behavior)
-        return behavior
-    }()
-
     @IBOutlet private var cardViews: [PlayingCardView]!
     
     override func viewDidLoad() {
@@ -43,6 +26,7 @@ class ViewController: UIViewController {
             cards += [card, card]
         }
         cards.shuffle()
+        let cardBehavior = CardBehavior(in: animator)
         for cardView in cardViews {
             cardView.isFaceUp = false
             let card = cards.removeLast()
@@ -51,16 +35,8 @@ class ViewController: UIViewController {
             
             cardView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(flipCard(_:))))
             
-            collisionBehavior.addItem(cardView)
-            itemBehavior.addItem(cardView)
-            let push  = UIPushBehavior(items: [cardView], mode: .instantaneous)
-            push.angle = (2*CGFloat.pi).arc4random
-            push.magnitude = CGFloat(1) + CGFloat(2).arc4random
-            push.action = { [unowned push] in
-                //self.animator.removeBehavior(push) // Cycle: self -> animator -> push -> action closure -> self
-                push.dynamicAnimator?.removeBehavior(push)
-            }
-            animator.addBehavior(push)
+            cardBehavior.addItem(cardView)
+            cardBehavior.addItem(cardView)
         }
     }
     
