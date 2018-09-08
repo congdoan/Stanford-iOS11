@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		F41AB73321437600005DA8C2 /* CGFloat+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = F41AB73221437600005DA8C2 /* CGFloat+Ext.swift */; };
 		F453ECCF2136381000DBF699 /* PlayingCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = F453ECCE2136381000DBF699 /* PlayingCard.swift */; };
 		F453ECD121363E6B00DBF699 /* PlayingCardDeck.swift in Sources */ = {isa = PBXBuildFile; fileRef = F453ECD021363E6B00DBF699 /* PlayingCardDeck.swift */; };
 		F453ECD3213646EE00DBF699 /* Array+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = F453ECD2213646EE00DBF699 /* Array+Ext.swift */; };
@@ -20,6 +21,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		F41AB73221437600005DA8C2 /* CGFloat+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CGFloat+Ext.swift"; sourceTree = "<group>"; };
 		F453ECCE2136381000DBF699 /* PlayingCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayingCard.swift; sourceTree = "<group>"; };
 		F453ECD021363E6B00DBF699 /* PlayingCardDeck.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayingCardDeck.swift; sourceTree = "<group>"; };
 		F453ECD2213646EE00DBF699 /* Array+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array+Ext.swift"; sourceTree = "<group>"; };
@@ -68,6 +70,7 @@
 				F453ECD021363E6B00DBF699 /* PlayingCardDeck.swift */,
 				F453ECD2213646EE00DBF699 /* Array+Ext.swift */,
 				F453ECD4213648C700DBF699 /* Int+Ext.swift */,
+				F41AB73221437600005DA8C2 /* CGFloat+Ext.swift */,
 				F4FD2AD22133A73C008256BC /* PlayingCardView.swift */,
 				F4FD2AC12133A45E008256BC /* ViewController.swift */,
 				F4FD2AC32133A45E008256BC /* Main.storyboard */,
@@ -158,6 +161,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F41AB73321437600005DA8C2 /* CGFloat+Ext.swift in Sources */,
 				F453ECD5213648C700DBF699 /* Int+Ext.swift in Sources */,
 				F4FD2AC22133A45E008256BC /* ViewController.swift in Sources */,
 				F4FD2AD32133A73C008256BC /* PlayingCardView.swift in Sources */,

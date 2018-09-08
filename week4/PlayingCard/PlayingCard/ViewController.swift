@@ -11,24 +11,56 @@ import UIKit
 class ViewController: UIViewController {
     
     private var deck = PlayingCardDeck()
+    
+    private lazy var animator = UIDynamicAnimator(referenceView: view)
+    
+    private lazy var collisionBehavior: UICollisionBehavior = {
+        let behavior = UICollisionBehavior()
+        behavior.translatesReferenceBoundsIntoBoundary = true
+        //behavior.collisionMode = .everything // The default value is everything
+        animator.addBehavior(behavior)
+        return behavior
+    }()
+    
+    private lazy var itemBehavior: UIDynamicItemBehavior = {
+        let behavior = UIDynamicItemBehavior()
+        behavior.allowsRotation = false
+        behavior.elasticity = 1
+        behavior.resistance = 0
+        animator.addBehavior(behavior)
+        return behavior
+    }()
 
-    @IBOutlet private var cardViews: [PlayingCardView]! {
-        didSet {
-            let numCardPairs = (cardViews.count + 1) / 2
-            var cards = [PlayingCard]()
-            for _ in 1...numCardPairs {
-                let card = deck.draw()!
-                cards += [card, card]
+    @IBOutlet private var cardViews: [PlayingCardView]!
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        let numCardPairs = (cardViews.count + 1) / 2
+        var cards = [PlayingCard]()
+        for _ in 1...numCardPairs {
+            let card = deck.draw()!
+            cards += [card, card]
+        }
+        cards.shuffle()
+        for cardView in cardViews {
+            cardView.isFaceUp = false
+            let card = cards.removeLast()
+            cardView.rank = card.rank.order
+            cardView.suit = card.suit.rawValue
+            
+            cardView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(flipCard(_:))))
+            
+            collisionBehavior.addItem(cardView)
+            itemBehavior.addItem(cardView)
+            let push  = UIPushBehavior(items: [cardView], mode: .instantaneous)
+            push.angle = (2*CGFloat.pi).arc4random
+            push.magnitude = CGFloat(1) + CGFloat(2).arc4random
+            push.action = { [unowned push] in
+                //push.dynamicAnimator?.removeBehavior(push)
+                self.animator.removeBehavior(push)
             }
-            cards.shuffle()
-            for cardView in cardViews {
-                cardView.isFaceUp = false
-                let card = cards.removeLast()
-                cardView.rank = card.rank.order
-                cardView.suit = card.suit.rawValue
-                
-                cardView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(flipCard(_:))))
-            }
+            animator.addBehavior(push)
         }
     }
     
@@ -77,16 +109,19 @@ class ViewController: UIViewController {
                     view.transform = CGAffineTransform.identity.scaledBy(x: 3, y: 3)
                 },
                 completion: { position in
-                    // Scale back down
+                    // Simultaneously scale back down and fade out
                     UIViewPropertyAnimator.runningPropertyAnimator(
-                        withDuration: 0.5,
-                        delay: 0.3,
+                        withDuration: 0.75,
+                        delay: 0.2,
                         animations: {
                             view.transform = CGAffineTransform.identity.scaledBy(x: 0.1, y: 0.1)
+                            view.alpha = 0
                         },
                         completion: { (position) in
                             // Hide
                             view.isHidden = true
+                            view.alpha = 1
+                            view.transform = .identity
                         })
                 })
         }
