@@ -26,7 +26,24 @@ class CardBehavior: UIDynamicBehavior {
     
     private func push(_ item: UIDynamicItem) {
         let push  = UIPushBehavior(items: [item], mode: .instantaneous)
-        push.angle = (2*CGFloat.pi).arc4random
+        // Push toward the center
+        if let referenceBounds = dynamicAnimator?.referenceView?.bounds {
+            let center = referenceBounds.center
+            switch (item.center.x, item.center.y) {
+            case let (x, y) where x < center.x && y < center.y:
+                push.angle = (CGFloat.pi/2).arc4random
+            case let (x, y) where x > center.x && y < center.y:
+                //push.angle = CGFloat.pi - (CGFloat.pi/2).arc4random
+                push.angle = CGFloat.pi/2 + (CGFloat.pi/2).arc4random
+            case let (x, y) where x > center.x && y > center.y:
+                push.angle = CGFloat.pi + (CGFloat.pi/2).arc4random
+            case let (x, y) where x < center.x && y > center.y:
+                //push.angle = (-CGFloat.pi/2).arc4random
+                push.angle = (CGFloat.pi/2)*3 + (CGFloat.pi/2).arc4random
+            default:
+                push.angle = (CGFloat.pi*2).arc4random
+            }
+        }
         push.magnitude = CGFloat(1) + CGFloat(2).arc4random
         push.action = { [unowned push, weak self] in
             // NOTE: using strong self would cause retain cycle "self -> push -> action closure -> self"
