@@ -13,7 +13,8 @@ class ViewController: UIViewController {
     private var deck = PlayingCardDeck()
     
     private lazy var animator = UIDynamicAnimator(referenceView: view)
-    
+    private lazy var cardBehavior = CardBehavior(in: animator)
+
     @IBOutlet private var cardViews: [PlayingCardView]!
     
     override func viewDidLoad() {
@@ -26,7 +27,6 @@ class ViewController: UIViewController {
             cards += [card, card]
         }
         cards.shuffle()
-        let cardBehavior = CardBehavior(in: animator)
         for cardView in cardViews {
             cardView.isFaceUp = false
             let card = cards.removeLast()
@@ -35,7 +35,6 @@ class ViewController: UIViewController {
             
             cardView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(flipCard(_:))))
             
-            cardBehavior.addItem(cardView)
             cardBehavior.addItem(cardView)
         }
     }
@@ -52,6 +51,9 @@ class ViewController: UIViewController {
     @IBAction func flipCard(_ sender: UITapGestureRecognizer) {
         if sender.state != .ended { return }
         let cardView = sender.view as! PlayingCardView
+        if !cardView.isFaceUp {
+            cardBehavior.removeItem(cardView)
+        }
         UIView.transition(
             with: cardView,
             duration: 0.6,
@@ -62,6 +64,8 @@ class ViewController: UIViewController {
             completion: { finished in
                 if self.facedUpCardViews.count == 2 {
                     self.animate2FacedUpCardViews()
+                } else if !cardView.isFaceUp {
+                    self.cardBehavior.addItem(cardView)
                 }
             })
     }
@@ -111,6 +115,9 @@ class ViewController: UIViewController {
                 options: [.transitionFlipFromLeft],
                 animations: {
                     facedUpCardView.isFaceUp = false
+                },
+                completion: { position in
+                    self.cardBehavior.addItem(facedUpCardView)
                 })
         }
     }
