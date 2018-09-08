@@ -57,8 +57,8 @@ class ViewController: UIViewController {
             push.angle = (2*CGFloat.pi).arc4random
             push.magnitude = CGFloat(1) + CGFloat(2).arc4random
             push.action = { [unowned push] in
-                //push.dynamicAnimator?.removeBehavior(push)
-                self.animator.removeBehavior(push)
+                //self.animator.removeBehavior(push) // Cycle: self -> animator -> push -> action closure -> self
+                push.dynamicAnimator?.removeBehavior(push)
             }
             animator.addBehavior(push)
         }
