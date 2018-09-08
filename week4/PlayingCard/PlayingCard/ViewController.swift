@@ -40,75 +40,93 @@ class ViewController: UIViewController {
     }
     
     private var facedUpCardViews: [PlayingCardView] {
-        return cardViews.filter { $0.isFaceUp && !$0.isHidden }
+        return cardViews.filter { $0.isFaceUp && !$0.isHidden && $0.transform == .identity && $0.alpha == 1 }
     }
     
-    private var are2FacedUpCardsMatched: Bool {
-        return facedUpCardViews[0].rank == facedUpCardViews[1].rank
-            && facedUpCardViews[0].suit == facedUpCardViews[1].suit
-    }
-    
+    private var cardViewsBeingFlippedUp = Set<PlayingCardView>()
     @IBAction func flipCard(_ sender: UITapGestureRecognizer) {
-        if sender.state != .ended { return }
+        guard sender.state == .ended && facedUpCardViews.count < 2 else { return }
         let cardView = sender.view as! PlayingCardView
         if !cardView.isFaceUp {
             cardBehavior.removeItem(cardView)
         }
         UIView.transition(
             with: cardView,
-            duration: 0.6,
+            duration: 0.5,
             options: [cardView.isFaceUp ? .transitionFlipFromLeft : .transitionFlipFromRight],
             animations: {
                 cardView.isFaceUp = !cardView.isFaceUp
+                
+                if cardView.isFaceUp {
+                    self.cardViewsBeingFlippedUp.insert(cardView)
+                }
             },
             completion: { finished in
-                if self.facedUpCardViews.count == 2 {
-                    self.animate2FacedUpCardViews()
-                } else if !cardView.isFaceUp {
+                if cardView.isFaceUp {
+                    self.cardViewsBeingFlippedUp.remove(cardView)
+                } else {
                     self.cardBehavior.addItem(cardView)
+                }
+                
+                if self.cardViewsBeingFlippedUp.isEmpty {
+                    let cardViewsToAnimate = self.facedUpCardViews
+                    if cardViewsToAnimate.count == 2 {
+                        self.animate2FacedUpCardViews(cardViewsToAnimate)
+                    }
                 }
             })
     }
     
-    private func animate2FacedUpCardViews() {
-        if are2FacedUpCardsMatched {
-            animateMatchedPair()
+    private func animate2FacedUpCardViews(_ cardViewsToAnimate: [PlayingCardView]) {
+        if are2FacedUpCardsMatched(cardViewsToAnimate) {
+            animateMatchedPair(cardViewsToAnimate)
         } else {
-            animateMismatchedPair()
+            animateMismatchedPair(cardViewsToAnimate, cardBehavior)
         }
     }
     
-    private func animateMatchedPair() {
-        // Scale back down, then fade out & finally be removed from the super view
-        facedUpCardViews.forEach { view in
-            // Scale up
+}
+
+private func are2FacedUpCardsMatched(_ cardViewsToAnimate: [PlayingCardView]) -> Bool {
+    return cardViewsToAnimate[0].rank == cardViewsToAnimate[1].rank
+        && cardViewsToAnimate[0].suit == cardViewsToAnimate[1].suit
+}
+
+private func animateMatchedPair(_ cardViewsToAnimate: [PlayingCardView]) {
+    UIViewPropertyAnimator.runningPropertyAnimator(
+        withDuration: 0.5,
+        delay: 0,
+        // Scale Up
+        animations: {
+            cardViewsToAnimate.forEach {
+                $0.transform = CGAffineTransform.identity.scaledBy(x: 3, y: 3)
+            }
+        },
+        completion: { position in
             UIViewPropertyAnimator.runningPropertyAnimator(
                 withDuration: 0.6,
-                delay: 0,
+                delay: 0.2,
+                // Scale back Down & Fade Out
                 animations: {
-                    view.transform = CGAffineTransform.identity.scaledBy(x: 3, y: 3)
+                    cardViewsToAnimate.forEach {
+                        $0.transform = CGAffineTransform.identity.scaledBy(x: 0.1, y: 0.1)
+                        $0.alpha = 0
+                    }
                 },
-                completion: { position in
-                    // Simultaneously scale back down and fade out
-                    UIViewPropertyAnimator.runningPropertyAnimator(
-                        withDuration: 0.75,
-                        delay: 0.2,
-                        animations: {
-                            view.transform = CGAffineTransform.identity.scaledBy(x: 0.1, y: 0.1)
-                            view.alpha = 0
-                        },
-                        completion: { (position) in
-                            // Hide
-                            view.isHidden = true
-                            view.alpha = 1
-                            view.transform = .identity
-                        })
+                completion: { (position) in
+                    cardViewsToAnimate.forEach {
+                        $0.isHidden = true
+                        $0.alpha = 1
+                        $0.transform = .identity
+                    }
                 })
-        }
-    }
-    
-    private func animateMismatchedPair() {
-        facedUpCardViews.forEach { facedUpCardView in
+    })
+}
+
+private func animateMismatchedPair(_ cardViewsToAnimate: [PlayingCardView], _ cardBehavior: CardBehavior) {
+    let delay = 0.3
+    DispatchQueue.main.asyncAfter(deadline: .now() + delay) {
+        cardViewsToAnimate.forEach { facedUpCardView in
             UIView.transition(
                 with: facedUpCardView,
                 duration: 0.6,
@@ -117,9 +135,8 @@ class ViewController: UIViewController {
                     facedUpCardView.isFaceUp = false
                 },
                 completion: { position in
-                    self.cardBehavior.addItem(facedUpCardView)
+                    cardBehavior.addItem(facedUpCardView)
                 })
         }
     }
-    
 }
