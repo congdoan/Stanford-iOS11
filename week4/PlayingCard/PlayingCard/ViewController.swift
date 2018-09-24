@@ -20,6 +20,8 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        cardBehavior.setCollisionDelegate(self)
+        
         let numCardPairs = (cardViews.count + 1) / 2
         var cards = [PlayingCard]()
         for _ in 1...numCardPairs {
@@ -81,6 +83,24 @@ class ViewController: UIViewController {
         }
     }
     
+}
+
+extension ViewController: UICollisionBehaviorDelegate {
+    private func updateItemCenterIfNeeded(_ referenceBounds: CGRect, _ item: UIDynamicItem, _ animator: UIDynamicAnimator) {
+        if !referenceBounds.contains((item as! UIView).frame) {
+            //print("Escaped but Capured back:", item)
+            //cardBehavior.removeItem(item)
+            item.center = referenceBounds.center
+            animator.updateItem(usingCurrentState: item)
+        }
+    }
+    
+    func collisionBehavior(_ behavior: UICollisionBehavior, endedContactFor item1: UIDynamicItem, with item2: UIDynamicItem) {
+        if let animator = behavior.dynamicAnimator, let referenceBounds = animator.referenceView?.bounds {
+            updateItemCenterIfNeeded(referenceBounds, item1, animator)
+            updateItemCenterIfNeeded(referenceBounds, item2, animator)
+        }
+    }
 }
 
 private func are2FacedUpCardsMatched(_ cardViewsToAnimate: [PlayingCardView]) -> Bool {

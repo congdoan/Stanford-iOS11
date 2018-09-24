@@ -33,13 +33,13 @@ class CardBehavior: UIDynamicBehavior {
             case let (x, y) where x < center.x && y < center.y:
                 push.angle = (CGFloat.pi/2).arc4random
             case let (x, y) where x > center.x && y < center.y:
-                //push.angle = CGFloat.pi - (CGFloat.pi/2).arc4random
-                push.angle = CGFloat.pi/2 + (CGFloat.pi/2).arc4random
+                //push.angle = CGFloat.pi/2 + (CGFloat.pi/2).arc4random
+                push.angle = CGFloat.pi - (CGFloat.pi/2).arc4random
             case let (x, y) where x > center.x && y > center.y:
                 push.angle = CGFloat.pi + (CGFloat.pi/2).arc4random
             case let (x, y) where x < center.x && y > center.y:
-                //push.angle = (-CGFloat.pi/2).arc4random
-                push.angle = (CGFloat.pi/2)*3 + (CGFloat.pi/2).arc4random
+                //push.angle = (CGFloat.pi/2)*3 + (CGFloat.pi/2).arc4random
+                push.angle = (-CGFloat.pi/2).arc4random
             default:
                 push.angle = (CGFloat.pi*2).arc4random
             }
@@ -61,6 +61,10 @@ class CardBehavior: UIDynamicBehavior {
     func removeItem(_ item: UIDynamicItem) {
         collisionBehavior.removeItem(item)
         itemBehavior.removeItem(item)
+    }
+    
+    func setCollisionDelegate(_ collisionDelegate: UICollisionBehaviorDelegate) {
+        collisionBehavior.collisionDelegate = collisionDelegate
     }
     
     override init() {
