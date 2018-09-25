@@ -12,7 +12,7 @@ class ViewController: UIViewController {
     
     private var deck = Deck()
     
-    private let numberOfCardsToStart = 12
+    private let numberOfCardsToStart = 78
     private lazy var cards = deck.deal(numberOfCards: numberOfCardsToStart)
 
     @IBOutlet weak var cardsContainerView: UIView! {
@@ -123,7 +123,7 @@ class ViewController: UIViewController {
     private func onTapWhen3CardsSelected(_ tappedCardIndex: Int) {
         if areSelectedCardsASet {
             if deck.isEmpty {
-                removeSelectedCards(tappedCardIndex)
+                removeMatchedCards(tappedCardIndex)
             } else {
                 replaceWith(deck.deal(), completion: updateEnabledStatusOfDealButton)
                 selectedCardIndices = selectedCardIndices.contains(tappedCardIndex) ? [] : [tappedCardIndex]
@@ -140,14 +140,14 @@ class ViewController: UIViewController {
         }
     }
     
-    private func removeSelectedCards(_ tappedCardIndex: Int) {
+    private func removeMatchedCardViews(_ tappedCardIndex: Int) {
         selectedCardIndices.sort()
         
         cards.remove(positions: selectedCardIndices, true)
         
-        for reversedIdx in selectedCardIndices.indices.reversed() {
-            let selectedCardIdxLargeToSmall = selectedCardIndices[reversedIdx]
-            cardViews[selectedCardIdxLargeToSmall].removeFromSuperview()
+        for reversedIdx in self.selectedCardIndices.indices.reversed() {
+            let selectedCardIdxLargeToSmall = self.selectedCardIndices[reversedIdx]
+            self.cardViews[selectedCardIdxLargeToSmall].removeFromSuperview()
         }
         
         let minSelectedCardIdx = selectedCardIndices.first!
@@ -169,15 +169,44 @@ class ViewController: UIViewController {
         }
     }
     
+    private func removeMatchedCards(_ tappedCardIndex: Int) {
+        UIViewPropertyAnimator.runningPropertyAnimator(
+            withDuration: 2,
+            delay: 0,
+            options: [.curveLinear],
+            animations: {
+                for reversedIdx in self.selectedCardIndices.indices.reversed() {
+                    let selectedCardIdxLargeToSmall = self.selectedCardIndices[reversedIdx]
+                    self.cardViews[selectedCardIdxLargeToSmall].alpha = 0
+                }
+            },
+            completion: { finalPosition in
+                self.removeMatchedCardViews(tappedCardIndex)
+            })
+    }
+    
     private func replaceWith(_ newlyDealtCards: [Card], completion: (() -> Void)? = nil) {
-        for arrayIndex in newlyDealtCards.indices {
-            let selectedCardIndex = selectedCardIndices[arrayIndex]
-            let newCard = newlyDealtCards[arrayIndex]
-            cards[selectedCardIndex] = newCard
-            populateCardView(cardViews[selectedCardIndex], with: newCard)
-            cardViews[selectedCardIndex].isSelected = false
-        }
-        completion?()
+        let selectedCardIndices = self.selectedCardIndices
+        UIViewPropertyAnimator.runningPropertyAnimator(
+            withDuration: 2,
+            delay: 0,
+            options: [.curveLinear],
+            animations: {
+                for selectedCardIndex in selectedCardIndices {
+                    self.cardViews[selectedCardIndex].alpha = 0
+                }
+            },
+            completion: { finalPosition in
+                for arrayIndex in newlyDealtCards.indices {
+                    let selectedCardIndex = selectedCardIndices[arrayIndex]
+                    let newCard = newlyDealtCards[arrayIndex]
+                    self.cards[selectedCardIndex] = newCard
+                    self.cardViews[selectedCardIndex].alpha = 1
+                    populateCardView(self.cardViews[selectedCardIndex], with: newCard)
+                    self.cardViews[selectedCardIndex].isSelected = false
+                }
+                completion?()
+            })
     }
     
     private func addWith(_ newlyDealtCards: [Card]) {
