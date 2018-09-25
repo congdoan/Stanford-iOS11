@@ -12,7 +12,7 @@ class ViewController: UIViewController {
     
     private var deck = Deck()
     
-    private let numberOfCardsToStart = 78
+    private let numberOfCardsToStart = 72
     private lazy var cards = deck.deal(numberOfCards: numberOfCardsToStart)
 
     @IBOutlet weak var cardsContainerView: UIView! {
@@ -201,10 +201,19 @@ class ViewController: UIViewController {
                     let selectedCardIndex = selectedCardIndices[arrayIndex]
                     let newCard = newlyDealtCards[arrayIndex]
                     self.cards[selectedCardIndex] = newCard
-                    self.cardViews[selectedCardIndex].alpha = 1
                     populateCardView(self.cardViews[selectedCardIndex], with: newCard)
                     self.cardViews[selectedCardIndex].isSelected = false
                 }
+                UIViewPropertyAnimator.runningPropertyAnimator(
+                    withDuration: 2,
+                    delay: 0,
+                    options: [.curveLinear],
+                    animations: {
+                        for selectedCardIndex in selectedCardIndices {
+                            self.cardViews[selectedCardIndex].alpha = 1
+                        }
+                    },
+                    completion: nil)
                 completion?()
             })
     }
