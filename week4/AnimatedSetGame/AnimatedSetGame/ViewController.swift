@@ -54,6 +54,7 @@ class ViewController: UIViewController {
             let cardView = CardView()
             cardView.backgroundColor = .clear
             cardView.contentMode = .redraw
+            cardView.alpha = 0
             cardsContainerView.addSubview(cardView)
             cardView.tag = idx
             // Cannot assign a single gesture recognizer object to more than one view objects

@@ -9,6 +9,13 @@
 import UIKit
 
 class CardContainerView: UIView {
+    
+    private var allCardViewsAreTransparent: Bool {
+        for cardView in subviews {
+            if cardView.alpha != 0 { return false }
+        }
+        return true
+    }
 
     override func layoutSubviews() {
         super.layoutSubviews()
@@ -16,6 +23,14 @@ class CardContainerView: UIView {
         populateCardsContainerView()
     }
 
+    private func positionCardViews(_ cols: Int, _ cardW: CGFloat, _ cardH: CGFloat, _ spacing: CGFloat) {
+        for idx in subviews.indices {
+            let row = CGFloat(idx / cols), col = CGFloat(idx % cols)
+            subviews[idx].frame = CGRect(x: col * (cardW + spacing), y: row * (cardH + spacing),
+                                         width: cardW, height: cardH)
+        }
+    }
+    
     private func populateCardsContainerView() {
         let size = bounds.size, w = size.width, h = size.height
         let numCards = subviews.count, a = SizeRatio.cardHeightOverCardWidth
@@ -37,39 +52,45 @@ class CardContainerView: UIView {
         let spacing = sqrt(cardW * cardH) * SizeRatio.cardSpacingOverSqrtCardArea
         cardW -= CGFloat(cols - 1) * spacing / CGFloat(cols)
         cardH -= CGFloat(rows - 1) * spacing / CGFloat(rows)
-        
-        let completion: ((UIViewAnimatingPosition) -> Void)?
-        if let lastCardView = subviews.last, lastCardView.alpha == 0 {
-            completion = { finalPosition in
-                UIViewPropertyAnimator.runningPropertyAnimator(
-                    withDuration: 2,
-                    delay: 0,
-                    options: [.curveLinear],
-                    animations: {
-                        var index = self.subviews.count - 1
-                        while index >= 0 && self.subviews[index].alpha == 0 {
-                            self.subviews[index].alpha = 1
-                            index -= 1
-                        }
-                    })
-            }
+        if allCardViewsAreTransparent {
+            positionCardViews(cols, cardW, cardH, spacing)
+            UIViewPropertyAnimator.runningPropertyAnimator(
+                withDuration: 6,
+                delay: 0,
+                options: [.curveLinear],
+                animations: {
+                    for cardView in self.subviews {
+                        cardView.alpha = 1
+                    }
+                })
         } else {
-            completion = nil
-        }
-        
-        UIViewPropertyAnimator.runningPropertyAnimator(
-            withDuration: 2,
-            delay: 0,
-            options: [],
-            animations: {
-                for idx in self.subviews.indices {
-                    let row = CGFloat(idx / cols), col = CGFloat(idx % cols)
-                    let cardView = self.subviews[idx]
-                    cardView.frame = CGRect(x: col * (cardW + spacing), y: row * (cardH + spacing),
-                                            width: cardW, height: cardH)
+            let completion: ((UIViewAnimatingPosition) -> Void)?
+            if let lastCardView = subviews.last, lastCardView.alpha == 0 {
+                completion = { finalPosition in
+                    UIViewPropertyAnimator.runningPropertyAnimator(
+                        withDuration: 2,
+                        delay: 0,
+                        options: [.curveLinear],
+                        animations: {
+                            var index = self.subviews.count - 1
+                            while index >= 0 && self.subviews[index].alpha == 0 {
+                                self.subviews[index].alpha = 1
+                                index -= 1
+                            }
+                    })
                 }
-            },
-            completion: completion)
+            } else {
+                completion = nil
+            }
+            UIViewPropertyAnimator.runningPropertyAnimator(
+                withDuration: 2,
+                delay: 0,
+                options: [],
+                animations: {
+                    self.positionCardViews(cols, cardW, cardH, spacing)
+                },
+                completion: completion)
+        }
     }
     
 }
