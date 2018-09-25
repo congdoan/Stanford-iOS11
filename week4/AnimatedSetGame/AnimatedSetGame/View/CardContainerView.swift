@@ -37,6 +37,26 @@ class CardContainerView: UIView {
         let spacing = sqrt(cardW * cardH) * SizeRatio.cardSpacingOverSqrtCardArea
         cardW -= CGFloat(cols - 1) * spacing / CGFloat(cols)
         cardH -= CGFloat(rows - 1) * spacing / CGFloat(rows)
+        
+        let completion: ((UIViewAnimatingPosition) -> Void)?
+        if let lastCardView = subviews.last, lastCardView.alpha == 0 {
+            completion = { finalPosition in
+                UIViewPropertyAnimator.runningPropertyAnimator(
+                    withDuration: 2,
+                    delay: 0,
+                    options: [.curveLinear],
+                    animations: {
+                        var index = self.subviews.count - 1
+                        while index >= 0 && self.subviews[index].alpha == 0 {
+                            self.subviews[index].alpha = 1
+                            index -= 1
+                        }
+                    })
+            }
+        } else {
+            completion = nil
+        }
+        
         UIViewPropertyAnimator.runningPropertyAnimator(
             withDuration: 2,
             delay: 0,
@@ -49,7 +69,7 @@ class CardContainerView: UIView {
                                             width: cardW, height: cardH)
                 }
             },
-            completion: nil)
+            completion: completion)
     }
     
 }

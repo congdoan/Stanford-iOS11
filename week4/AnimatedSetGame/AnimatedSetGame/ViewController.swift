@@ -12,7 +12,7 @@ class ViewController: UIViewController {
     
     private var deck = Deck()
     
-    private let numberOfCardsToStart = 72
+    private let numberOfCardsToStart = 30
     private lazy var cards = deck.deal(numberOfCards: numberOfCardsToStart)
 
     @IBOutlet weak var cardsContainerView: UIView! {
@@ -225,6 +225,7 @@ class ViewController: UIViewController {
             newCardView.backgroundColor = .clear
             newCardView.contentMode = .redraw
             newCardView.tag = cardViews.count
+            newCardView.alpha = 0
             cardsContainerView.addSubview(newCardView)
             let tapRecognizer = UITapGestureRecognizer(target: self, action: #selector(onCardViewTap(recognizedBy:)))
             newCardView.gestureRecognizers = [tapRecognizer]
