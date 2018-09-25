@@ -37,12 +37,19 @@ class CardContainerView: UIView {
         let spacing = sqrt(cardW * cardH) * SizeRatio.cardSpacingOverSqrtCardArea
         cardW -= CGFloat(cols - 1) * spacing / CGFloat(cols)
         cardH -= CGFloat(rows - 1) * spacing / CGFloat(rows)
-        for idx in subviews.indices {
-            let row = CGFloat(idx / cols), col = CGFloat(idx % cols)
-            let cardView = subviews[idx]
-            cardView.frame = CGRect(x: col * (cardW + spacing), y: row * (cardH + spacing),
-                                    width: cardW, height: cardH)
-        }
+        UIViewPropertyAnimator.runningPropertyAnimator(
+            withDuration: 2,
+            delay: 0,
+            options: [],
+            animations: {
+                for idx in self.subviews.indices {
+                    let row = CGFloat(idx / cols), col = CGFloat(idx % cols)
+                    let cardView = self.subviews[idx]
+                    cardView.frame = CGRect(x: col * (cardW + spacing), y: row * (cardH + spacing),
+                                            width: cardW, height: cardH)
+                }
+            },
+            completion: nil)
     }
     
 }
