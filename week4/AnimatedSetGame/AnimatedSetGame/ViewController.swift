@@ -51,7 +51,7 @@ class ViewController: UIViewController {
         let deckFrameInCardsContainerView = dealButton.superview!.convert(dealButton.frame, to: cardsContainerView)
         cardsContainerView.dealButtonFrame = deckFrameInCardsContainerView
         
-        cardsContainerView.positionCardViews(allCardViewsAreTransparent: true)
+        cardsContainerView.positionCardViews(numberOfTransparentCardViewsInTheEnd: numberOfCardsToStart)
     }
     
     private func populateCardsContainerView() {
@@ -117,7 +117,7 @@ class ViewController: UIViewController {
         deck = Deck()
         cards = deck.deal(numberOfCards: numberOfCardsToStart)
         populateCardsContainerView()
-        cardsContainerView.positionCardViews(allCardViewsAreTransparent: true)
+        cardsContainerView.positionCardViews(numberOfTransparentCardViewsInTheEnd: numberOfCardsToStart)
         selectedCardIndices = []
         score = 0
         dealButton.isEnabled = true
@@ -160,7 +160,7 @@ class ViewController: UIViewController {
             let selectedCardIdxLargeToSmall = self.selectedCardIndices[reversedIdx]
             self.cardViews[selectedCardIdxLargeToSmall].removeFromSuperview()
         }
-        cardsContainerView.positionCardViews(allCardViewsAreTransparent: false)
+        cardsContainerView.positionCardViews(numberOfTransparentCardViewsInTheEnd: 0)
         
         let minSelectedCardIdx = selectedCardIndices.first!
         for idx in minSelectedCardIdx..<cardViews.count {
@@ -247,9 +247,9 @@ class ViewController: UIViewController {
             let tapRecognizer = UITapGestureRecognizer(target: self, action: #selector(onCardViewTap(recognizedBy:)))
             newCardView.gestureRecognizers = [tapRecognizer]
             populateCardView(newCardView, with: newCard)
-            
-            cardsContainerView.positionCardViews(allCardViewsAreTransparent: false)
         }
+        
+        cardsContainerView.positionCardViews(numberOfTransparentCardViewsInTheEnd: newlyDealtCards.count)
     }
     
     @objc private func onRotationGesture(_ recognizer: UIRotationGestureRecognizer) {

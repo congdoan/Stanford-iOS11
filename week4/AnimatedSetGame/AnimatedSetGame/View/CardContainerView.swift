@@ -22,7 +22,7 @@ class CardContainerView: UIView {
         }
     }
     
-    func positionCardViews(allCardViewsAreTransparent: Bool) {
+    func positionCardViews(numberOfTransparentCardViewsInTheEnd: Int) {
         let size = bounds.size, w = size.width, h = size.height
         let numCards = subviews.count, a = SizeRatio.cardHeightOverCardWidth
         let cardArea = w * h / CGFloat(numCards)
@@ -43,7 +43,7 @@ class CardContainerView: UIView {
         let spacing = sqrt(cardW * cardH) * SizeRatio.cardSpacingOverSqrtCardArea
         cardW -= CGFloat(cols - 1) * spacing / CGFloat(cols)
         cardH -= CGFloat(rows - 1) * spacing / CGFloat(rows)
-        if allCardViewsAreTransparent {
+        if numberOfTransparentCardViewsInTheEnd == subviews.count {
             positionCardViews(cols, cardW, cardH, spacing)
             UIViewPropertyAnimator.runningPropertyAnimator(
                 withDuration: 2,
@@ -56,12 +56,8 @@ class CardContainerView: UIView {
                 })
         } else {
             let completion: ((UIViewAnimatingPosition) -> Void)?
-            if let lastCardView = subviews.last, lastCardView.alpha == 0 {
-                var startIndex = subviews.count - 1
-                while startIndex >= 0 && subviews[startIndex].alpha == 0 {
-                    startIndex -= 1
-                }
-                let indexRangeOfCardsToBeDealt = startIndex+1..<subviews.count
+            if numberOfTransparentCardViewsInTheEnd > 0 {
+                let indexRangeOfCardsToBeDealt = subviews.indices.suffix(numberOfTransparentCardViewsInTheEnd)
                 
                 completion = { finalPosition in
                     var index2Frame = [Int: CGRect]()
