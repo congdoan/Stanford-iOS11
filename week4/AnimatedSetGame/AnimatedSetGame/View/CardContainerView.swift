@@ -19,12 +19,6 @@ class CardContainerView: UIView {
         return true
     }
 
-    override func layoutSubviews() {
-        super.layoutSubviews()
-        
-        populateCardsContainerView()
-    }
-
     private func positionCardViews<C: Collection>(_ indices: C,
                                                   _ cols: Int,
                                                   _ cardW: CGFloat, _ cardH: CGFloat,
@@ -36,7 +30,7 @@ class CardContainerView: UIView {
         }
     }
     
-    private func populateCardsContainerView() {
+    func positionCardViews() {
         let size = bounds.size, w = size.width, h = size.height
         let numCards = subviews.count, a = SizeRatio.cardHeightOverCardWidth
         let cardArea = w * h / CGFloat(numCards)
@@ -70,6 +64,7 @@ class CardContainerView: UIView {
                 })
         } else {
             let completion: ((UIViewAnimatingPosition) -> Void)?
+            let indexRangeOfOpaqueCardViews: CountableRange<Int>
             if let lastCardView = subviews.last, lastCardView.alpha == 0 {
                 var startIndex = subviews.count - 1
                 while startIndex >= 0 && subviews[startIndex].alpha == 0 {
@@ -79,11 +74,10 @@ class CardContainerView: UIView {
                 
                 completion = { finalPosition in
                     for index in indexRangeOfCardsToBeDealt {
-                        // This will cause the method layoutSubviews() to be re-called
                         self.subviews[index].frame = self.dealButtonFrame
                         self.subviews[index].alpha = 1
                     }
-                    /*
+                    
                     UIViewPropertyAnimator.runningPropertyAnimator(
                         withDuration: 2,
                         delay: 0,
@@ -91,17 +85,18 @@ class CardContainerView: UIView {
                         animations: {
                             self.positionCardViews(indexRangeOfCardsToBeDealt, cols, cardW, cardH, spacing)
                         })
-                    */
                 }
+                indexRangeOfOpaqueCardViews = 0..<startIndex+1
             } else {
                 completion = nil
+                indexRangeOfOpaqueCardViews = subviews.indices
             }
             UIViewPropertyAnimator.runningPropertyAnimator(
                 withDuration: 2,
                 delay: 0,
                 options: [],
                 animations: {
-                    self.positionCardViews(self.subviews.indices, cols, cardW, cardH, spacing)
+                    self.positionCardViews(indexRangeOfOpaqueCardViews, cols, cardW, cardH, spacing)
                 },
                 completion: completion)
         }

@@ -50,6 +50,8 @@ class ViewController: UIViewController {
         
         let deckFrameInCardsContainerView = dealButton.superview!.convert(dealButton.frame, to: cardsContainerView)
         cardsContainerView.dealButtonFrame = deckFrameInCardsContainerView
+        
+        cardsContainerView.positionCardViews()
     }
     
     private func populateCardsContainerView() {
@@ -115,6 +117,7 @@ class ViewController: UIViewController {
         deck = Deck()
         cards = deck.deal(numberOfCards: numberOfCardsToStart)
         populateCardsContainerView()
+        cardsContainerView.positionCardViews()
         selectedCardIndices = []
         score = 0
         dealButton.isEnabled = true
@@ -157,6 +160,7 @@ class ViewController: UIViewController {
             let selectedCardIdxLargeToSmall = self.selectedCardIndices[reversedIdx]
             self.cardViews[selectedCardIdxLargeToSmall].removeFromSuperview()
         }
+        cardsContainerView.positionCardViews()
         
         let minSelectedCardIdx = selectedCardIndices.first!
         for idx in minSelectedCardIdx..<cardViews.count {
@@ -205,19 +209,18 @@ class ViewController: UIViewController {
                 }
             },
             completion: { finalPosition in
-                //var selectedCardIndex2CardViewFrame = [Int: CGRect]()
+                var selectedCardIndex2CardViewFrame = [Int: CGRect]()
                 for arrayIndex in newlyDealtCards.indices {
                     let selectedCardIndex = selectedCardIndices[arrayIndex]
                     let newCard = newlyDealtCards[arrayIndex]
                     self.cards[selectedCardIndex] = newCard
                     populateCardView(self.cardViews[selectedCardIndex], with: newCard)
                     self.cardViews[selectedCardIndex].isSelected = false
-                    //selectedCardIndex2CardViewFrame[selectedCardIndex] = self.cardViews[selectedCardIndex].frame
-                    // This will cause the method CardContainerView.layoutSubviews() to be called
+                    selectedCardIndex2CardViewFrame[selectedCardIndex] = self.cardViews[selectedCardIndex].frame
                     self.cardViews[selectedCardIndex].frame = self.cardsContainerView.dealButtonFrame
                     self.cardViews[selectedCardIndex].alpha = 1
                 }
-                /*
+                
                 UIViewPropertyAnimator.runningPropertyAnimator(
                     withDuration: 2,
                     delay: 0,
@@ -228,7 +231,6 @@ class ViewController: UIViewController {
                         }
                     },
                     completion: nil)
-                */
                 completion?()
             })
     }
@@ -245,6 +247,8 @@ class ViewController: UIViewController {
             let tapRecognizer = UITapGestureRecognizer(target: self, action: #selector(onCardViewTap(recognizedBy:)))
             newCardView.gestureRecognizers = [tapRecognizer]
             populateCardView(newCardView, with: newCard)
+            
+            cardsContainerView.positionCardViews()
         }
     }
     
