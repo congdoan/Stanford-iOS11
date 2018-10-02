@@ -12,10 +12,11 @@ class CardContainerView: UIView {
     
     var dealButtonFrame: CGRect!
     
-    private func positionCardViews(_ cols: Int,
+    private func positionCardViews<S: Sequence>(_ indexSequence: S,
+                                   _ cols: Int,
                                    _ cardW: CGFloat, _ cardH: CGFloat,
-                                   _ spacing: CGFloat) {
-        for index in subviews.indices {
+                                   _ spacing: CGFloat) where S.Element == Int {
+        for index in indexSequence {
             let row = CGFloat(index / cols), col = CGFloat(index % cols)
             subviews[index].frame = CGRect(x: col * (cardW + spacing), y: row * (cardH + spacing),
                                            width: cardW, height: cardH)
@@ -44,7 +45,7 @@ class CardContainerView: UIView {
         cardW -= CGFloat(cols - 1) * spacing / CGFloat(cols)
         cardH -= CGFloat(rows - 1) * spacing / CGFloat(rows)
         if numberOfTransparentCardViewsInTheEnd == subviews.count {
-            positionCardViews(cols, cardW, cardH, spacing)
+            positionCardViews(subviews.indices, cols, cardW, cardH, spacing)
             UIViewPropertyAnimator.runningPropertyAnimator(
                 withDuration: 2,
                 delay: 0,
@@ -56,13 +57,12 @@ class CardContainerView: UIView {
                 })
         } else {
             let completion: ((UIViewAnimatingPosition) -> Void)?
+            let indexRangeOfOpaqueCardViews: CountableRange<Int>
             if numberOfTransparentCardViewsInTheEnd > 0 {
-                let indexRangeOfCardsToBeDealt = subviews.indices.suffix(numberOfTransparentCardViewsInTheEnd)
+                let indexRangeOfTransparentCardViewsToBeDealt = subviews.indices.suffix(numberOfTransparentCardViewsInTheEnd)
                 
                 completion = { finalPosition in
-                    var index2Frame = [Int: CGRect]()
-                    for index in indexRangeOfCardsToBeDealt {
-                        index2Frame[index] = self.subviews[index].frame
+                    for index in indexRangeOfTransparentCardViewsToBeDealt {
                         self.subviews[index].frame = self.dealButtonFrame
                         self.subviews[index].alpha = 1
                     }
@@ -72,20 +72,20 @@ class CardContainerView: UIView {
                         delay: 0,
                         options: [.curveLinear],
                         animations: {
-                            for index in indexRangeOfCardsToBeDealt {
-                                self.subviews[index].frame = index2Frame[index]!
-                            }
+                            self.positionCardViews(indexRangeOfTransparentCardViewsToBeDealt, cols, cardW, cardH, spacing)
                         })
                 }
+                indexRangeOfOpaqueCardViews = subviews.indices.prefix(upTo: subviews.count - numberOfTransparentCardViewsInTheEnd)
             } else {
                 completion = nil
+                indexRangeOfOpaqueCardViews = subviews.indices
             }
             UIViewPropertyAnimator.runningPropertyAnimator(
                 withDuration: 2,
                 delay: 0,
                 options: [],
                 animations: {
-                    self.positionCardViews(cols, cardW, cardH, spacing)
+                    self.positionCardViews(indexRangeOfOpaqueCardViews, cols, cardW, cardH, spacing)
                 },
                 completion: completion)
         }
