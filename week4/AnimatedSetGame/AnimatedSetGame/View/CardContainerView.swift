@@ -12,13 +12,6 @@ class CardContainerView: UIView {
     
     var dealButtonFrame: CGRect!
     
-    private var allCardViewsAreTransparent: Bool {
-        for cardView in subviews {
-            if cardView.alpha != 0 { return false }
-        }
-        return true
-    }
-
     private func positionCardViews(_ cols: Int,
                                    _ cardW: CGFloat, _ cardH: CGFloat,
                                    _ spacing: CGFloat) {
@@ -29,7 +22,7 @@ class CardContainerView: UIView {
         }
     }
     
-    func positionCardViews() {
+    func positionCardViews(allCardViewsAreTransparent: Bool) {
         let size = bounds.size, w = size.width, h = size.height
         let numCards = subviews.count, a = SizeRatio.cardHeightOverCardWidth
         let cardArea = w * h / CGFloat(numCards)

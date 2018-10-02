@@ -51,7 +51,7 @@ class ViewController: UIViewController {
         let deckFrameInCardsContainerView = dealButton.superview!.convert(dealButton.frame, to: cardsContainerView)
         cardsContainerView.dealButtonFrame = deckFrameInCardsContainerView
         
-        cardsContainerView.positionCardViews()
+        cardsContainerView.positionCardViews(allCardViewsAreTransparent: true)
     }
     
     private func populateCardsContainerView() {
@@ -117,7 +117,7 @@ class ViewController: UIViewController {
         deck = Deck()
         cards = deck.deal(numberOfCards: numberOfCardsToStart)
         populateCardsContainerView()
-        cardsContainerView.positionCardViews()
+        cardsContainerView.positionCardViews(allCardViewsAreTransparent: true)
         selectedCardIndices = []
         score = 0
         dealButton.isEnabled = true
@@ -160,7 +160,7 @@ class ViewController: UIViewController {
             let selectedCardIdxLargeToSmall = self.selectedCardIndices[reversedIdx]
             self.cardViews[selectedCardIdxLargeToSmall].removeFromSuperview()
         }
-        cardsContainerView.positionCardViews()
+        cardsContainerView.positionCardViews(allCardViewsAreTransparent: false)
         
         let minSelectedCardIdx = selectedCardIndices.first!
         for idx in minSelectedCardIdx..<cardViews.count {
@@ -248,7 +248,7 @@ class ViewController: UIViewController {
             newCardView.gestureRecognizers = [tapRecognizer]
             populateCardView(newCardView, with: newCard)
             
-            cardsContainerView.positionCardViews()
+            cardsContainerView.positionCardViews(allCardViewsAreTransparent: false)
         }
     }
     
