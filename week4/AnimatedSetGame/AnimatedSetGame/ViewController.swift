@@ -15,7 +15,7 @@ class ViewController: UIViewController {
     private let numberOfCardsToStart = 30
     private lazy var cards = deck.deal(numberOfCards: numberOfCardsToStart)
 
-    @IBOutlet weak var cardsContainerView: UIView! {
+    @IBOutlet weak var cardsContainerView: CardContainerView! {
         didSet {
             let swipe = UISwipeGestureRecognizer(target: self, action: #selector(dealMorecards))
             swipe.direction = [.right, .down, .left, .up]
@@ -43,6 +43,13 @@ class ViewController: UIViewController {
         view.backgroundColor = UIColor.init(patternImage: #imageLiteral(resourceName: "table_surface"))
         
         populateCardsContainerView()
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        let deckFrameInCardsContainerView = dealButton.superview!.convert(dealButton.frame, to: cardsContainerView)
+        cardsContainerView.dealButtonFrame = deckFrameInCardsContainerView
     }
     
     private func populateCardsContainerView() {
@@ -198,23 +205,30 @@ class ViewController: UIViewController {
                 }
             },
             completion: { finalPosition in
+                //var selectedCardIndex2CardViewFrame = [Int: CGRect]()
                 for arrayIndex in newlyDealtCards.indices {
                     let selectedCardIndex = selectedCardIndices[arrayIndex]
                     let newCard = newlyDealtCards[arrayIndex]
                     self.cards[selectedCardIndex] = newCard
                     populateCardView(self.cardViews[selectedCardIndex], with: newCard)
                     self.cardViews[selectedCardIndex].isSelected = false
+                    //selectedCardIndex2CardViewFrame[selectedCardIndex] = self.cardViews[selectedCardIndex].frame
+                    // This will cause the method CardContainerView.layoutSubviews() to be called
+                    self.cardViews[selectedCardIndex].frame = self.cardsContainerView.dealButtonFrame
+                    self.cardViews[selectedCardIndex].alpha = 1
                 }
+                /*
                 UIViewPropertyAnimator.runningPropertyAnimator(
                     withDuration: 2,
                     delay: 0,
                     options: [.curveLinear],
                     animations: {
                         for selectedCardIndex in selectedCardIndices {
-                            self.cardViews[selectedCardIndex].alpha = 1
+                            self.cardViews[selectedCardIndex].frame = selectedCardIndex2CardViewFrame[selectedCardIndex]!
                         }
                     },
                     completion: nil)
+                */
                 completion?()
             })
     }

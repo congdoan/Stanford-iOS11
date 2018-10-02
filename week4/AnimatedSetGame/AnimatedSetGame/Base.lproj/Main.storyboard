@@ -14,7 +14,7 @@
         <!--View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="GraphicalSetGame" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="AnimatedSetGame" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -35,14 +35,14 @@
                                     <fontDescription key="fontDescription" type="boldSystem" pointSize="35"/>
                                 </variation>
                             </label>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="QxB-M2-7iB" userLabel="CardsContainerView" customClass="CardContainerView" customModule="GraphicalSetGame" customModuleProvider="target">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="QxB-M2-7iB" userLabel="CardsContainerView" customClass="CardContainerView" customModule="AnimatedSetGame" customModuleProvider="target">
                                 <rect key="frame" x="8" y="69" width="359" height="524.5"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </view>
                             <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" spacing="30" translatesAutoresizingMaskIntoConstraints="NO" id="Ych-nN-pEG" userLabel="ButtonsStackView">
                                 <rect key="frame" x="36.5" y="607.5" width="302" height="43.5"/>
                                 <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SEI-Ra-7hA" userLabel="DealButton" customClass="RoundedBorderedButton" customModule="GraphicalSetGame" customModuleProvider="target">
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SEI-Ra-7hA" userLabel="DealButton" customClass="RoundedBorderedButton" customModule="AnimatedSetGame" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="0.0" width="170" height="43.5"/>
                                         <constraints>
                                             <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="150" id="eTn-Wl-jcb">
@@ -76,7 +76,7 @@
                                             <action selector="onDealButtonTap:" destination="BYZ-38-t0r" eventType="touchUpInside" id="GOC-M0-F4w"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="A8e-b1-Sfd" userLabel="NewGameButton" customClass="RoundedBorderedButton" customModule="GraphicalSetGame" customModuleProvider="target">
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="A8e-b1-Sfd" userLabel="NewGameButton" customClass="RoundedBorderedButton" customModule="AnimatedSetGame" customModuleProvider="target">
                                         <rect key="frame" x="200" y="0.0" width="102" height="43.5"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <state key="normal" title="New Game">

@@ -10,6 +10,8 @@ import UIKit
 
 class CardContainerView: UIView {
     
+    var dealButtonFrame: CGRect!
+    
     private var allCardViewsAreTransparent: Bool {
         for cardView in subviews {
             if cardView.alpha != 0 { return false }
@@ -23,10 +25,13 @@ class CardContainerView: UIView {
         populateCardsContainerView()
     }
 
-    private func positionCardViews(_ cols: Int, _ cardW: CGFloat, _ cardH: CGFloat, _ spacing: CGFloat) {
-        for idx in subviews.indices {
-            let row = CGFloat(idx / cols), col = CGFloat(idx % cols)
-            subviews[idx].frame = CGRect(x: col * (cardW + spacing), y: row * (cardH + spacing),
+    private func positionCardViews<C: Collection>(_ indices: C,
+                                                  _ cols: Int,
+                                                  _ cardW: CGFloat, _ cardH: CGFloat,
+                                                  _ spacing: CGFloat) where C.Element == Int {
+        for index in indices {
+            let row = CGFloat(index / cols), col = CGFloat(index % cols)
+            subviews[index].frame = CGRect(x: col * (cardW + spacing), y: row * (cardH + spacing),
                                          width: cardW, height: cardH)
         }
     }
@@ -53,9 +58,9 @@ class CardContainerView: UIView {
         cardW -= CGFloat(cols - 1) * spacing / CGFloat(cols)
         cardH -= CGFloat(rows - 1) * spacing / CGFloat(rows)
         if allCardViewsAreTransparent {
-            positionCardViews(cols, cardW, cardH, spacing)
+            positionCardViews(subviews.indices, cols, cardW, cardH, spacing)
             UIViewPropertyAnimator.runningPropertyAnimator(
-                withDuration: 6,
+                withDuration: 2,
                 delay: 0,
                 options: [.curveLinear],
                 animations: {
@@ -66,18 +71,27 @@ class CardContainerView: UIView {
         } else {
             let completion: ((UIViewAnimatingPosition) -> Void)?
             if let lastCardView = subviews.last, lastCardView.alpha == 0 {
+                var startIndex = subviews.count - 1
+                while startIndex >= 0 && subviews[startIndex].alpha == 0 {
+                    startIndex -= 1
+                }
+                let indexRangeOfCardsToBeDealt = startIndex+1..<subviews.count
+                
                 completion = { finalPosition in
+                    for index in indexRangeOfCardsToBeDealt {
+                        // This will cause the method layoutSubviews() to be re-called
+                        self.subviews[index].frame = self.dealButtonFrame
+                        self.subviews[index].alpha = 1
+                    }
+                    /*
                     UIViewPropertyAnimator.runningPropertyAnimator(
                         withDuration: 2,
                         delay: 0,
                         options: [.curveLinear],
                         animations: {
-                            var index = self.subviews.count - 1
-                            while index >= 0 && self.subviews[index].alpha == 0 {
-                                self.subviews[index].alpha = 1
-                                index -= 1
-                            }
-                    })
+                            self.positionCardViews(indexRangeOfCardsToBeDealt, cols, cardW, cardH, spacing)
+                        })
+                    */
                 }
             } else {
                 completion = nil
@@ -87,7 +101,7 @@ class CardContainerView: UIView {
                 delay: 0,
                 options: [],
                 animations: {
-                    self.positionCardViews(cols, cardW, cardH, spacing)
+                    self.positionCardViews(self.subviews.indices, cols, cardW, cardH, spacing)
                 },
                 completion: completion)
         }
