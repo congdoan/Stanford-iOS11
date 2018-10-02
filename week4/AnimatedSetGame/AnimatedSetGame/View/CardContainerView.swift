@@ -13,9 +13,9 @@ class CardContainerView: UIView {
     var dealButtonFrame: CGRect!
     
     private func positionCardViews<S: Sequence>(_ indexSequence: S,
-                                   _ cols: Int,
-                                   _ cardW: CGFloat, _ cardH: CGFloat,
-                                   _ spacing: CGFloat) where S.Element == Int {
+                                                _ cols: Int,
+                                                _ cardW: CGFloat, _ cardH: CGFloat,
+                                                _ spacing: CGFloat) where S.Element == Int {
         for index in indexSequence {
             let row = CGFloat(index / cols), col = CGFloat(index % cols)
             subviews[index].frame = CGRect(x: col * (cardW + spacing), y: row * (cardH + spacing),
