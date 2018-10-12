@@ -23,6 +23,39 @@ class CardContainerView: UIView {
         }
     }
     
+    private func positionCardView(_ index: Int,
+                                  _ cols: Int,
+                                  _ cardW: CGFloat, _ cardH: CGFloat,
+                                  _ spacing: CGFloat) {
+        let row = CGFloat(index / cols), col = CGFloat(index % cols)
+        subviews[index].frame = CGRect(x: col * (cardW + spacing), y: row * (cardH + spacing),
+                                       width: cardW, height: cardH)
+    }
+    
+    private func dealCardViews<C: Collection>(_ indexCollection: C,
+                                              _ cols: Int,
+                                              _ cardW: CGFloat, _ cardH: CGFloat,
+                                              _ spacing: CGFloat) where C.Element == Int {
+        var cardNo = 0
+        let delay = 0.5
+        for index in indexCollection {
+            subviews[index].frame = dealButtonFrame
+            DispatchQueue.main.asyncAfter(deadline: .now() + TimeInterval(cardNo) * delay) {
+                self.subviews[index].alpha = 1
+                
+                UIViewPropertyAnimator.runningPropertyAnimator(
+                    withDuration: 2,
+                    delay: 0,
+                    options: [.curveLinear],
+                    animations: {
+                        self.positionCardView(index, cols, cardW, cardH, spacing)
+                })
+            }
+            
+            cardNo += 1
+        }
+    }
+    
     func positionCardViews(numberOfTransparentCardViewsInTheEnd: Int) {
         let size = bounds.size, w = size.width, h = size.height
         let numCards = subviews.count, a = SizeRatio.cardHeightOverCardWidth
@@ -62,18 +95,7 @@ class CardContainerView: UIView {
                 let indexRangeOfTransparentCardViewsToBeDealt = subviews.indices.suffix(numberOfTransparentCardViewsInTheEnd)
                 
                 completion = { finalPosition in
-                    for index in indexRangeOfTransparentCardViewsToBeDealt {
-                        self.subviews[index].frame = self.dealButtonFrame
-                        self.subviews[index].alpha = 1
-                    }
-                    
-                    UIViewPropertyAnimator.runningPropertyAnimator(
-                        withDuration: 2,
-                        delay: 0,
-                        options: [.curveLinear],
-                        animations: {
-                            self.positionCardViews(indexRangeOfTransparentCardViewsToBeDealt, cols, cardW, cardH, spacing)
-                        })
+                    self.dealCardViews(indexRangeOfTransparentCardViewsToBeDealt, cols, cardW, cardH, spacing)
                 }
                 indexRangeOfOpaqueCardViews = subviews.indices.prefix(upTo: subviews.count - numberOfTransparentCardViewsInTheEnd)
             } else {

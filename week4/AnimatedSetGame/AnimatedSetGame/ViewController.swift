@@ -12,7 +12,7 @@ class ViewController: UIViewController {
     
     private var deck = Deck()
     
-    private let numberOfCardsToStart = 30
+    private let numberOfCardsToStart = 12
     private lazy var cards = deck.deal(numberOfCards: numberOfCardsToStart)
 
     @IBOutlet weak var cardsContainerView: CardContainerView! {
