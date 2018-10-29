@@ -36,6 +36,34 @@ class CardView: UIView {
 
     var shape: Shape = .diamond { didSet { setNeedsDisplay() } }
     
+    init() {
+        super.init(frame: .zero)
+    }
+    
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+        
+        number = aDecoder.decodeInteger(forKey: "number")
+        color = aDecoder.decodeObject(forKey: "color") as! UIColor
+        let fillingKindRaw = aDecoder.decodeInteger(forKey: "fillingKindRaw")
+        fillingKind = Filling(rawValue: fillingKindRaw)!
+        let shapeRaw = aDecoder.decodeInteger(forKey: "shapeRaw")
+        shape = Shape(rawValue: shapeRaw)!
+    }
+    
+    override func encode(with aCoder: NSCoder) {
+        super.encode(with: aCoder)
+        
+        aCoder.encode(number, forKey: "number")
+        aCoder.encode(color, forKey: "color")
+        aCoder.encode(fillingKind.rawValue, forKey: "fillingKindRaw")
+        aCoder.encode(shape.rawValue, forKey: "shapeRaw")
+    }
+    
     @available(*, unavailable, message: "This property is reserved for Interface Builder. Use 'shape' instead.")
     @IBInspectable var shapeAsInt: Int = 0 {
         willSet(shapeIndex) {
@@ -168,5 +196,50 @@ extension CardView {
         static let cornerRadiusOverWidth: CGFloat = 1/20
         
         static let borderWidthOverSqrtArea: CGFloat = 0.04
+    }
+}
+
+extension CardView.Filling: CustomStringConvertible {
+    var description: String {
+        switch self {
+        case .none: return "Open"
+        case .solid: return "Solid"
+        case .striped: return "Striped"
+        }
+    }
+}
+
+extension CardView.Shape: CustomStringConvertible {
+    var description: String {
+        switch self {
+        case .diamond: return "Diamond"
+        case .oval: return "Oval"
+        case .squiggle: return "Squiggle"
+        }
+    }
+}
+
+extension CardView {
+    var copiedInstance: CardView {
+        let serializedData = NSKeyedArchiver.archivedData(withRootObject: self)
+        let deserializedView = NSKeyedUnarchiver.unarchiveObject(with: serializedData) as! CardView
+        return deserializedView
+    }
+    
+    private var colorString: String {
+        switch color {
+        case .green: return "Green"
+        case .purple: return "Purple"
+        case .red: return "Red"
+        default: return "Unsupported color"
+        }
+    }
+    
+    override var description: String {
+        let numberStr = "\(number)".padding(toLength: "three".count, withPad: " ", startingAt: 0)
+        let colorStr = colorString.padding(toLength: "purple".count, withPad: " ", startingAt: 0)
+        let fillingStr = "\(fillingKind)".padding(toLength: "striped".count, withPad: " ", startingAt: 0)
+        let shapeStr = "\(shape)".padding(toLength: "rectangle".count, withPad: " ", startingAt: 0)
+        return "CardView: \(numberStr)  \(colorStr)  \(fillingStr)  \(shapeStr)"
     }
 }

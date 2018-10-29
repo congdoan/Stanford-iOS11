@@ -44,7 +44,7 @@ class CardContainerView: UIView {
                 self.subviews[index].alpha = 1
                 
                 UIViewPropertyAnimator.runningPropertyAnimator(
-                    withDuration: 2,
+                    withDuration: 0.5,
                     delay: 0,
                     options: [.curveLinear],
                     animations: {
@@ -80,7 +80,7 @@ class CardContainerView: UIView {
         if numberOfTransparentCardViewsInTheEnd == subviews.count {
             positionCardViews(subviews.indices, cols, cardW, cardH, spacing)
             UIViewPropertyAnimator.runningPropertyAnimator(
-                withDuration: 2,
+                withDuration: 0.5,
                 delay: 0,
                 options: [.curveLinear],
                 animations: {
@@ -103,7 +103,7 @@ class CardContainerView: UIView {
                 indexRangeOfOpaqueCardViews = subviews.indices
             }
             UIViewPropertyAnimator.runningPropertyAnimator(
-                withDuration: 2,
+                withDuration: 0.5,
                 delay: 0,
                 options: [],
                 animations: {

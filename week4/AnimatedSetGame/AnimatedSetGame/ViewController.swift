@@ -72,6 +72,12 @@ class ViewController: UIViewController {
             populateCardView(cardView, with: cards[idx])
         }
     }
+    
+    private lazy var dynamicAnimator = UIDynamicAnimator(referenceView: cardsContainerView)
+    private lazy var flyawayBehavior: Flyaway = {
+        let snapPoint = dealButton.superview!.convert(dealButton.frame.center, to: cardsContainerView)
+        return Flyaway(in: dynamicAnimator, snapPoint: snapPoint)
+    }()
 
     @objc func onCardViewTap(recognizedBy tapRecognizer: UITapGestureRecognizer) {
         let cardView = tapRecognizer.view as! CardView
@@ -86,9 +92,23 @@ class ViewController: UIViewController {
         if cardView.isSelected {
             selectedCardIndices.append(cardIdx)
             if selectedCardIndices.count == Deck.SET_SIZE {
-                let selectedCards = selectedCardIndices.map{cards[$0]}
+                let selectedCards = selectedCardIndices.map { cards[$0] }
                 areSelectedCardsASet = Deck.isSet(selectedCards)
-                score += areSelectedCardsASet ? Constant.Score.match : Constant.Score.mismatch
+                if areSelectedCardsASet {
+                    score += Constant.Score.match
+                    
+                    for selectedCardIndex in selectedCardIndices {
+                        /*
+                        let newCardView = CardView(frame: cardViews[selectedCardIndex].frame)
+                        populateCardView(newCardView, with: cards[selectedCardIndex])
+                        */
+                        let newCardView = cardViews[selectedCardIndex].copiedInstance
+                        cardsContainerView.addSubview(newCardView)
+                        flyawayBehavior.addItem(newCardView)
+                    }
+                } else {
+                    score += Constant.Score.mismatch
+                }
             }
         } else {
             selectedCardIndices.remove(at: selectedCardIndices.index(of: cardIdx)!)
@@ -183,7 +203,7 @@ class ViewController: UIViewController {
     
     private func removeMatchedCards(_ tappedCardIndex: Int) {
         UIViewPropertyAnimator.runningPropertyAnimator(
-            withDuration: 2,
+            withDuration: 0.5,
             delay: 0,
             options: [.curveLinear],
             animations: {
@@ -196,11 +216,11 @@ class ViewController: UIViewController {
                 self.removeMatchedCardViews(tappedCardIndex)
             })
     }
-    
+
     private func replaceWith(_ newlyDealtCards: [Card], completion: (() -> Void)? = nil) {
         let selectedCardIndices = self.selectedCardIndices
         UIViewPropertyAnimator.runningPropertyAnimator(
-            withDuration: 2,
+            withDuration: 0.5,
             delay: 0,
             options: [.curveLinear],
             animations: {
@@ -222,7 +242,7 @@ class ViewController: UIViewController {
                 }
                 
                 UIViewPropertyAnimator.runningPropertyAnimator(
-                    withDuration: 2,
+                    withDuration: 0.5,
                     delay: 0,
                     options: [.curveLinear],
                     animations: {

@@ -101,6 +101,18 @@ extension ViewController: UICollisionBehaviorDelegate {
             updateItemCenterIfNeeded(referenceBounds, item2, animator)
         }
     }
+    
+    func collisionBehavior(_ behavior: UICollisionBehavior,
+                           beganContactFor item: UIDynamicItem,
+                           withBoundaryIdentifier identifier: NSCopying?,
+                           at p: CGPoint) {
+        print("withBoundaryIdentifier:", identifier)
+    }
+    func collisionBehavior(_ behavior: UICollisionBehavior,
+                           endedContactFor item: UIDynamicItem,
+                           withBoundaryIdentifier identifier: NSCopying?) {
+        print("withBoundaryIdentifier:", identifier)
+    }
 }
 
 private func are2FacedUpCardsMatched(_ cardViewsToAnimate: [PlayingCardView]) -> Bool {
