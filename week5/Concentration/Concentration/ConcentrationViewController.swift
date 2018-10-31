@@ -40,7 +40,7 @@ class ConcentrationViewController: UIViewController {
             refreshScoreLabel()
         }
     }
-    private let scoreWordAttrString = NSAttributedString(string: "Score: ", attributes: [.strokeWidth: 4])
+    private let scoreWordAttrString = NSAttributedString(string: "Score", attributes: [.strokeWidth: 4])
     private let scoreNumberAttr: [NSAttributedStringKey: Any] = [.foregroundColor: #colorLiteral(red: 1, green: 0.5763723254, blue: 0, alpha: 1)]
 
     @IBOutlet private weak var flipCountLabel: UILabel!
@@ -88,10 +88,23 @@ class ConcentrationViewController: UIViewController {
     }
     
     private func refreshScoreLabel() {
-        let scoreNumberAttrString = NSAttributedString(string: "\(game.score)", attributes: scoreNumberAttr)
         let scoreAttrString = NSMutableAttributedString(attributedString: scoreWordAttrString)
+        if traitCollection.verticalSizeClass == .compact {
+            let newLine = NSAttributedString(string: "\n")
+            scoreAttrString.append(newLine)
+        } else {
+            let colon = NSAttributedString(string: ": ")
+            scoreAttrString.append(colon)
+        }
+        let scoreNumberAttrString = NSAttributedString(string: "\(game.score)", attributes: scoreNumberAttr)
         scoreAttrString.append(scoreNumberAttrString)
         scoreLabel.attributedText = scoreAttrString
+    }
+    
+    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        super.traitCollectionDidChange(previousTraitCollection)
+        
+        refreshScoreLabel()
     }
     
     @IBAction private func tapNewGame(_ sender: Any) {
