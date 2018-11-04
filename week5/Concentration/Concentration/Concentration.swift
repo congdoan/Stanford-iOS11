@@ -1,5 +1,5 @@
 //
-//  ConcentrationByMichel.swift
+//  Concentration.swift
 //  Concentration
 //
 //  Created by Cong Doan on 7/11/18.
@@ -31,7 +31,7 @@ class Concentration {
     
     init(numberOfPairsOfCards: Int) {
         assert(numberOfPairsOfCards > 0,
-               "ConcentrationByMichel.init(numberOfPairsOfCards: \(numberOfPairsOfCards)); Number of pairs must be atleast 1")
+               "Concentration.init(numberOfPairsOfCards: \(numberOfPairsOfCards)); Number of pairs must be atleast 1")
         
         for _ in 1...numberOfPairsOfCards {
             let card = Card()
@@ -42,7 +42,7 @@ class Concentration {
     
     func chooseCard(at pickIndex: Int) {
         assert(cards.indices.contains(pickIndex),
-               "ConcentrationByMichel.chooseCard(at: \(pickIndex); Index must be in \(cards.indices)")
+               "Concentration.chooseCard(at: \(pickIndex); Index must be in \(cards.indices)")
         
         if cards[pickIndex].isFaceUp || cards[pickIndex].isMatched { return }
         
