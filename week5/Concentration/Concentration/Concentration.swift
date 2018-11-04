@@ -1,8 +1,8 @@
 //
-//  Concentration.swift
-//  StanfordiOSClassWeek1
+//  ConcentrationByMichel.swift
+//  Concentration
 //
-//  Created by Cong Doan on 7/5/18.
+//  Created by Cong Doan on 7/11/18.
 //  Copyright © 2018 Cong Doan. All rights reserved.
 //
 
@@ -12,14 +12,26 @@ class Concentration {
     
     private let matchScore = 2
     private let mismatchScore = -1
-    private var currentlyFacedUpCardIndices = Set<Int>()
     private(set) var score = 0
     private var alreadySeenCardIndices = Set<Int>()
-    
+
     private(set) var flipCount = 0
     
+    private var indexOfOneAndOnlyFacedUpCard: Int? {
+        get {
+            let facedUpUnmatchedIndices = cards.indices.filter { cards[$0].isFaceUp && !cards[$0].isMatched }
+            return facedUpUnmatchedIndices.oneAndOnly
+        }
+        set {
+            for index in cards.indices {
+                cards[index].isFaceUp = (index == newValue)
+            }
+        }
+    }
+    
     init(numberOfPairsOfCards: Int) {
-        assert(numberOfPairsOfCards > 0, "Concentration.init(numberOfPairsOfCards: \(numberOfPairsOfCards)); Number of pairs must be atleast 1")
+        assert(numberOfPairsOfCards > 0,
+               "ConcentrationByMichel.init(numberOfPairsOfCards: \(numberOfPairsOfCards)); Number of pairs must be atleast 1")
         
         for _ in 1...numberOfPairsOfCards {
             let card = Card()
@@ -28,39 +40,45 @@ class Concentration {
         cards.shuffle()
     }
     
-    func chooseCard(at index: Int) -> Set<Int> {
-        assert(cards.indices.contains(index), "Concentration.chooseCard(at: \(index); Index must be in \(cards.indices)")
+    func chooseCard(at pickIndex: Int) {
+        assert(cards.indices.contains(pickIndex),
+               "ConcentrationByMichel.chooseCard(at: \(pickIndex); Index must be in \(cards.indices)")
         
-        var changedCardIndices = Set<Int>()
-        if cards[index].isFaceUp || cards[index].isMatched { return changedCardIndices }
-        if currentlyFacedUpCardIndices.count == 1 {
-            let matchIndex = Array(currentlyFacedUpCardIndices)[0]
-            if cards[matchIndex] == cards[index] {
+        if cards[pickIndex].isFaceUp || cards[pickIndex].isMatched { return }
+        
+        if let matchIndex = indexOfOneAndOnlyFacedUpCard {
+            assert(matchIndex != pickIndex)
+            
+            if cards[matchIndex] == cards[pickIndex] {
                 cards[matchIndex].isMatched = true
-                cards[index].isMatched = true
+                cards[pickIndex].isMatched = true
                 score += matchScore
             } else {
                 if alreadySeenCardIndices.contains(matchIndex) {
                     score += mismatchScore
                 }
-                if alreadySeenCardIndices.contains(index) {
+                if alreadySeenCardIndices.contains(pickIndex) {
                     score += mismatchScore
                 }
             }
-        } else if currentlyFacedUpCardIndices.count > 1 {
-            for faceUpCardIndex in currentlyFacedUpCardIndices {
-                cards[faceUpCardIndex].isFaceUp = false
-                changedCardIndices.insert(faceUpCardIndex)
-                alreadySeenCardIndices.insert(faceUpCardIndex)
+            cards[pickIndex].isFaceUp = true
+        } else {
+            for index in cards.indices {
+                if cards[index].isFaceUp && !cards[index].isMatched {
+                    alreadySeenCardIndices.insert(index)
+                }
             }
-            currentlyFacedUpCardIndices.removeAll(keepingCapacity: true)
+            indexOfOneAndOnlyFacedUpCard = pickIndex
         }
-        cards[index].isFaceUp = true
-        currentlyFacedUpCardIndices.insert(index)
-        changedCardIndices.insert(index)
+
         flipCount += 1
-        return changedCardIndices
     }
-    
+
+}
+
+extension Collection {
+    var oneAndOnly: Element? {
+        return count == 1 ? first : nil
+    }
 }
 
