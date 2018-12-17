@@ -20,6 +20,9 @@ class EmojiArtViewController: UIViewController {
     
     private let emojiArtView = EmojiArtView()
     
+    private let emojis = "😀🎁✈️🎱🍎🐶🐝☕️🎼🚲♣️👨‍🎓✏️🌈🤡🎓👻☎️".map { String($0) }
+    
+    
     // MARK: - Outlets
     
     @IBOutlet weak var dropZone: UIView! {
@@ -39,6 +42,24 @@ class EmojiArtViewController: UIViewController {
     
     @IBOutlet weak var scrollViewWidth: NSLayoutConstraint!
     @IBOutlet weak var scrollViewHeight: NSLayoutConstraint!
+    
+    @IBOutlet weak var emojiCollectionView: UICollectionView! {
+        didSet {
+            emojiCollectionView.dataSource = self
+            emojiCollectionView.delegate = self
+        }
+    }
+    
+    @IBOutlet weak var emojiCollectionViewHeight: NSLayoutConstraint!
+    
+    
+    // MARK: - Lifecycle methods
+    
+    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        emojiCollectionViewHeight.constant = emojis[0].size(inFont: emojiFont).maxDimension + 10.0
+        emojiCollectionView.reloadData()
+    }
+    
     
     // MARK: - Helper computed var and func
     
@@ -66,6 +87,7 @@ class EmojiArtViewController: UIViewController {
     
 }
 
+
 // MARK: - UIScrollViewDelegate
 
 extension EmojiArtViewController: UIScrollViewDelegate {
@@ -79,6 +101,7 @@ extension EmojiArtViewController: UIScrollViewDelegate {
     }
     
 }
+
 
 // MARK: - UIDropInteractionDelegate
 
@@ -106,6 +129,72 @@ extension EmojiArtViewController: UIDropInteractionDelegate {
                 self.imageFetcher.backup = image
             }
         }
+    }
+    
+}
+
+
+// MARK: - UICollectionViewDataSource
+
+extension EmojiArtViewController: UICollectionViewDataSource {
+    
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return emojis.count
+    }
+    
+    private var emojiFont: UIFont {
+        let font = UIFont.preferredFont(forTextStyle: .body).withSize(64)
+        return UIFontMetrics(forTextStyle: .body).scaledFont(for: font)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: EmojiCollectionViewCell.identifier, for: indexPath)
+        if let emojiCell = cell as? EmojiCollectionViewCell {
+            let emoji = emojis[indexPath.row]
+            let text = NSAttributedString(string: emoji, attributes: [.font: emojiFont])
+            emojiCell.label.attributedText = text
+        }
+        return cell
+    }
+    
+}
+
+// MARK: - UICollectionViewDelegateFlowLayout
+
+// NOTE: UICollectionViewDelegateFlowLayout does inherit UICollectionViewDelegate
+extension EmojiArtViewController: UICollectionViewDelegateFlowLayout {
+    
+    func collectionView(_ collectionView: UICollectionView,
+                        layout collectionViewLayout: UICollectionViewLayout,
+                        sizeForItemAt indexPath: IndexPath) -> CGSize {
+        return emojis[indexPath.item].size(inFont: emojiFont)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView,
+                        layout collectionViewLayout: UICollectionViewLayout,
+                        minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+        return max(emojiFont.pointSize * 10.0 / 76.0, 10)
+    }
+    
+}
+
+
+// MARK: - Utility extensions
+
+extension String {
+    
+    func size(inFont font: UIFont) -> CGSize {
+        let fontAttributes = [NSAttributedString.Key.font: font]
+        return self.size(withAttributes: fontAttributes)
+    }
+    
+}
+
+
+extension CGSize {
+    
+    var maxDimension: CGFloat {
+        return max(self.width, self.height)
     }
     
 }
