@@ -20,7 +20,7 @@ class EmojiArtViewController: UIViewController {
     
     private let emojiArtView = EmojiArtView()
     
-    private let emojis = "😀🎁✈️🎱🍎🐶🐝☕️🎼🚲♣️👨‍🎓✏️🌈🤡🎓👻☎️".map { String($0) }
+    private var emojis = "😀🎁✈️🎱🍎🐶🐝☕️🎼🚲♣️👨‍🎓✏️🌈🤡🎓👻☎️".map { String($0) }
     
     
     // MARK: - Outlets
@@ -47,6 +47,9 @@ class EmojiArtViewController: UIViewController {
         didSet {
             emojiCollectionView.dataSource = self
             emojiCollectionView.delegate = self
+            
+            emojiCollectionView.dragDelegate = self
+            emojiCollectionView.dropDelegate = self
         }
     }
     
@@ -103,37 +106,6 @@ extension EmojiArtViewController: UIScrollViewDelegate {
 }
 
 
-// MARK: - UIDropInteractionDelegate
-
-extension EmojiArtViewController: UIDropInteractionDelegate {
-    
-    func dropInteraction(_ interaction: UIDropInteraction, canHandle session: UIDropSession) -> Bool {
-        return session.canLoadObjects(ofClass: NSURL.self) && session.canLoadObjects(ofClass: UIImage.self)
-    }
-    
-    func dropInteraction(_ interaction: UIDropInteraction, sessionDidUpdate session: UIDropSession) -> UIDropProposal {
-        return UIDropProposal(operation: .copy)
-    }
-    
-    func dropInteraction(_ interaction: UIDropInteraction, performDrop session: UIDropSession) {
-        // NOTE: imageFetcher couldn't be defined in this method cause it would had left the heap by the time the fetch finished
-        
-        session.loadObjects(ofClass: NSURL.self) { (nsurls) in
-            if let url = nsurls.first as? URL {
-                self.imageFetcher.fetch(url)
-            }
-        }
-        
-        session.loadObjects(ofClass: UIImage.self) { (images) in
-            if let image = images.first as? UIImage {
-                self.imageFetcher.backup = image
-            }
-        }
-    }
-    
-}
-
-
 // MARK: - UICollectionViewDataSource
 
 extension EmojiArtViewController: UICollectionViewDataSource {
@@ -179,7 +151,142 @@ extension EmojiArtViewController: UICollectionViewDelegateFlowLayout {
 }
 
 
+// MARK: - UIDropInteractionDelegate
+
+extension EmojiArtViewController: UIDropInteractionDelegate {
+    
+    func dropInteraction(_ interaction: UIDropInteraction, canHandle session: UIDropSession) -> Bool {
+        return session.canLoadObjects(ofClass: NSURL.self) && session.canLoadObjects(ofClass: UIImage.self)
+    }
+    
+    func dropInteraction(_ interaction: UIDropInteraction, sessionDidUpdate session: UIDropSession) -> UIDropProposal {
+        return UIDropProposal(operation: .copy)
+    }
+    
+    func dropInteraction(_ interaction: UIDropInteraction, performDrop session: UIDropSession) {
+        // NOTE: imageFetcher couldn't be defined in this method cause it would had left the heap by the time the fetch finished
+        
+        session.loadObjects(ofClass: NSURL.self) { (nsurls) in
+            if let url = nsurls.first as? URL {
+                self.imageFetcher.fetch(url)
+            }
+        }
+        
+        session.loadObjects(ofClass: UIImage.self) { (images) in
+            if let image = images.first as? UIImage {
+                self.imageFetcher.backup = image
+            }
+        }
+    }
+    
+}
+
+
+// MARK: - UICollectionViewDragDelegate
+
+extension EmojiArtViewController: UICollectionViewDragDelegate {
+    
+    func collectionView(_ collectionView: UICollectionView,
+                        itemsForBeginning session: UIDragSession, at indexPath: IndexPath) -> [UIDragItem] {
+        return dragItems(at: indexPath)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView,
+                        itemsForAddingTo session: UIDragSession, at indexPath: IndexPath,
+                        point: CGPoint) -> [UIDragItem] {
+        return dragItems(at: indexPath)
+    }
+    
+    private func dragItems(at indexPath: IndexPath) -> [UIDragItem] {
+        if let attributedString = (emojiCollectionView.cellForItem(at: indexPath) as? EmojiCollectionViewCell)?.label.attributedText {
+            let dragItem = UIDragItem(itemProvider: NSItemProvider(object: attributedString))
+            // Drag locally; don't need to go through all that item provider stuff: the async getting data (as in drop interaction)
+            // Just grab the local object; a way of like short-circuiting all that
+            dragItem.localObject = attributedString
+            return [dragItem]
+        }
+        return []
+    }
+    
+}
+
+// MARK: - UICollectionViewDropDelegate
+
+extension EmojiArtViewController: UICollectionViewDropDelegate {
+    
+    func collectionView(_ collectionView: UICollectionView, canHandle session: UIDropSession) -> Bool {
+        return session.canLoadObjects(ofClass: NSAttributedString.self)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView,
+                        dropSessionDidUpdate session: UIDropSession,
+                        withDestinationIndexPath destinationIndexPath: IndexPath?) -> UICollectionViewDropProposal {
+        let isSelf = (session.localDragSession?.localContext as? UICollectionView) == collectionView
+        return UICollectionViewDropProposal(operation: isSelf ? .move : .copy, intent: .insertAtDestinationIndexPath)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, performDropWith coordinator: UICollectionViewDropCoordinator) {
+        let destinationIndexPath = coordinator.destinationIndexPath ?? IndexPath(item: 0, section: 0)
+        for dropItem in coordinator.items {
+            if let sourceIndexPath = dropItem.sourceIndexPath { // Local drag
+                //if let attributedString = dropItem.dragItem.localObject as? NSAttributedString {
+                if let _ = dropItem.dragItem.localObject as? NSAttributedString {
+                    collectionView.performBatchUpdates({
+                        /*
+                        emojis.remove(at: sourceIndexPath.item)
+                        emojis.insert(attributedString.string, at: destinationIndexPath.item)
+                        */
+                        emojis.moveElement(fromIndex: sourceIndexPath.item, toIndex: destinationIndexPath.item)
+                        collectionView.deleteItems(at: [sourceIndexPath])
+                        collectionView.insertItems(at: [destinationIndexPath])
+                    })
+                    coordinator.drop(dropItem.dragItem, toItemAt: destinationIndexPath)
+                }
+            } else { // Remote drag (i.e. from another app)
+                let placeholderContext = coordinator.drop(
+                                            dropItem.dragItem,
+                                            to: UICollectionViewDropPlaceholder(insertionIndexPath: destinationIndexPath,
+                                                                                reuseIdentifier: "DropPlaceholderCell"))
+                dropItem.dragItem.itemProvider.loadObject(ofClass: NSAttributedString.self) { (providerData, error) in
+                    DispatchQueue.main.async {
+                        if let attributedString = providerData as? NSAttributedString {
+                            placeholderContext.commitInsertion(dataSourceUpdates: { insertionIndexPath in
+                                // Note: insertionIndexPath might be different from destinationIndexPath
+                                // because the collection view might have changed during the data-load process
+                                self.emojis.insert(attributedString.string, at: insertionIndexPath.item)
+                            })
+                        } else {
+                            placeholderContext.deletePlaceholder()
+                        }
+                    }
+                }
+            }
+        }
+    }
+    
+}
+
+
 // MARK: - Utility extensions
+
+extension Array {
+    
+    mutating func moveElement(fromIndex from: Int, toIndex to: Int) {
+        guard from != to else { return }
+        let value = self[from]
+        if from < to {
+            for idx in from..<to {
+                self[idx] = self[idx + 1]
+            }
+        } else {
+            for idx in (to+1...from).reversed() {
+                self[idx] = self[idx - 1]
+            }
+        }
+        self[to] = value
+    }
+    
+}
 
 extension String {
     

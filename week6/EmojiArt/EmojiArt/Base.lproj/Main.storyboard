@@ -100,7 +100,7 @@
                                 <constraints>
                                     <constraint firstAttribute="height" constant="85" id="ana-r6-aad"/>
                                 </constraints>
-                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="e0N-4F-GVa">
+                                <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="10" minimumInteritemSpacing="10" id="e0N-4F-GVa">
                                     <size key="itemSize" width="50" height="50"/>
                                     <size key="headerReferenceSize" width="0.0" height="0.0"/>
                                     <size key="footerReferenceSize" width="0.0" height="0.0"/>
@@ -130,6 +130,24 @@
                                         <connections>
                                             <outlet property="label" destination="chH-5k-T1A" id="T05-XF-FyS"/>
                                         </connections>
+                                    </collectionViewCell>
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="DropPlaceholderCell" id="Yfj-dS-RTs">
+                                        <rect key="frame" x="95" y="0.0" width="85" height="85"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
+                                            <rect key="frame" x="0.0" y="0.0" width="85" height="85"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" animating="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="YhD-YX-WSY">
+                                                    <rect key="frame" x="32.5" y="32.5" width="20" height="20"/>
+                                                </activityIndicatorView>
+                                            </subviews>
+                                        </view>
+                                        <constraints>
+                                            <constraint firstItem="YhD-YX-WSY" firstAttribute="centerX" secondItem="Yfj-dS-RTs" secondAttribute="centerX" id="VNw-0q-hNu"/>
+                                            <constraint firstItem="YhD-YX-WSY" firstAttribute="centerY" secondItem="Yfj-dS-RTs" secondAttribute="centerY" id="ze5-0c-Ngk"/>
+                                        </constraints>
+                                        <size key="customSize" width="85" height="85"/>
                                     </collectionViewCell>
                                 </cells>
                             </collectionView>
