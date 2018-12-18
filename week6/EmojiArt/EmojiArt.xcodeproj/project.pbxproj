@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		F422684621C9141800F457D9 /* EmojiArtView+Gestures.swift in Sources */ = {isa = PBXBuildFile; fileRef = F422684521C9141800F457D9 /* EmojiArtView+Gestures.swift */; };
 		F49D1C9921B0D382007A05BF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F49D1C9821B0D382007A05BF /* AppDelegate.swift */; };
 		F49D1C9E21B0D382007A05BF /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F49D1C9C21B0D382007A05BF /* Main.storyboard */; };
 		F49D1CA021B0D384007A05BF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F49D1C9F21B0D384007A05BF /* Assets.xcassets */; };
@@ -19,6 +20,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		F422684521C9141800F457D9 /* EmojiArtView+Gestures.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "EmojiArtView+Gestures.swift"; sourceTree = "<group>"; };
 		F49D1C9521B0D382007A05BF /* EmojiArt.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = EmojiArt.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F49D1C9821B0D382007A05BF /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		F49D1C9D21B0D382007A05BF /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -66,6 +68,7 @@
 				F49D1CAB21B0D46F007A05BF /* EmojiArtViewController.swift */,
 				F49D1CAF21B0E1F0007A05BF /* Utilities.swift */,
 				F49D1CAD21B0D5A6007A05BF /* EmojiArtView.swift */,
+				F422684521C9141800F457D9 /* EmojiArtView+Gestures.swift */,
 				F49D1C9C21B0D382007A05BF /* Main.storyboard */,
 				F49E1F8121C7973B00C23034 /* EmojiCollectionViewCell.swift */,
 				F49D1CA421B0D384007A05BF /* Info.plist */,
@@ -156,6 +159,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				F49D1C9921B0D382007A05BF /* AppDelegate.swift in Sources */,
+				F422684621C9141800F457D9 /* EmojiArtView+Gestures.swift in Sources */,
 				F49E1F8221C7973B00C23034 /* EmojiCollectionViewCell.swift in Sources */,
 				F49D1CB221B0F558007A05BF /* EmojiArtTableViewController.swift in Sources */,
 				F49D1CAC21B0D46F007A05BF /* EmojiArtViewController.swift in Sources */,
