@@ -146,12 +146,52 @@ extension String {
 	}
 }
 
-extension Array where Element: Equatable {
+//extension Array where Element: Equatable {
+extension Array where Element: Hashable {
 	var uniquified: [Element] {
 		var elements = [Element]()
-		forEach { if !elements.contains($0) { elements.append($0) } }
+        //forEach { if !elements.contains($0) { elements.append($0) } }
+        var set = Set<Element>()
+        forEach { if !set.contains($0) { elements.append($0); set.insert($0) } }
 		return elements
 	}
+    
+    func followedWithoutDuplicateBy(_ array: [Element]) -> [Element] {
+        /*
+        var elements = [Element]()
+        var set = Set<Element>()
+        for element in self {
+            if !set.contains(element) {
+                elements.append(element)
+                set.insert(element)
+            }
+        }
+        for element in array {
+            if !set.contains(element) {
+                elements.append(element)
+            }
+        }
+        return elements
+        */
+        if self.isEmpty { return array }
+        if array.isEmpty { return self }
+        var elements = [Element](repeating: self[0], count: self.count + array.count)
+        var index = 0
+        var set = Set<Element>()
+        for element in self {
+            if !set.contains(element) {
+                elements[index] = element; index += 1
+                set.insert(element)
+            }
+        }
+        for element in array {
+            if !set.contains(element) {
+                elements[index] = element; index += 1
+            }
+        }
+        elements.removeLast(elements.count - index)
+        return elements
+    }
 }
 
 extension NSAttributedString {

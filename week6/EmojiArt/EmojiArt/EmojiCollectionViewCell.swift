@@ -16,7 +16,8 @@ class EmojiCollectionViewCell: UICollectionViewCell {
 
 extension UICollectionViewCell {
     
-    static var identifier: String {
+    //static var identifier: String {
+    @objc class var identifier: String {
         return String(describing: self)
     }
     
