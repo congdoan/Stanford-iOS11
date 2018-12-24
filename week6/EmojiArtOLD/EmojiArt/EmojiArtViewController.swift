@@ -60,23 +60,36 @@ class EmojiArtViewController: UIViewController {
                                             create: true).appendingPathComponent("Untitled.json", isDirectory: false)
     }
     
-    @IBAction func save(_ sender: UIBarButtonItem) {
-        if let json = emojiArt?.json, let url = urlToSaveDoc {
-            do {
-                try json.write(to: url)
-                print("Saved Successfully")
-            } catch let error {
-                print("Couldn't save:", error)
-            }
+    var document: EmojiArtDocument? // will be set from 'File/Document Chooser' that is presenting this
+    
+    @IBAction func save(_ sender: UIBarButtonItem? = nil) {
+        document?.emojiArt = emojiArt
+        if document?.emojiArt != nil {
+            document?.updateChangeCount(.done)
         }
+    }
+    
+    @IBAction func close(_ sender: UIBarButtonItem) {
+        save()
+        document?.close()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        if let url = urlToSaveDoc, FileManager.default.fileExists(atPath: url.path) {
-            if let json = try? Data(contentsOf: url) {
-                emojiArt = EmojiArt(json: json)
+        
+        guard let document = document else { return }
+        document.open { success in
+            if success {
+                self.title = document.localizedName
+                self.emojiArt = document.emojiArt
             }
+        }
+    }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        if let url = urlToSaveDoc {
+            document = EmojiArtDocument(fileURL: url)
         }
     }
     
