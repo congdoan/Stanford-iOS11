@@ -53,13 +53,6 @@ class EmojiArtViewController: UIViewController {
     }
     
     
-    private var urlToSaveDoc: URL? {
-        return try? FileManager.default.url(for: .documentDirectory,
-                                            in: .userDomainMask,
-                                            appropriateFor: nil,
-                                            create: true).appendingPathComponent("Untitled.json", isDirectory: false)
-    }
-    
     var document: EmojiArtDocument? // will be set from 'File/Document Chooser' that is presenting this
     
     @IBAction func save(_ sender: UIBarButtonItem? = nil) {
@@ -71,7 +64,9 @@ class EmojiArtViewController: UIViewController {
     
     @IBAction func close(_ sender: UIBarButtonItem) {
         save()
-        document?.close()
+        dismiss(animated: true) {
+            self.document?.close()
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -83,13 +78,6 @@ class EmojiArtViewController: UIViewController {
                 self.title = document.localizedName
                 self.emojiArt = document.emojiArt
             }
-        }
-    }
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        if let url = urlToSaveDoc {
-            document = EmojiArtDocument(fileURL: url)
         }
     }
     
