@@ -64,6 +64,9 @@ class EmojiArtViewController: UIViewController {
     
     @IBAction func close(_ sender: UIBarButtonItem) {
         save()
+        if document?.emojiArt != nil {
+            document!.thumbnail = emojiArtView.snapshot
+        }
         dismiss(animated: true) {
             self.document?.close()
         }
