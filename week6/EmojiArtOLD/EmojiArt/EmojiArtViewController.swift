@@ -121,6 +121,8 @@ class EmojiArtViewController: UIViewController {
             
             emojiCollectionView.dragDelegate = self
             emojiCollectionView.dropDelegate = self
+            
+            emojiCollectionView.dragInteractionEnabled = true // by default it is true on iPad but false on iPhone 
         }
     }
     

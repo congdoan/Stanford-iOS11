@@ -21,7 +21,7 @@ class DocumentBrowserViewController: UIDocumentBrowserViewController, UIDocument
                                                    appropriateFor: nil,
                                                    create: true).appendingPathComponent("Untitled.json",
                                                                                         isDirectory: false)
-        if let templatePath = templateURL?.path {
+        if UIDevice.current.userInterfaceIdiom == .pad, let templatePath = templateURL?.path {
             allowsDocumentCreation = FileManager.default.createFile(atPath: templatePath, contents: Data())
         } else {
             allowsDocumentCreation = false
