@@ -207,8 +207,8 @@ extension NSAttributedString {
 
 extension String {
 	func attributedString(withTextStyle style: UIFont.TextStyle, ofSize size: CGFloat) -> NSAttributedString {
-		let font = UIFontMetrics(forTextStyle: .body).scaledFont(for: UIFont.preferredFont(forTextStyle: .body).withSize(size))
-		return NSAttributedString(string: self, attributes: [.font:font])
+        let font = UIFontMetrics(forTextStyle: style).scaledFont(for: UIFont.preferredFont(forTextStyle: style).withSize(size))
+		return NSAttributedString(string: self, attributes: [.font: font])
 	}
 }
 
