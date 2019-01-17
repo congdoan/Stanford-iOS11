@@ -55,15 +55,7 @@ class EmojiArtViewController: UIViewController {
     
     var document: EmojiArtDocument? // will be set from 'File/Document Chooser' that is presenting this
     
-    @IBAction func save(_ sender: UIBarButtonItem? = nil) {
-        document?.emojiArt = emojiArt
-        if document?.emojiArt != nil {
-            document?.updateChangeCount(.done)
-        }
-    }
-    
     @IBAction func close(_ sender: UIBarButtonItem) {
-        save()
         if document?.emojiArt != nil {
             document!.thumbnail = emojiArtView.snapshot
         }
@@ -89,7 +81,11 @@ class EmojiArtViewController: UIViewController {
     
     private var imageFetcher: ImageFetcher!
     
-    private let emojiArtView = EmojiArtView()
+    private lazy var emojiArtView: EmojiArtView = {
+        let view = EmojiArtView()
+        view.delegate = self
+        return view
+    }()
     
     private var emojis = "😀🎁✈️🎱🍎🐶🐝☕️🎼🚲♣️👨‍🎓✏️🌈🤡🎓👻☎️".map { String($0) }
     
@@ -398,6 +394,16 @@ extension EmojiArtViewController: UICollectionViewDropDelegate {
         }
     }
     
+}
+
+
+extension EmojiArtViewController: EmojiArtViewDelegate {
+    func emojiArtViewDidChange() {
+        document?.emojiArt = emojiArt
+        if document?.emojiArt != nil {
+            document?.updateChangeCount(.done)
+        }
+    }
 }
 
 

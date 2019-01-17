@@ -31,6 +31,8 @@ class EmojiArtView: UIView {
     override func draw(_ rect: CGRect) {
         backgroundImage?.draw(in: bounds)
     }
+    
+    weak var delegate: EmojiArtViewDelegate?
 
 }
 
@@ -50,6 +52,8 @@ extension EmojiArtView: UIDropInteractionDelegate {
             for attributedString in (providers as? [NSAttributedString] ?? []) {
                 self.addLabel(with: attributedString, centeredAt: dropPoint)
             }
+            
+            self.delegate?.emojiArtViewDidChange()
         }
     }
     
@@ -63,4 +67,8 @@ extension EmojiArtView: UIDropInteractionDelegate {
         addSubview(label)
     }
     
+}
+
+protocol EmojiArtViewDelegate: class {
+    func emojiArtViewDidChange()
 }

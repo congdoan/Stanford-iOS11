@@ -180,11 +180,6 @@
                                 <action selector="close:" destination="Lkq-Uh-LfG" id="7Py-mb-GDp"/>
                             </connections>
                         </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" systemItem="save" id="OHO-jy-zSP">
-                            <connections>
-                                <action selector="save:" destination="Lkq-Uh-LfG" id="OQd-58-G7z"/>
-                            </connections>
-                        </barButtonItem>
                     </navigationItem>
                     <connections>
                         <outlet property="dropZone" destination="wqs-3i-Ud1" id="kHG-b9-bME"/>
