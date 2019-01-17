@@ -19,8 +19,7 @@ class DocumentBrowserViewController: UIDocumentBrowserViewController, UIDocument
         templateURL = try? FileManager.default.url(for: .applicationSupportDirectory,
                                                    in: .userDomainMask,
                                                    appropriateFor: nil,
-                                                   create: true).appendingPathComponent("Untitled.json",
-                                                                                        isDirectory: false)
+                                                   create: true).appendingPathComponent("Untitled.emojiart") //.json
         if UIDevice.current.userInterfaceIdiom == .pad, let templatePath = templateURL?.path {
             allowsDocumentCreation = FileManager.default.createFile(atPath: templatePath, contents: Data())
         } else {
